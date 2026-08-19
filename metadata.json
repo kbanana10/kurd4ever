@@ -1,0 +1,8 @@
+{
+  "name": "Kurmanji Quester",
+  "description": "A gamified application for learning the Kurdish (Kurmanji) language.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

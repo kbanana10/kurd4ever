@@ -1,0 +1,3483 @@
+[
+ {
+  "id": "home__mobile__light__en",
+  "route": "/",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/home__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__mobile__light__ar",
+  "route": "/",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/home__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__mobile__light__ku",
+  "route": "/",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/home__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__mobile__dark__en",
+  "route": "/",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/home__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__mobile__dark__ar",
+  "route": "/",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/home__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__mobile__dark__ku",
+  "route": "/",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/home__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__desktop__light__en",
+  "route": "/",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/home__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__desktop__light__ar",
+  "route": "/",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/home__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__desktop__light__ku",
+  "route": "/",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/home__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__desktop__dark__en",
+  "route": "/",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/home__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__desktop__dark__ar",
+  "route": "/",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/home__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "home__desktop__dark__ku",
+  "route": "/",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/home__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__mobile__light__en",
+  "route": "/alphabet",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/alphabet__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__mobile__light__ar",
+  "route": "/alphabet",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/alphabet__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__mobile__light__ku",
+  "route": "/alphabet",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/alphabet__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__mobile__dark__en",
+  "route": "/alphabet",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/alphabet__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__mobile__dark__ar",
+  "route": "/alphabet",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/alphabet__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__mobile__dark__ku",
+  "route": "/alphabet",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/alphabet__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__desktop__light__en",
+  "route": "/alphabet",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/alphabet__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__desktop__light__ar",
+  "route": "/alphabet",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/alphabet__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__desktop__light__ku",
+  "route": "/alphabet",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/alphabet__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__desktop__dark__en",
+  "route": "/alphabet",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/alphabet__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__desktop__dark__ar",
+  "route": "/alphabet",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/alphabet__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "alphabet__desktop__dark__ku",
+  "route": "/alphabet",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/alphabet__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__mobile__light__en",
+  "route": "/vocabulary",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/vocabulary__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "General Words",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "Academic Terms",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__mobile__light__ar",
+  "route": "/vocabulary",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/vocabulary__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "المفردات العامة",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "المصطلحات الأكاديمية",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__mobile__light__ku",
+  "route": "/vocabulary",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/vocabulary__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "General Words",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "Academic Terms",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__mobile__dark__en",
+  "route": "/vocabulary",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/vocabulary__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "General Words",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "Academic Terms",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__mobile__dark__ar",
+  "route": "/vocabulary",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/vocabulary__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "المفردات العامة",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "المصطلحات الأكاديمية",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__mobile__dark__ku",
+  "route": "/vocabulary",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/vocabulary__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "General Words",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "Academic Terms",
+     "w": 171,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__desktop__light__en",
+  "route": "/vocabulary",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/vocabulary__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "General Words",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "Academic Terms",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__desktop__light__ar",
+  "route": "/vocabulary",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/vocabulary__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "المفردات العامة",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "المصطلحات الأكاديمية",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__desktop__light__ku",
+  "route": "/vocabulary",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/vocabulary__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "General Words",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "Academic Terms",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__desktop__dark__en",
+  "route": "/vocabulary",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/vocabulary__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "General Words",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "Academic Terms",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__desktop__dark__ar",
+  "route": "/vocabulary",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/vocabulary__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "المفردات العامة",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "المصطلحات الأكاديمية",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "vocabulary__desktop__dark__ku",
+  "route": "/vocabulary",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/vocabulary__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "General Words",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    },
+    {
+     "label": "Academic Terms",
+     "w": 197,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__mobile__light__en",
+  "route": "/sentences",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/sentences__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__mobile__light__ar",
+  "route": "/sentences",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/sentences__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__mobile__light__ku",
+  "route": "/sentences",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/sentences__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__mobile__dark__en",
+  "route": "/sentences",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/sentences__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__mobile__dark__ar",
+  "route": "/sentences",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/sentences__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__mobile__dark__ku",
+  "route": "/sentences",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/sentences__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__desktop__light__en",
+  "route": "/sentences",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/sentences__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__desktop__light__ar",
+  "route": "/sentences",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/sentences__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__desktop__light__ku",
+  "route": "/sentences",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/sentences__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "Play pronunciation of Kerem bike, rûnişt",
+     "w": 44,
+     "h": 44,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__desktop__dark__en",
+  "route": "/sentences",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/sentences__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__desktop__dark__ar",
+  "route": "/sentences",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/sentences__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "sentences__desktop__dark__ku",
+  "route": "/sentences",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/sentences__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__mobile__light__en",
+  "route": "/favorites",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/favorites__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__mobile__light__ar",
+  "route": "/favorites",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/favorites__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__mobile__light__ku",
+  "route": "/favorites",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/favorites__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__mobile__dark__en",
+  "route": "/favorites",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/favorites__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__mobile__dark__ar",
+  "route": "/favorites",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/favorites__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__mobile__dark__ku",
+  "route": "/favorites",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/favorites__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__desktop__light__en",
+  "route": "/favorites",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/favorites__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__desktop__light__ar",
+  "route": "/favorites",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/favorites__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__desktop__light__ku",
+  "route": "/favorites",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/favorites__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__desktop__dark__en",
+  "route": "/favorites",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/favorites__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__desktop__dark__ar",
+  "route": "/favorites",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/favorites__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "favorites__desktop__dark__ku",
+  "route": "/favorites",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/favorites__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__mobile__light__en",
+  "route": "/grammar",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/grammar__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__mobile__light__ar",
+  "route": "/grammar",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/grammar__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__mobile__light__ku",
+  "route": "/grammar",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/grammar__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__mobile__dark__en",
+  "route": "/grammar",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/grammar__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__mobile__dark__ar",
+  "route": "/grammar",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/grammar__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__mobile__dark__ku",
+  "route": "/grammar",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/grammar__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__desktop__light__en",
+  "route": "/grammar",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/grammar__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__desktop__light__ar",
+  "route": "/grammar",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/grammar__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__desktop__light__ku",
+  "route": "/grammar",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/grammar__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__desktop__dark__en",
+  "route": "/grammar",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/grammar__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__desktop__dark__ar",
+  "route": "/grammar",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/grammar__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "grammar__desktop__dark__ku",
+  "route": "/grammar",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/grammar__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__mobile__light__en",
+  "route": "/roadmap",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/roadmap__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__mobile__light__ar",
+  "route": "/roadmap",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/roadmap__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__mobile__light__ku",
+  "route": "/roadmap",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/roadmap__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__mobile__dark__en",
+  "route": "/roadmap",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/roadmap__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__mobile__dark__ar",
+  "route": "/roadmap",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/roadmap__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__mobile__dark__ku",
+  "route": "/roadmap",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/roadmap__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__desktop__light__en",
+  "route": "/roadmap",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/roadmap__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__desktop__light__ar",
+  "route": "/roadmap",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/roadmap__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__desktop__light__ku",
+  "route": "/roadmap",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/roadmap__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__desktop__dark__en",
+  "route": "/roadmap",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/roadmap__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__desktop__dark__ar",
+  "route": "/roadmap",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/roadmap__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "roadmap__desktop__dark__ku",
+  "route": "/roadmap",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/roadmap__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__mobile__light__en",
+  "route": "/games",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/games__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__mobile__light__ar",
+  "route": "/games",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/games__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__mobile__light__ku",
+  "route": "/games",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/games__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__mobile__dark__en",
+  "route": "/games",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/games__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__mobile__dark__ar",
+  "route": "/games",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/games__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__mobile__dark__ku",
+  "route": "/games",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/games__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__desktop__light__en",
+  "route": "/games",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/games__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__desktop__light__ar",
+  "route": "/games",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/games__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__desktop__light__ku",
+  "route": "/games",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/games__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__desktop__dark__en",
+  "route": "/games",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/games__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__desktop__dark__ar",
+  "route": "/games",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/games__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "games__desktop__dark__ku",
+  "route": "/games",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/games__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__mobile__light__en",
+  "route": "/search",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/search__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__mobile__light__ar",
+  "route": "/search",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/search__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__mobile__light__ku",
+  "route": "/search",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/search__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__mobile__dark__en",
+  "route": "/search",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/search__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__mobile__dark__ar",
+  "route": "/search",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/search__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__mobile__dark__ku",
+  "route": "/search",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/search__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__desktop__light__en",
+  "route": "/search",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/search__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__desktop__light__ar",
+  "route": "/search",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/search__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__desktop__light__ku",
+  "route": "/search",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/search__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__desktop__dark__en",
+  "route": "/search",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/search__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__desktop__dark__ar",
+  "route": "/search",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/search__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "search__desktop__dark__ku",
+  "route": "/search",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/search__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__mobile__light__en",
+  "route": "/profile",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/profile__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__mobile__light__ar",
+  "route": "/profile",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/profile__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__mobile__light__ku",
+  "route": "/profile",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/profile__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__mobile__dark__en",
+  "route": "/profile",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/profile__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__mobile__dark__ar",
+  "route": "/profile",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/profile__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__mobile__dark__ku",
+  "route": "/profile",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/profile__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__desktop__light__en",
+  "route": "/profile",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/profile__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__desktop__light__ar",
+  "route": "/profile",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/profile__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__desktop__light__ku",
+  "route": "/profile",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/profile__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__desktop__dark__en",
+  "route": "/profile",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/profile__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__desktop__dark__ar",
+  "route": "/profile",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/profile__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "profile__desktop__dark__ku",
+  "route": "/profile",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/profile__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "BUTTON",
+     "w": 40,
+     "h": 40,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__mobile__light__en",
+  "route": "/leaderboard",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/leaderboard__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "Test Rival Active Progress",
+     "w": 358,
+     "h": 41,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__mobile__light__ar",
+  "route": "/leaderboard",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/leaderboard__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "تحديث نشاط المنافسين",
+     "w": 358,
+     "h": 42,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__mobile__light__ku",
+  "route": "/leaderboard",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/leaderboard__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "Nûkirina Çalakiya Hevalan",
+     "w": 358,
+     "h": 41,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__mobile__dark__en",
+  "route": "/leaderboard",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/leaderboard__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "Test Rival Active Progress",
+     "w": 358,
+     "h": 41,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__mobile__dark__ar",
+  "route": "/leaderboard",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/leaderboard__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "تحديث نشاط المنافسين",
+     "w": 358,
+     "h": 42,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__mobile__dark__ku",
+  "route": "/leaderboard",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/leaderboard__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "Nûkirina Çalakiya Hevalan",
+     "w": 358,
+     "h": 41,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__desktop__light__en",
+  "route": "/leaderboard",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/leaderboard__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "Test Rival Active Progress",
+     "w": 410,
+     "h": 41,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__desktop__light__ar",
+  "route": "/leaderboard",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/leaderboard__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "تحديث نشاط المنافسين",
+     "w": 410,
+     "h": 42,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__desktop__light__ku",
+  "route": "/leaderboard",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/leaderboard__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "Nûkirina Çalakiya Hevalan",
+     "w": 410,
+     "h": 41,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__desktop__dark__en",
+  "route": "/leaderboard",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/leaderboard__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "Test Rival Active Progress",
+     "w": 410,
+     "h": 41,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__desktop__dark__ar",
+  "route": "/leaderboard",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/leaderboard__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "تحديث نشاط المنافسين",
+     "w": 410,
+     "h": 42,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "leaderboard__desktop__dark__ku",
+  "route": "/leaderboard",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/leaderboard__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "Nûkirina Çalakiya Hevalan",
+     "w": 410,
+     "h": 41,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "admin__mobile__light__en",
+  "route": "/admin",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/admin__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__mobile__light__ar",
+  "route": "/admin",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/admin__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__mobile__light__ku",
+  "route": "/admin",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/admin__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__mobile__dark__en",
+  "route": "/admin",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/admin__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__mobile__dark__ar",
+  "route": "/admin",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/admin__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__mobile__dark__ku",
+  "route": "/admin",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/admin__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__desktop__light__en",
+  "route": "/admin",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/admin__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__desktop__light__ar",
+  "route": "/admin",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/admin__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__desktop__light__ku",
+  "route": "/admin",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/admin__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__desktop__dark__en",
+  "route": "/admin",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/admin__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__desktop__dark__ar",
+  "route": "/admin",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/admin__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "admin__desktop__dark__ku",
+  "route": "/admin",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/admin__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "id": "login__mobile__light__en",
+  "route": "/login",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/login__mobile__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__mobile__light__ar",
+  "route": "/login",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/login__mobile__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__mobile__light__ku",
+  "route": "/login",
+  "viewport": "mobile",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/login__mobile__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__mobile__dark__en",
+  "route": "/login",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/login__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__mobile__dark__ar",
+  "route": "/login",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/login__mobile__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__mobile__dark__ku",
+  "route": "/login",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/login__mobile__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__desktop__light__en",
+  "route": "/login",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "en",
+  "shot": "audit_screenshots/login__desktop__light__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__desktop__light__ar",
+  "route": "/login",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ar",
+  "shot": "audit_screenshots/login__desktop__light__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__desktop__light__ku",
+  "route": "/login",
+  "viewport": "desktop",
+  "theme": "light",
+  "lang": "ku",
+  "shot": "audit_screenshots/login__desktop__light__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__desktop__dark__en",
+  "route": "/login",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/login__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__desktop__dark__ar",
+  "route": "/login",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ar",
+  "shot": "audit_screenshots/login__desktop__dark__ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "login__desktop__dark__ku",
+  "route": "/login",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "ku",
+  "shot": "audit_screenshots/login__desktop__dark__ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "privacy__mobile__dark__en",
+  "route": "/privacy",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/privacy__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "privacy__desktop__dark__en",
+  "route": "/privacy",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/privacy__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "terms__mobile__dark__en",
+  "route": "/terms",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/terms__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "terms__desktop__dark__en",
+  "route": "/terms",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/terms__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "notfound__mobile__dark__en",
+  "route": "/definitely-not-a-route",
+  "viewport": "mobile",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/notfound__mobile__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "id": "notfound__desktop__dark__en",
+  "route": "/definitely-not-a-route",
+  "viewport": "desktop",
+  "theme": "dark",
+  "lang": "en",
+  "shot": "audit_screenshots/notfound__desktop__dark__en.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ }
+]

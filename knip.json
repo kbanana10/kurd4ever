@@ -1,0 +1,22 @@
+{
+  "entry": [
+    "scripts/replace_wav.ts",
+    "audit/**/*.test.{ts,tsx}",
+    "audit/setup.{ts,tsx}",
+    "audit/tools/*.mjs",
+    "oxlint.config.mjs"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}",
+    "scripts/**/*.ts",
+    "services/**/*.ts",
+    "audit/**/*.{ts,tsx,mjs}"
+  ],
+  "ignore": [
+    "src/features/audio/utils/audioSlug.ts"
+  ],
+  "ignoreDependencies": [
+    "@capacitor/android",
+    "tailwindcss"
+  ]
+}

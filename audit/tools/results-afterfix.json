@@ -1,0 +1,159 @@
+[
+ {
+  "name": "fix_i18n_grammar_ku",
+  "route": "/grammar",
+  "shot": "audit_screenshots/afterfix_fix_i18n_grammar_ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "name": "fix_i18n_sentences_ku",
+  "route": "/sentences",
+  "shot": "audit_screenshots/afterfix_fix_i18n_sentences_ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "name": "fix_i18n_notfound_ku",
+  "route": "/definitely-not-a-route",
+  "shot": "audit_screenshots/afterfix_fix_i18n_notfound_ku.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "name": "fix_login_dark_contrast",
+  "route": "/login",
+  "shot": "audit_screenshots/afterfix_fix_login_dark_contrast.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "name": "fix_nav_label_ar",
+  "route": "/",
+  "shot": "audit_screenshots/afterfix_fix_nav_label_ar.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "name": "fix_touch_targets_search",
+  "route": "/search",
+  "shot": "audit_screenshots/afterfix_fix_touch_targets_search.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "name": "fix_leaderboard_classes",
+  "route": "/leaderboard",
+  "shot": "audit_screenshots/afterfix_fix_leaderboard_classes.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [
+    {
+     "label": "Test Rival Active Progress",
+     "w": 358,
+     "h": 41,
+     "tag": "button"
+    }
+   ],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "name": "fix_admin_message",
+  "route": "/admin",
+  "shot": "audit_screenshots/afterfix_fix_admin_message.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "name": "fix_roadmap_reset_btn",
+  "route": "/roadmap",
+  "shot": "audit_screenshots/afterfix_fix_roadmap_reset_btn.jpg",
+  "checks": {
+   "hScroll": false,
+   "hScrollDelta": 0,
+   "smallTargets": [],
+   "clippedText": []
+  },
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ }
+]

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+public/audio/
+android/app/build/
+android/.gradle/
+*.log
+package-lock.json
+*.apk

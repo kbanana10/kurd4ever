@@ -1,0 +1,548 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,600..900;1,9..144,600..900&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+/* ==========================================================================
+   Kurdish Quest — "Warm Heritage Growth" design system (per DESIGN.md)
+   --------------------------------------------------------------------------
+   Canvas   : Warm Porcelain Ivory #FBFBFA
+   Cards    : Pure white, rounded-3xl (24–28px), soft ambient shadow
+              0 4px 20px rgba(0,0,0,0.03), 1px #F1F5F9 borders
+   Primary  : Sun Gold #FFB300 / #FFA000 (CTAs, progress, brand icons)
+   Success  : Emerald #10B981 / #00A86B  ·  Streak: #FF5722
+   Gems     : Cyan #00B0FF  ·  XP: Purple #8B5CF6
+   Text     : Deep Slate #1E293B  ·  Muted: #64748B
+   Type     : Plus Jakarta Sans (400–800)
+   ========================================================================== */
+
+@theme {
+  --breakpoint-xs: 480px;
+  --animate-shake: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: "Noto Kufi Arabic", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Display voice: Fraunces — warm, chiseled storybook serifs for hero
+     moments only (its Latin-Extended set carries ç ê î ş û beautifully).
+     Arabic display text falls through to Noto Kufi. */
+  --font-display: "Fraunces", "Noto Kufi Arabic", Georgia, serif;
+
+  /* Semantic tokens used across pages/components */
+  --color-surface: #ffffff;
+  --color-surface-2: #F6F5F1;
+  --color-ink: #1E293B;
+  --color-muted: #475569;
+  --color-subtle: #64748B;
+  --color-line: #F1F5F9;
+  --color-line-soft: #E2E8F0;
+  --color-brand: #FFB300;
+  --color-brand-deep: #8A6100;
+  --color-brand-alt: #FFA000;
+  --color-on-brand: #432C00;
+  --color-info: #00B0FF;
+  --color-accent: #FF5722;
+  --color-success: #10B981;
+  --color-danger: #EF4444;
+  --color-warning: #F59E0B;
+  --radius-control: 1rem;
+  --shadow-flat: 0 4px 20px rgba(0, 0, 0, 0.03);
+  --shadow-soft: 0 10px 30px rgba(30, 41, 59, 0.06);
+
+  @keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+  }
+}
+
+body {
+  margin: 0;
+  overscroll-behavior-y: none;
+}
+
+@layer base {
+  *, ::before, ::after {
+    border-color: #F1F5F9;
+  }
+  .dark *, .dark ::before, .dark ::after {
+    border-color: #2B2F36;
+  }
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+[dir="rtl"] {
+  --font-sans: "Noto Kufi Arabic", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
+  line-height: 1.65;
+}
+
+/* Reduced Motion Safeguard */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Screen reader only helper */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Palette variables (light = Warm Heritage Growth; dark = warm graphite)
+   -------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+  --kq-ink: #1E293B;
+  --kq-muted: #475569;      /* high-contrast secondary text (slate-600) */
+  --kq-bg: #FBFBFA;
+  --kq-bg-2: #F6F5F1;
+  --kq-surface: #ffffff;
+  --kq-surface-2: #FFF6E0;      /* gold tint container */
+  --kq-border: #F1F5F9;         /* soft structural border */
+  --kq-border-soft: #E2E8F0;
+  --kq-gold: #FFB300;
+  --kq-gold-dark: #FFA000;
+  --kq-gold-hover: #E69500;
+  --kq-gold-text: #8A6100;      /* accessible gold for text on light */
+  --kq-gold-on: #432C00;        /* text on gold fills */
+  --kq-green: #10B981;
+  --kq-green-deep: #00A86B;
+  --kq-streak: #FF5722;
+  --kq-cyan: #00B0FF;
+  --kq-purple: #8B5CF6;
+  --kq-red: #EF4444;
+  --kq-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.03);
+  --kq-shadow-hover: 0 10px 30px rgba(30, 41, 59, 0.07);
+  --kq-shadow-press: 0 3px 0 #E69500;
+  --kq-ring: #FFB300;
+}
+
+.dark {
+  color-scheme: dark;
+  --kq-ink: #F1F1F0;
+  --kq-muted: #A8B0BC;
+  --kq-bg: #141414;
+  --kq-bg-2: #1A1918;
+  --kq-surface: #1F1F1E;
+  --kq-surface-2: #2A2415;
+  --kq-border: #2B2B2A;
+  --kq-border-soft: #383836;
+  --kq-gold: #FFBA38;
+  --kq-gold-dark: #FFB300;
+  --kq-gold-hover: #FFC95E;
+  --kq-gold-text: #FFCE6B;
+  --kq-gold-on: #3A2A00;
+  --kq-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --kq-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --kq-shadow-press: 0 3px 0 #B87F00;
+  --kq-ring: #FFBA38;
+}
+
+.dark {
+  --color-surface: #1F1F1E;
+  --color-surface-2: #2A2415;
+  --color-ink: #F1F1F0;
+  --color-muted: #A8B0BC;
+  --color-subtle: #7C8592;
+  --color-line: #2B2B2A;
+  --color-line-soft: #383836;
+  --color-brand: #FFBA38;
+  --color-brand-deep: #FFCE6B;
+}
+
+/* Warm porcelain canvas — flat and calm, no loud gradients. */
+html,
+body,
+#root {
+  min-height: 100%;
+  background: var(--kq-bg);
+  color: var(--kq-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--kq-gold);
+  color: #432C00;
+}
+
+/* --------------------------------------------------------------------------
+   Legacy-utility remaps: convert the app's indigo/violet brand family and
+   harsh neutrals to the Warm Heritage palette without editing every page.
+   -------------------------------------------------------------------------- */
+
+/* Canvas wells & neutral fills */
+.bg-slate-50,
+.bg-slate-100 {
+  background-color: var(--kq-bg-2) !important;
+}
+
+.bg-white {
+  background-color: var(--kq-surface) !important;
+}
+
+/* Brand-tinted containers → warm gold tints */
+.bg-indigo-50,
+.bg-violet-50,
+.bg-indigo-100,
+.bg-violet-100 {
+  background-color: var(--kq-surface-2) !important;
+}
+
+.dark .dark\:bg-slate-950,
+.dark .dark\:bg-slate-900,
+.dark .dark\:bg-slate-800 {
+  background-color: var(--kq-surface) !important;
+}
+
+.dark .dark\:bg-indigo-950\/40,
+.dark .dark\:bg-indigo-950\/50,
+.dark .dark\:bg-indigo-950\/60,
+.dark .dark\:bg-indigo-950\/30,
+.dark .dark\:bg-purple-950\/40,
+.dark .dark\:bg-violet-950\/50 {
+  background-color: var(--kq-surface-2) !important;
+}
+
+/* Soft structure instead of harsh borders */
+.border-slate-100,
+.border-slate-200,
+.border-indigo-100,
+.border-indigo-200,
+.border-purple-100,
+.border-purple-200,
+.border-violet-100,
+.border-violet-200 {
+  border-color: var(--kq-border) !important;
+}
+
+.border-slate-300,
+.border-indigo-300 {
+  border-color: var(--kq-border-soft) !important;
+}
+
+.dark .dark\:border-slate-800,
+.dark .dark\:border-slate-700,
+.dark .dark\:border-indigo-900,
+.dark .dark\:border-indigo-800,
+.dark .dark\:border-purple-900 {
+  border-color: var(--kq-border) !important;
+}
+
+/* Typography colors → Deep Slate / Muted Slate */
+.text-slate-400,
+.text-slate-500,
+.text-slate-600 {
+  color: var(--kq-muted) !important;
+}
+
+.text-slate-700,
+.text-slate-800,
+.text-slate-900,
+.text-indigo-900,
+.text-indigo-950 {
+  color: var(--kq-ink) !important;
+}
+
+.dark .dark\:text-slate-400,
+.dark .dark\:text-slate-300,
+.dark .dark\:text-slate-200,
+.dark .dark\:text-white {
+  color: var(--kq-ink) !important;
+}
+
+/* Brand text: indigo/violet → accessible gold */
+.text-indigo-600,
+.text-indigo-700,
+.text-indigo-500,
+.text-violet-600,
+.text-purple-600 {
+  color: var(--kq-gold-text) !important;
+}
+
+.dark .dark\:text-indigo-400,
+.dark .dark\:text-purple-400,
+.dark .dark\:text-violet-400 {
+  color: var(--kq-gold-text) !important;
+}
+
+/* Solid brand fills → Sun Gold with dark warm text (WCAG-safe on gold) */
+.bg-indigo-600,
+.bg-indigo-700,
+.bg-indigo-500,
+.bg-violet-600,
+.hover\:bg-indigo-700:hover,
+.hover\:bg-indigo-800:hover {
+  background: var(--kq-gold) !important;
+  color: var(--kq-gold-on) !important;
+}
+
+.bg-indigo-600 *:not([class*="text-emerald"]):not([class*="text-rose"]),
+.bg-indigo-700 *:not([class*="text-emerald"]):not([class*="text-rose"]) {
+  color: var(--kq-gold-on) !important;
+}
+
+/* XP purple stays purple (spec: purple = XP) */
+.bg-purple-600,
+.hover\:bg-purple-700:hover {
+  background: var(--kq-purple) !important;
+  color: #ffffff !important;
+}
+
+/* Success family → emerald per spec */
+.bg-emerald-600,
+.hover\:bg-emerald-700:hover,
+.bg-emerald-500 {
+  background: var(--kq-green) !important;
+  color: #ffffff !important;
+}
+
+/* Brand gradients (hero cards, CTAs) → Sun Gold gradient, warm-dark content.
+   Only strong brand shades (500–800) — subtle 50/100 washes keep their tint. */
+:is(.from-indigo-500, .from-indigo-600, .from-indigo-700, .from-indigo-800,
+    .from-violet-500, .from-violet-600, .from-violet-700,
+    .via-indigo-600, .via-indigo-700, .via-violet-600)[class*="bg-gradient"]:not(.bg-clip-text) {
+  background: linear-gradient(135deg, #FFC541, #FFB300 45%, #FFA000) !important;
+  color: var(--kq-gold-on) !important;
+  border-color: transparent !important;
+}
+
+:is(.from-indigo-500, .from-indigo-600, .from-indigo-700, .from-indigo-800,
+    .from-violet-500, .from-violet-600, .from-violet-700)[class*="bg-gradient"]:not(.bg-clip-text)
+  :is(.text-white, [class*="text-indigo-1"], [class*="text-indigo-2"], [class*="text-violet-1"], [class*="text-white\/"], [class*="text-amber-2"], [class*="text-amber-3"], [class*="text-emerald-2"], [class*="text-emerald-3"], [class*="text-yellow-2"], [class*="text-yellow-3"]) {
+  color: var(--kq-gold-on) !important;
+}
+
+/* Gradient-clipped display text keeps its clipping, recoloured to deep gold */
+.bg-clip-text:is(.from-indigo-500, .from-indigo-600, .from-indigo-700, .from-violet-500, .from-violet-600, .from-violet-700) {
+  background: linear-gradient(90deg, #E69500, #B8860B) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+:is(.from-purple-500, .from-purple-600, .from-purple-700)[class*="bg-gradient"]:not(.bg-clip-text) {
+  background: linear-gradient(135deg, #9F7AEA, #8B5CF6) !important;
+  color: #ffffff !important;
+}
+
+/* Streak / fire accents */
+.text-orange-500, .text-orange-600 { color: var(--kq-streak) !important; }
+/* Gem cyan */
+.text-cyan-500, .text-sky-500, .text-blue-500 { color: var(--kq-cyan) !important; }
+
+/* --------------------------------------------------------------------------
+   Soft-tactile surfaces: cards float on ambient shadow, never hard strokes.
+   -------------------------------------------------------------------------- */
+:is(div, section, article, li)[class*="rounded-3xl"],
+:is(div, section, article, li)[class*="rounded-[32px]"],
+:is(div, section, article, li)[class*="rounded-[2rem]"] {
+  box-shadow: var(--kq-shadow-card);
+}
+
+/* Neutralise legacy chunky borders on cards: thin + soft */
+:is(div, section, article, li)[class*="border-2"][class*="rounded-3xl"],
+:is(div, section, article, li)[class*="border-2"][class*="rounded-2xl"],
+:is(div, section, article, li)[class*="border-2"][class*="rounded-[2rem]"] {
+  border-width: 1px !important;
+}
+
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled),
+a[role="button"]:not([aria-disabled="true"]) {
+  transition: transform 150ms cubic-bezier(.2, .9, .2, 1), box-shadow 150ms ease, background 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+@media (hover: hover) {
+  button:not(:disabled):hover,
+  a[role="button"]:not([aria-disabled="true"]):hover {
+    transform: translateY(-1px);
+  }
+}
+
+button:not(:disabled):active,
+a[role="button"]:not([aria-disabled="true"]):active {
+  transform: translateY(1px) scale(0.99);
+}
+
+button:disabled {
+  opacity: .55;
+}
+
+/* Progress bars: thick rounded tracks, calm inner surface */
+[class*="rounded-full"][class*="h-"][style*="width"] {
+  box-shadow: none;
+}
+
+/* Typography polish */
+h1, h2, h3,
+.font-black,
+.font-extrabold {
+  letter-spacing: -0.02em;
+}
+
+.uppercase,
+[class*="tracking-wider"],
+[class*="tracking-widest"] {
+  letter-spacing: 0.06em;
+}
+
+/* High-visibility keyboard focus — Sun Gold ring */
+*:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--kq-ring), 0 0 0 5px color-mix(in srgb, var(--kq-ring) 25%, transparent) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:not(:disabled):hover,
+  a[role="button"]:not([aria-disabled="true"]):hover,
+  button:not(:disabled):active,
+  a[role="button"]:not([aria-disabled="true"]):active {
+    transform: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   READABILITY FLOOR (UX refinement pass)
+   No text below 12px anywhere; generous leading so Hawar diacritics
+   (ç ê î ş û) and Arabic Kufi never clip; high-contrast secondary text.
+   -------------------------------------------------------------------------- */
+.text-\[8px\],
+.text-\[9px\],
+.text-\[10px\],
+.text-\[11px\] {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+/* 12px stays the absolute label floor, with breathing room */
+.text-xs {
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+}
+
+/* Body text floor: 14px with relaxed leading */
+.text-sm {
+  line-height: 1.5 !important;
+}
+
+/* leading-none (1.0) clips Kurdish circumflex + Arabic ascenders */
+.leading-none {
+  line-height: 1.25 !important;
+}
+
+/* Bottom-nav captions: compact tracking so 5 tabs never truncate at 390px */
+nav[aria-label="Main Navigation"] span {
+  letter-spacing: -0.02em !important;
+  font-size: 11.5px !important;
+}
+
+/* R-06: at very narrow widths (<=340px) five captions still truncated
+   ("ALPHAB…", "ROADM…"). Tighter tracking + 10.5px keeps every label whole
+   without changing the navigation structure. Deliberate, scoped exception to
+   the 12px readability floor: these are icon captions, not content text. */
+@media (max-width: 340px) {
+  nav[aria-label="Main Navigation"] span {
+    letter-spacing: 0 !important;
+    font-size: 10.5px !important;
+  }
+}
+
+.leading-tight {
+  line-height: 1.35 !important;
+}
+
+/* --------------------------------------------------------------------------
+   CLICKABILITY & TOUCH AFFORDANCE
+   -------------------------------------------------------------------------- */
+/* Tactile press compression on every interactive element */
+button:not(:disabled):active,
+a[role="button"]:not([aria-disabled="true"]):active,
+:is(div, li, article, span)[class*="cursor-pointer"]:active {
+  transform: translateY(1px) scale(0.98) !important;
+}
+
+/* Interactive cards visually distinct from static containers */
+@media (hover: hover) {
+  :is(div, li, article)[class*="cursor-pointer"]:hover {
+    box-shadow: var(--kq-shadow-hover);
+    border-color: var(--kq-border-soft);
+  }
+  button[class*="rounded"]:not(:disabled):hover {
+    box-shadow: var(--kq-shadow-hover);
+  }
+}
+
+/* Generous tap spacing: interactive rows never collapse below 44px */
+button:not([class*="h-"]):not([class*="min-h"]):not([class*="p-0"]) {
+  min-height: 40px;
+}
+
+/* --------------------------------------------------------------------------
+   Page-level rhythm helpers (kept from previous system, restyled soft)
+   -------------------------------------------------------------------------- */
+.quest-page input,
+.quest-page select,
+.quest-page textarea {
+  border: 1px solid var(--kq-border-soft) !important;
+  border-radius: 9999px !important;
+  background-color: var(--kq-bg-2);
+  box-shadow: none !important;
+  font-weight: 600;
+}
+
+.quest-page input:focus,
+.quest-page select:focus,
+.quest-page textarea:focus {
+  border-color: var(--kq-gold) !important;
+  background-color: var(--kq-surface);
+}
+
+.quest-page [class*="space-y-"] > [class*="bg-white"],
+.quest-page [class*="grid"] > [class*="bg-white"] {
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+@media (hover: hover) {
+  .quest-page [class*="space-y-"] > [class*="bg-white"]:hover,
+  .quest-page [class*="grid"] > [class*="bg-white"]:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--kq-shadow-hover);
+  }
+}
+
+.quest-page h1,
+.quest-page h2,
+.quest-page h3 {
+  text-wrap: balance;
+}
+
+.quest-page p,
+.quest-page span,
+.quest-page bdi {
+  overflow-wrap: anywhere;
+}

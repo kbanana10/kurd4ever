@@ -1,0 +1,41 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile gamification, dictionary history, and stats",
+      "type": "object",
+      "properties": {
+        "xp": { "type": "integer", "description": "Total experience points" },
+        "level": { "type": "integer", "description": "Leveled tier level count" },
+        "streak": { "type": "integer", "description": "Continuous streak count" },
+        "wordsLearned": { "type": "integer", "description": "Total learned vocabulary count" },
+        "quizzesCompleted": { "type": "integer", "description": "Total syllabus quizzes resolved" },
+        "sessionsCount": { "type": "integer", "description": "Number of learning sessions started" },
+        "totalStudyTime": { "type": "integer", "description": "Estimated minutes spent reading / practicing" },
+        "completedLessons": { "type": "array", "description": "Unlocked and fully read lessons in syllabus" },
+        "unlockedLevels": { "type": "array", "description": "CEFR levels unlocked" },
+        "badges": { "type": "array", "description": "System badges earned" },
+        "recentSearches": { "type": "array", "description": "Recent localized dictionary lookup strings" },
+        "favorites": { "type": "array", "description": "List of vocabulary word/term IDs favorited by student" },
+        "gameScores": { "type": "object", "description": "Arcade games metrics" },
+        "weakCategories": { "type": "object", "description": "Category error trackers" },
+        "strongCategories": { "type": "object", "description": "Category success trackers" },
+        "lastActive": { "type": "integer", "description": "Javascript epoch microtime" },
+        "createdAt": { "type": "integer", "description": "Creation timestamp epoch" },
+        "updatedAt": { "type": "integer", "description": "Modification timestamp epoch" },
+        "avatarId": { "type": "string", "description": "Active profile avatar id" },
+        "ageRange": { "type": "string", "description": "Optional demographic age" },
+        "gender": { "type": "string", "description": "Optional demographic gender" },
+        "region": { "type": "string", "description": "Optional general residential city" },
+        "kurdishRegion": { "type": "string", "description": "Kurdish dialect connection region" }
+      },
+      "required": ["xp", "level", "streak", "lastActive"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile with gamification stats"
+    }
+  }
+}

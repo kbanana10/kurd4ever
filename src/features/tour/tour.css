@@ -1,0 +1,165 @@
+/* ==========================================================================
+   Kurdish Quest guided tour — Driver.js popover skin ("Warm Heritage Growth")
+   Matches the app card language: white surface, 24px radius, soft ambient
+   shadow, Sun Gold (#FFB300) primary action with the signature hard shadow.
+   Dark mode mirrors the slate-900 card surfaces. RTL is handled via the
+   dir attribute set on the wrapper by useAppTour (text-align: start).
+   ========================================================================== */
+
+.driver-popover.kq-tour {
+  --kq-tour-bg: #ffffff;
+  background-color: var(--kq-tour-bg);
+  color: #1e293b;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 18px 44px rgba(30, 41, 59, 0.18);
+  padding: 20px;
+  max-width: 300px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+.dark .driver-popover.kq-tour {
+  --kq-tour-bg: #0f172a;
+  background-color: var(--kq-tour-bg);
+  color: #f1f5f9;
+  border-color: #1e293b;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
+}
+
+.driver-popover.kq-tour .driver-popover-title {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  text-align: start;
+}
+
+.driver-popover.kq-tour .driver-popover-description {
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #475569;
+  margin-top: 6px;
+  text-align: start;
+}
+
+.dark .driver-popover.kq-tour .driver-popover-description {
+  color: #94a3b8;
+}
+
+/* Footer: progress dots-style counter + pill buttons */
+.driver-popover.kq-tour .driver-popover-footer {
+  margin-top: 14px;
+  gap: 8px;
+}
+
+.driver-popover.kq-tour .driver-popover-progress-text {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #94a3b8;
+  font-variant-numeric: tabular-nums;
+}
+
+.driver-popover.kq-tour .driver-popover-footer button.driver-popover-footer-btn {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 9999px;
+  padding: 8px 16px;
+  min-height: 36px;
+  text-shadow: none;
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+
+.driver-popover.kq-tour .driver-popover-footer button.driver-popover-footer-btn:active {
+  transform: scale(0.96);
+}
+
+/* Primary (Next / Done): Sun Gold CTA with the app's hard 2px shadow */
+.driver-popover.kq-tour .driver-popover-footer button.driver-popover-next-btn {
+  background-color: #ffb300;
+  color: #432c00;
+  border: none;
+  box-shadow: 0 2px 0 #e69500;
+}
+
+.driver-popover.kq-tour .driver-popover-footer button.driver-popover-next-btn:hover {
+  background-color: #e69500;
+}
+
+/* Secondary (Back): quiet outline pill */
+.driver-popover.kq-tour .driver-popover-footer button.driver-popover-prev-btn {
+  background-color: transparent;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  box-shadow: none;
+}
+
+.dark .driver-popover.kq-tour .driver-popover-footer button.driver-popover-prev-btn {
+  color: #94a3b8;
+  border-color: #334155;
+}
+
+/* Close (skip) — small round ghost button pinned inside the card corner */
+.driver-popover.kq-tour button.driver-popover-close-btn {
+  color: #94a3b8;
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  top: 8px;
+  right: 8px;
+  border-radius: 9999px;
+  outline: none;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.driver-popover.kq-tour button.driver-popover-close-btn:focus-visible {
+  outline: 2px solid rgba(255, 179, 0, 0.55);
+  outline-offset: 1px;
+}
+
+.driver-popover.kq-tour button.driver-popover-close-btn:hover {
+  background-color: rgba(148, 163, 184, 0.14);
+  color: #1e293b;
+}
+
+.dark .driver-popover.kq-tour button.driver-popover-close-btn:hover {
+  color: #f1f5f9;
+}
+
+/* Keep the title clear of the close button */
+.driver-popover.kq-tour .driver-popover-title {
+  padding-inline-end: 26px;
+}
+
+/* RTL: close button moves to the mirrored corner */
+.driver-popover.kq-tour[dir='rtl'] button.driver-popover-close-btn {
+  right: auto;
+  left: 8px;
+}
+
+/* Arrow inherits the surface color in both themes */
+.driver-popover.kq-tour .driver-popover-arrow-side-top {
+  border-top-color: var(--kq-tour-bg);
+}
+.driver-popover.kq-tour .driver-popover-arrow-side-bottom {
+  border-bottom-color: var(--kq-tour-bg);
+}
+.driver-popover.kq-tour .driver-popover-arrow-side-left {
+  border-left-color: var(--kq-tour-bg);
+}
+.driver-popover.kq-tour .driver-popover-arrow-side-right {
+  border-right-color: var(--kq-tour-bg);
+}
+
+/* RTL polish: Arabic UI gets the app's Arabic face and natural button order */
+.driver-popover.kq-tour[dir='rtl'] {
+  font-family: "Noto Kufi Arabic", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+.driver-popover.kq-tour[dir='rtl'] .driver-popover-navigation-btns {
+  flex-direction: row-reverse;
+}

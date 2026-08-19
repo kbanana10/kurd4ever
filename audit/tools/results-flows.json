@@ -1,0 +1,296 @@
+[
+ {
+  "flow": "onboarding",
+  "step": "unauthenticated redirect to /login",
+  "ok": true,
+  "note": "http://localhost:3000/login",
+  "shot": null
+ },
+ {
+  "flow": "onboarding",
+  "step": "local sign-in via name",
+  "ok": true,
+  "note": "http://localhost:3000/",
+  "shot": "audit_screenshots/flow_onboarding_02_after_signin.jpg"
+ },
+ {
+  "flow": "onboarding",
+  "step": "onboarding wizard walk-through",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_onboarding_09_done.jpg"
+ },
+ {
+  "flow": "onboarding",
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "flow": "dashboard",
+  "step": "Daily Goal modal opens",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_dashboard_04_daily_goal_modal.jpg"
+ },
+ {
+  "flow": "dashboard",
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "flow": "quiz",
+  "step": "study phase (Explore & Learn) rendered",
+  "ok": true,
+  "note": "",
+  "shot": null
+ },
+ {
+  "flow": "quiz",
+  "step": "multiple-choice rendered",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_quiz_40_mcq.jpg"
+ },
+ {
+  "flow": "quiz",
+  "step": "answer feedback state",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_quiz_10_feedback.jpg"
+ },
+ {
+  "flow": "quiz",
+  "step": "answer feedback state",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_quiz_11_feedback.jpg"
+ },
+ {
+  "flow": "quiz",
+  "step": "victory screen reached",
+  "ok": true,
+  "note": "6 steps",
+  "shot": "audit_screenshots/flow_quiz_90_victory.jpg"
+ },
+ {
+  "flow": "quiz",
+  "step": "question types exercised",
+  "ok": true,
+  "note": "mcq",
+  "shot": null
+ },
+ {
+  "flow": "quiz",
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "flow": "roadmap",
+  "step": "active node opens detail modal",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_roadmap_03_node_modal.jpg"
+ },
+ {
+  "flow": "roadmap",
+  "step": "locked node interaction captured",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_roadmap_04_locked_click.jpg"
+ },
+ {
+  "flow": "roadmap",
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "flow": "vocab",
+  "step": "category opens word list",
+  "ok": true,
+  "note": "http://localhost:3000/vocabulary/numbers",
+  "shot": "audit_screenshots/flow_vocab_02_word_list.jpg"
+ },
+ {
+  "flow": "vocab",
+  "step": "favorite toggle works",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_vocab_04_favorited.jpg"
+ },
+ {
+  "flow": "search",
+  "step": "search typing renders results",
+  "ok": true,
+  "note": "query=av",
+  "shot": "audit_screenshots/flow_search_01_typed_query.jpg"
+ },
+ {
+  "flow": "search",
+  "step": "CEFR + POS filters applied",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_search_03_pos_filter.jpg"
+ },
+ {
+  "flow": "favorites",
+  "step": "favorites page renders seeded favorites",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_favorites_01.jpg"
+ },
+ {
+  "flow": "vocab",
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/audio/numbers/zero.mp3]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /audio/numbers/zero.mp3",
+    "FAILED net::ERR_ABORTED /audio/numbers/zero.mp3"
+   ]
+  }
+ },
+ {
+  "flow": "grammar",
+  "step": "chapter/lesson expansion",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_grammar_02_lesson_open.jpg"
+ },
+ {
+  "flow": "sentences",
+  "step": "tab switching",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_sentences_02_tab_switch.jpg"
+ },
+ {
+  "flow": "grammar",
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "flow": "games",
+  "step": "Word Matching UI frame captured",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_games_02_word_matching.jpg"
+ },
+ {
+  "flow": "games",
+  "step": "Zombie Typing UI frame captured",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_games_03_zombie_typing.jpg"
+ },
+ {
+  "flow": "games",
+  "step": "Word Spelling UI frame captured",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_games_04_word_spelling.jpg"
+ },
+ {
+  "flow": "games",
+  "step": "Word Connect UI frame captured",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_games_05_word_connect.jpg"
+ },
+ {
+  "flow": "games",
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "flow": "profile",
+  "step": "live theme toggle",
+  "ok": true,
+  "note": "dark=true",
+  "shot": "audit_screenshots/flow_profile_03_theme_toggled.jpg"
+ },
+ {
+  "flow": "profile",
+  "step": "instant LTR→RTL flip",
+  "ok": true,
+  "note": "dir=rtl",
+  "shot": "audit_screenshots/flow_profile_04_rtl_flip.jpg"
+ },
+ {
+  "flow": "profile",
+  "step": "Kurdish LTR + Hawar diacritics",
+  "ok": true,
+  "note": "dir=ltr",
+  "shot": "audit_screenshots/flow_profile_05_kurdish_ltr.jpg"
+ },
+ {
+  "flow": "profile",
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ },
+ {
+  "flow": "admin",
+  "step": "admin dashboard renders with disabled-API notice",
+  "ok": true,
+  "note": "",
+  "shot": "audit_screenshots/flow_admin_01_overview.jpg"
+ },
+ {
+  "flow": "admin",
+  "step": "form controls accept input",
+  "ok": true,
+  "note": "",
+  "shot": null
+ },
+ {
+  "flow": "admin",
+  "issues": {
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]",
+    "Failed to load resource: the server responded with a status of 404 (Not Found) [http://localhost:3000/api/admin/tts/stats]"
+   ],
+   "pageErrors": [],
+   "failedRequests": [
+    "404 /api/admin/tts/stats",
+    "404 /api/admin/tts/stats"
+   ]
+  }
+ },
+ {
+  "flow": "quiz-rtl",
+  "step": "quiz renders in RTL",
+  "ok": true,
+  "note": "dir=rtl",
+  "shot": "audit_screenshots/flow_quiz_rtl_01.jpg"
+ },
+ {
+  "flow": "quiz-rtl",
+  "issues": {
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ }
+]
