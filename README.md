@@ -1,445 +1,306 @@
-# 🏆 Kurdish Quest (Kurmanji Quester)
+# 🏆 Kurdish Quest — Learn Kurmanji
 
-An enterprise-grade, mobile-first, and offline-resilient language learning application designed to teach **Kurmanji Kurdish** (Hawar script). Localized natively in **Kurmanji Kurdish, English, and Arabic** with fluid bidirectional layout support (LTR & RTL), Kurdish Quest delivers a gamified curriculum complete with interactive lessons, an adaptive quiz engine with SM-2 Spaced Repetition (SRS), a content-hashed pronunciation audio pipeline, arcade learning games, and offline-resilient progress synchronization across devices.
+An enterprise-grade, mobile-first, offline-resilient language-learning app for **Kurmanji Kurdish** (Hawar script). Localized natively in **Kurmanji Kurdish (ku), English (en) and Arabic (ar)** with fluid bidirectional LTR/RTL layout. Kurdish Quest pairs a gamified curriculum with an adaptive quiz engine (SM-2 spaced repetition), a content-hashed pronunciation-audio pipeline, arcade learning games, and offline-first progress sync.
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
-1. [Project Overview](#1-project-overview)
+1. [What this is](#1-what-this-is)
 2. [Technology Stack](#2-technology-stack)
-3. [Complete Project Structure](#3-complete-project-structure)
-4. [Architecture Explanation](#4-architecture-explanation)
-5. [Features Documentation](#5-features-documentation)
-6. [Installation & Setup](#6-installation--setup)
-7. [Development Guide](#7-development-guide)
-8. [Database Documentation](#8-database-documentation)
-9. [UI/UX Documentation](#9-uiux-documentation)
-10. [Future Improvements](#10-future-improvements)
+3. [Getting Started](#3-getting-started)
+4. [Project Layout](#4-project-layout)
+5. [Architecture](#5-architecture)
+6. [Features in Detail](#6-features-in-detail)
+7. [Environment Variables](#7-environment-variables)
+8. [Data & Firebase](#8-data--firebase)
+9. [Quality Tooling](#9-quality-tooling)
+10. [Known Gaps](#10-known-gaps)
 
 ---
 
-## 1. Project Overview
+## 1. What this is
 
-### Purpose & Vision
-Kurmanji Kurdish is spoken by millions across the globe, yet accessible, high-quality, interactive digital learning tools remain scarce. **Kurdish Quest** bridges this gap by providing a modern, gamified learning platform modeled after leading global language platforms, customized specifically for Kurmanji Kurdish in the Hawar alphabet.
+Kurmanji Kurdish is spoken by millions, yet accessible, high-quality interactive learning tools are scarce. Kurdish Quest fills that gap with a gamified platform modeled after leading language apps, built specifically for Kurmanji Kurdish in the Hawar alphabet.
 
-### Key Objectives & Problems Solved
-- **Bi-Directional Localization**: Fully localized in English and Arabic to serve learners from both Western and Middle Eastern backgrounds, with automatic right-to-left (RTL) and left-to-right (LTR) layout switching.
-- **Hawar Script Mastery**: Teaches standard Kurmanji Kurdish orthography (Hawar Latin alphabet), phonetics, and grammar structures.
-- **Offline-First Accessibility**: Operates seamlessly in low-connectivity or offline environments using client-side caching and an auto-synchronizing cloud engine.
-- **Cross-Platform Native Availability**: Runs as a progressive web application (PWA), a full-stack web application, and a native Android `.apk` app powered by CapacitorJS.
+- **Tri-lingual & bi-directional**: English, Arabic and native Kurdish UI with automatic RTL/LTR switching.
+- **Hawar mastery**: teaches the 31-letter Hawar alphabet, phonetics and grammar, with native pronunciation audio.
+- **Offline-first**: local persistence (IndexedDB/localStorage) with an auto-syncing cloud engine.
+- **Cross-platform**: ships as a PWA, a web app, and a native **Android** app via Capacitor.
 
 ---
 
 ## 2. Technology Stack
 
-### Frontend Architecture
-| Technology | Version | Role & Purpose |
-| :--- | :--- | :--- |
-| **React** | `^19.0.1` | Declarative UI framework for building component-driven views. |
-| **TypeScript** | `~5.8.2` | Type-safe programming language ensuring strict interface compliance. |
-| **Vite** | `^6.2.3` | Next-generation frontend build tool and dev server. |
-| **Tailwind CSS** | `^4.1.14` | Utility-first CSS framework for mobile-first responsive styling. |
-| **React Router** | `^7.14.2` | Client-side route management and code-split layout rendering. |
-| **Framer Motion** | `^12.23.24` | Production-grade motion library for fluid UI animations and micro-interactions. |
-| **Zustand** | `^5.0.12` | Lightweight state management for monetization and app state. |
-| **Lucide React** | `^0.546.0` | Accessible vector icon library. |
-| **React Confetti** | `^6.4.0` | Micro-animation library for celebration effects upon quiz and game completions. |
-
-### Backend & Cloud Services
-| Technology | Version | Role & Purpose |
-| :--- | :--- | :--- |
-| **Express.js** | `^4.21.2` | Node.js web server handling audio asset delivery, rate limiting, and security proxying. |
-| **Firebase Firestore** | `^12.13.0` | Cloud NoSQL database storing user profiles, progress, streaks, and game scores. |
-| **Firebase Auth** | `^12.13.0` | Google authentication provider for cloud sync across devices. |
-| **express-rate-limit** | `^8.5.1` | Rate-limiting middleware for securing backend API endpoints. |
-
-### Mobile Native & Deployment
-| Technology | Version | Role & Purpose |
-| :--- | :--- | :--- |
-| **CapacitorJS** | `^8.3.4` | Native bridge wrapping the web bundle into a native Android runtime. |
-| **Vite PWA** | `^1.3.0` | Service worker generator for offline caching and PWA installation. |
-| **Vitest** | `latest` | Fast unit, component, performance, and regression test runner. |
+| Area | Technology |
+| :--- | :--- |
+| UI framework | React 19, TypeScript (strict) |
+| Build tool | Vite 6 + `@vitejs/plugin-react` |
+| Styling | Tailwind CSS v4 (`@tailwindcss/vite`) |
+| Routing | React Router v7 |
+| Animation | `motion` v12 (Framer Motion) |
+| State | `zustand` (monetization/ad store) + React Context (`src/store/AuthContext.tsx`) |
+| Icons | `lucide-react` |
+| Backend / dev server | Express 4 wrapping Vite (`server.ts`) |
+| Cloud (optional) | Firebase Auth (Google) + Firestore |
+| Native shell | Capacitor 8 |
+| PWA | `vite-plugin-pwa` (VitePluginPWA) |
+| Testing | Vitest 4 + Testing Library + jsdom |
+| Storybook | Storybook 10 (React + Vite) |
+| Linting | TypeScript `--noEmit`, ESLint + vendored `anti-slop` rules, `knip` dead-code |
 
 ---
 
-## 3. Complete Project Structure
+## 3. Getting Started
+
+**Prerequisites**: Node.js **>= 20 and < 21** (see the `engines` field in `package.json`). The code is ESM (`"type": "module"`).
+
+```bash
+git clone https://github.com/kbanana10/kurd4ever.git
+cd kurd4ever
+
+# Install dependencies
+npm ci          # clean, lockfile-exact install (recommended)
+# or
+npm install
+
+# Optional: copy env template (see §7 — the app runs fully offline without it)
+cp .env.example .env
+
+# Start the dev server (Express + Vite middleware, hot reload)
+npm run dev     # → http://localhost:3000
+```
+
+### Useful scripts
+
+| Script | What it does |
+| :--- | :--- |
+| `npm run dev` / `npm start` | Start the dev server (`tsx server.ts`) |
+| `npm run build` | Production build (`vite build` → `dist/`) |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | Type-check (`tsc --noEmit`) |
+| `npm run lint:slop` | ESLint anti-slop rules, zero-warning gate |
+| `npm run lint:knip` | Dead-code / unused export audit |
+| `npm test` | Vitest suite (`audit/vitest.config.ts`) |
+| `npm run storybook` | Storybook UI dev server (port 6006) |
+| `npm run build-storybook` | Static Storybook build |
+| `npm run generate-audio` | Batch-generate lesson audio via external TTS |
+
+> **Note**: `node_modules/`, `dist/`, `storybook-static/`, `android/build` and `.env*` are git-ignored.
+
+---
+
+## 4. Project Layout
 
 ```text
-/ (Project Root)
-├── .env.example                      → Environment configuration template
-├── .gitignore                        → Excluded paths for git version control
-├── AUDIT_REPORT.md                   → Codebase security, performance, and audit report
-├── README.md                         → Main project documentation
-├── capacitor.config.ts               → Native mobile configuration for CapacitorJS
-├── firebase-applet-config.json       → Client-side Firebase credentials
-├── firebase-blueprint.json           → Database schema blueprint definition
-├── firestore.rules                   → Production security rules for Firestore
-├── index.html                        → SPA HTML entry template
-├── metadata.json                     → Applet metadata and permissions
-├── package.json                      → Project dependencies and build scripts
-├── server.ts                         → Node.js Express server entry point
-├── tsconfig.json                     → TypeScript compiler configuration
-├── vite.config.ts                    → Vite build, PWA manifest, and bundle splitting config
+/ (repo root)
+├── .env.example              → Environment template (GitHub-copied; .env is ignored)
+├── .nvmrc                    → Node major version (20)
+├── capacitor.config.ts       → Capacitor app config (com.kurdishquest.app)
+├── firebase-applet-config.json → DEV placeholder Firebase config (real config comes from env)
+├── firebase-blueprint.json   → Firestore schema blueprint (users/{userId})
+├── firestore.rules           → Firestore security rules
+├── index.html                → SPA HTML entry
+├── metadata.json             → Applet metadata (name / capabilities)
+├── server.ts                 → Express dev/prod server: static audio, SPA serving, security headers
+├── vite.config.ts            → Vite + Tailwind + PWA + manual chunk splitting
+├── package.json / package-lock.json / bun.lock
 │
-├── android/                          → Native Android Studio Project
-│   ├── app/                          → Android app module, manifests, and build configs
-│   ├── build.gradle                  → Root Gradle build configuration
-│   └── variables.gradle              → Android SDK and plugin version variables
+├── android/                  → Capacitor-generated Android Studio project
+├── public/                   → Static assets
+│   └── audio/feedback/       → correct / wrong / complete sound effects
+├── scripts/                  → generateAudio.ts, replace_wav.ts, ux_agent.py (LLM UX explorer)
+├── services/tts/             → TTS provider interface + KurdishTTSProvider
+├── app/applet/               → Content-maintenance helpers (emoji/icon indexing)
+├── tools/oxlint/anti-slop/   → Vendored anti-slop lint plugin (+ its own tests)
 │
-├── audit/                            → Automated Quality & Regression Test Suite
-│   ├── audio.test.ts                 → Audio engine unit tests
-│   ├── deep.test.tsx                 → Deep component rendering tests
-│   ├── interact.test.tsx             → User interaction simulation tests
-│   ├── logic.test.ts                 → Core business logic tests
-│   ├── perf.test.tsx                 → Performance benchmark tests
-│   ├── regression.test.ts            → Bug regression test coverage
-│   ├── srs.test.ts                   → Spaced repetition algorithm tests
-│   ├── vitest.config.ts              → Vitest execution configuration
-│   └── setup.ts                      → Test environment setup file
+├── audit/                    → OH&QA test harness (14 test files, ~170 tests)
+│   ├── tools/qa-lib.mjs      → Shared Playwright QA library
+│   ├── tools/matrix-sweep.mjs→ Route × viewport × theme × lang screenshot sweep
+│   ├── tools/flows.mjs       → End-to-end user-flow checks
+│   ├── tools/design-shots.mjs→ Design regression screenshots
+│   └── tools/results-*.json  → Checked-in results from past runs
 │
-├── docs/                             → Developer & Architecture Documentation Hub
-│   ├── ANDROID_BUILD.md              → Native Android compilation guide
-│   ├── ARCHITECTURE.md               → Architectural design map and system layout
-│   ├── AUDIO_SYSTEM.md               → Pronunciation audio engine specifications
-│   ├── COMPONENTS.md                 → Reusable component registry & design tokens
-│   ├── CONTENT_GUIDE.md              → Curriculum schema & content editing manual
-│   ├── FUTURE_ROADMAP.md             → Development expansion roadmap
-│   ├── GAMIFICATION.md               → XP formulas, streak rules, and leveling math
-│   ├── LOCALIZATION.md               → RTL/LTR and translation dictionary specifications
-│   ├── QUIZ_ENGINE.md                → Dynamic question generation mechanics
-│   └── UI_UX_SPECIFICATION.md        → Visual design tokens and layout rules
-│
-├── public/                           → Static Public Assets
-│   ├── audio/                        → Generated MP3/WAV pronunciation audio files
-│   ├── favicon.png                   → Application favicon
-│   ├── pwa-192x192.png               → PWA icon (192px)
-│   └── pwa-512x512.png               → PWA icon (512px)
-│
-├── scripts/                          → Automation & Asset Generation Scripts
-│   ├── generateAudio.ts              → Script to synthesize lesson audio assets
-│   └── replace_wav.ts                → Utility script for converting WAV to MP3 format
-│
-└── src/                              → Application Source Code
-    ├── App.tsx                       → Main application router and context providers
-    ├── main.tsx                      → DOM entry point mounting React root
-    ├── index.css                     → Global CSS with Tailwind setup
-    ├── vite-env.d.ts                 → TypeScript global Vite environment definitions
-    │
-    ├── components/                   → Reusable UI Components
-    │   ├── AudioButton.tsx           → Audio playback trigger component with loading state
-    │   ├── DailyGoalTracker.tsx      → Daily progress modal tracking XP goals
-    │   ├── ErrorBoundary.tsx         → React error boundary catching runtime crashes
-    │   ├── Leaderboard.tsx           → Embedded top users ranking widget
-    │   ├── MainLayout.tsx            → Application navigation shell (Header & Bottom Bar)
-    │   ├── NetworkStatusBadge.tsx    → Offline/online connectivity indicator badge
-    │   ├── OnboardingFlow.tsx        → First-time user setup modal
-    │   ├── RouteFallback.tsx         → Loading spinner fallback for lazy routes
-    │   ├── games/                    → Interactive Arcade Game Components
-    │   │   ├── WordConnectGame.tsx   → Letter connection spelling puzzle
-    │   │   ├── WordMatchingGame.tsx  → Flip card memory matching game
-    │   │   └── ZombieTypingGame.tsx  → Speed typing arcade defense game
-    │   └── ui/                       → Design System Primitive Components
-    │       ├── Badge.tsx             → Custom status badge primitive
-    │       ├── Button.tsx            → Standard button primitive
-    │       ├── Card.tsx              → Container card primitive
-    │       ├── EmptyState.tsx        → Placeholder view for empty collections
-    │       ├── Modal.tsx             → Reusable dialog modal primitive
-    │       ├── Progress.tsx          → Animated progress bar primitive
-    │       ├── StatPill.tsx          → Gamification stat pill primitive
-    │       └── index.ts              → UI primitives barrel export
-    │
-    ├── constants/                    → System-Wide Constants
-    │   └── appConstants.ts           → Level thresholds, default XP rewards, and settings
-    │
-    ├── data/                         → Curriculum Data & Schema Definitions
-    │   ├── academic.ts               → CEFR academic lessons and dialogues data
-    │   ├── grammar.ts                → Grammar rules, tenses, and structural guides
-    │   ├── kurmanji.ts               → Core vocabulary library and alphabet entries
-    │   ├── learningPath.ts           → Roadmap modules, units, and lesson milestones
-    │   ├── adapters/                 → Content translation and normalization adapters
-    │   │   └── contentAdapter.ts     → Data adapter unifying content representations
-    │   ├── json/                     → Content manifest JSON catalogs
-    │   │   └── contentManifest.json  → Master index of learning content
-    │   ├── normalized/               → Structured datasets
-    │   │   ├── dialogues.ts          → Conversation dialogues dataset
-    │   │   ├── grammarModules.ts     → Normalized grammar dataset
-    │   │   └── vocabularyLemmas.ts   → Normalized vocabulary dataset
-    │   └── schemas/                  → TypeScript content validators
-    │       └── contentSchemas.ts     → Zod/Type content validation schemas
-    │
-    ├── features/                     → Feature-Driven Modules
-    │   ├── audio/                    → Pronunciation Audio Module
-    │   │   ├── components/           → Audio player control UI elements
-    │   │   └── hooks/                → Audio hooks (`useAudioPlayer`)
-    │   ├── monetization/             → Ad Simulation & Store Module
-    │   │   ├── components/           → Interstitial and Rewarded Ad modals
-    │   │   └── store/                → Zustand store managing gems and ad views
-    │   └── quiz/                     → Dynamic Quiz Engine Module
-    │       ├── components/           → Question cards and quiz result views
-    │       ├── hooks/                → Quiz execution hook (`useQuizEngine`)
-    │       ├── types.ts              → Quiz question interface definitions
-    │       └── utils/                → Distractor generation algorithms
-    │
-    ├── hooks/                        → Custom React Hooks
-    │   ├── useAudio.ts               → Hook wrapping web audio playback
-    │   └── useFavorites.ts           → Hook managing favorited words in localStorage/Firestore
-    │
-    ├── lib/                          → Third-Party Configurations & Utilities
-    │   ├── AuthContext.tsx           → Authentication context and Firestore sync provider
-    │   ├── LeaderboardService.ts     → Leaderboard score calculation utility
-    │   ├── ReminderService.ts        → Browser notification scheduler
-    │   ├── firebase.ts               → Firebase initialization instance
-    │   ├── firestoreUtils.ts         → Firestore read/write helper functions
-    │   ├── navigation.ts             → Navigation route helpers
-    │   ├── translations.ts           → UI translation keys dictionary
-    │   └── utils.ts                  → Class merging utility (`cn`)
-    │
-    ├── localization/                 → Internationalization Layer
-    │   └── translations.ts           → Multilingual strings for English and Arabic
-    │
-    ├── models/                       → Data Models & TypeScript Interfaces
-    │   ├── learning.ts               → Vocabulary, Lesson, Quiz, and Category types
-    │   └── user.ts                   → User Profile, Stats, and Badge types
-    │
-    ├── pages/                        → Top-Level Application Views
-    │   ├── Admin.tsx                 → Admin portal for content management and TTS status
-    │   ├── Alphabet.tsx              → Hawar script alphabet learning page
-    │   ├── Dashboard.tsx             → Primary user hub with stats, streaks, and quick launch
-    │   ├── Favorites.tsx             → Saved vocabulary terms review page
-    │   ├── Games.tsx                 → Arcade game selection portal
-    │   ├── GrammarPage.tsx           → Kurmanji grammar rules and structural guide
-    │   ├── LeaderboardPage.tsx       → Global community ranking leaderboard
-    │   ├── Login.tsx                 → User authentication and guest login page
-    │   ├── NotFound.tsx              → 404 route error page
-    │   ├── PrivacyPolicy.tsx         → Privacy policy legal documentation
-    │   ├── Profile.tsx               → User account settings, badges, and progress summary
-    │   ├── Quiz.tsx                  → Interactive quiz execution container
-    │   ├── Roadmap.tsx               → Gamified CEFR learning path map
-    │   ├── Search.tsx                → Real-time multilingual dictionary search
-    │   ├── Sentences.tsx             → Practical sentences and dialogue practice page
-    │   ├── TermsOfService.tsx        → Terms of service legal documentation
-    │   ├── VocabularyCategories.tsx  → Vocabulary categories overview page
-    │   └── VocabularyList.tsx        → Detailed vocabulary items view page
-    │
-    ├── services/                     → Core Business Logic & Engine Services
-    │   ├── GamificationService.ts    → Calculation of XP rewards, levels, and streak logic
-    │   ├── LeaderboardService.ts     → Leaderboard fetching and rank calculation
-    │   ├── OfflineStorageService.ts  → Fallback IndexedDB / LocalStorage state persistence
-    │   ├── ReminderService.ts        → Daily practice reminder notifications
-    │   ├── SpacedRepetitionService.ts→ SM-2 algorithm for spaced memory review
-    │   ├── SyncEngine.ts             → Auto-sync engine merging offline and cloud data
-    │   └── TelemetryService.ts       → User interaction analytics and error logging
-    │
-    ├── store/                        → Context State Provider
-    │   └── AuthContext.tsx           → Core user session and data state context
-    │
-    └── utils/                        → General Utility Functions
-        └── cn.ts                     → ClassName merger helper
+└── src/                      → Application source
+    ├── main.tsx              → React root + PWA service-worker registration
+    ├── App.tsx               → Router + lazy-loaded routes + ErrorBoundaries
+    ├── index.css             → Tailwind entry + Warm Heritage design system tokens
+    ├── components/           → MainLayout (shell), ErrorBoundary, RouteFallback,
+    │   │                       OnboardingFlow, NetworkStatusBadge, games/, ui/ (primitives)
+    ├── constants/appConstants.ts → Avatars, regions, XP/level thresholds
+    ├── data/                 → Curriculum: kurmanji.ts, academic.ts, learningPath.ts,
+    │   │                       normalized/ (dialogues, vocabularyLemmas), schemas/
+    ├── features/
+    │   ├── audio/            → useAudio hook + AudioButton (TTS player)
+    │   ├── monetization/     → Ad simulator + gems store (Zustand)
+    │   ├── quiz/             → types, useQuizEngine, questionGenerator, 4 question components
+    │   └── tour/             → Driver.js onboarding tour (tours.ts, useAppTour.ts)
+    ├── hooks/                → useFavorites (+ legacy re-export of useAudio)
+    ├── lib/                  → firebase.ts, navigation.ts, translations re-exports
+    ├── localization/translations.ts → en/ku/ar UI strings (the canonical dictionary)
+    ├── models/               → user.ts (User, UserData), word.ts
+    ├── pages/                → 18 routed views (Dashboard, Roadmap, Alphabet, Quiz, …)
+    ├── services/             → Gamification, SRS, SyncEngine, OfflineStorage, Missions,
+    │   │                       Leaderboard, CloudLeaderboard, Reminder, Telemetry
+    ├── store/AuthContext.tsx → Core session/profile state + theme/language + sync orchestration
+    └── utils/cn.ts           → className merger (clsx + tailwind-merge)
 ```
 
 ---
 
-## 4. Architecture Explanation
+## 5. Architecture
 
-### Overall System Architecture
-Kurdish Quest follows a **Mobile-First Client-Side Architecture** backed by an Express backend proxy and Firebase Cloud Storage:
+Kurdish Quest is a **mobile-first client-side SPA** with an Express proxy and optional Firebase cloud sync.
 
-```text
-  ┌──────────────────────────────────────────────────────────┐
-  │                 Client Application Layer                 │
-  │  (React 19 SPA + React Router v7 + Tailwind + Framer)    │
-  └─────────────┬──────────────────────────────┬─────────────┘
-                │                              │
-    (State & Offline Storage)       (Cloud Synchronization)
-                │                              │
-                ▼                              ▼
-  ┌───────────────────────────┐  ┌───────────────────────────┐
-  │ LocalStorage / IndexedDB  │  │  Firebase Firestore &     │
-  │ (Offline Data Resilience) │  │  Google Authentication    │
-  └───────────────────────────┘  └───────────────────────────┘
-                ▲                              ▲
-                └──────────────┬───────────────┘
-                               │
-                       (SyncEngine.ts)
-                               │
-                               ▼
-  ┌──────────────────────────────────────────────────────────┐
-  │              Express.js Server Proxy Layer               │
-  │    (Static Audio Serving + Admin API + Rate Limiter)     │
-  └──────────────────────────────────────────────────────────┘
+```
+             ┌─────────────────────────────────────────────┐
+             │          React 19 SPA (Vite dev / build)    │
+             └───────────────┬──────────────┬──────────────┘
+                             │              │
+        Local-first state    │              │   Cloud sync (when configured)
+           + persistence     │              │
+                             ▼              ▼
+             ┌────────────────────┐   ┌─────────────────────┐
+             │ localStorage /     │   │ Firebase Firestore  │
+             │ IndexedDB          │   │ + Google Auth       │
+             │ (OfflineStorageService)│ └─────────────────────┘
+             └────────────────────┘             ▲
+                                                │ SyncEngine merge (additive)
+             ┌────────────────────────────────────┐
+             │  Express server (server.ts)        │
+             │  static /audio · SPA fallback      │
+             │  security headers (CSP, X-Frame… ) │
+             └────────────────────────────────────┘
 ```
 
-### Data Flow Pipeline
-1. **User Action**: The user completes a quiz, reads a lesson, or earns XP.
-2. **Immediate Local Update**: `AuthContext.tsx` updates client-side state in memory and persists state instantly to `LocalStorage` for zero latency.
-3. **Background Cloud Sync**: `SyncEngine.ts` monitors network connectivity and syncs local profile updates to Firebase Cloud Firestore at `users/{userId}`.
-4. **Offline Resilience**: If offline, changes queue locally. Once reconnected, `SyncEngine.ts` merges offline changes with Firestore seamlessly.
+### State model
+
+`src/store/AuthContext.tsx` is the single source of truth for session + profile. It:
+
+1. Hydrates `user` / `userData` from localStorage immediately (fast first paint).
+2. Listens to `onAuthStateChanged`; for signed-in users it pulls Firestore and **additively merges** via `SyncEngine.mergeUserDataAdditive` so no progress is lost to a stale local/cloud side.
+3. Persists every write locally first, then writes through to Firestore — queuing mutations (`OfflineStorageService.enqueueMutation`) when offline.
+4. Writes progress through a `userDataRef` (not the render closure) so back-to-back updates (quiz XP + lesson completion) **compose** instead of clobbering each other (a previous lost-update bug).
+
+### Gamification (`services/GamificationService.ts`)
+
+- **XP → level** is an exponential curve (`calculateLevelFromXP`); 100 XP ≈ 1 level early on.
+- **Streak** is UTC-date aware with streak-freeze shields (`checkAndUpdateStreak`).
+- **Gems** are granted only via explicit awards (quiz perfect scores, level-ups, mission claims) — the old "auto-mint gems on every event" behavior was removed.
+- **Badges** are computed from thresholds (XP, words learned, streak, quizzes, lessons).
+
+### Spaced repetition (`services/SpacedRepetitionService.ts`)
+
+An SM-2 derivative maintains a `reviewDeck` per user, adjusting each item's ease/interval from answer correctness; quiz flows surface `srs_review` and `review_mistakes` modules.
 
 ---
 
-## 5. Features Documentation
+## 6. Features in Detail
 
-### Feature Matrix
-
-| Feature | Description | File Location | Key Functions / Mechanism |
-| :--- | :--- | :--- | :--- |
-| **Hawar Alphabet Guide** | Interactive audio guide for all 31 Kurmanji Latin letters with phonetic charts and sample words. | `src/pages/Alphabet.tsx` | Plays native pronunciation clips per letter; filters vowels and consonants. |
-| **Categorized Vocabulary** | Browse hundreds of terms categorized into Animals, Colors, Food, Family, Travel, and more. | `src/pages/VocabularyCategories.tsx`, `VocabularyList.tsx` | Integrates with `useFavorites` and audio playback triggers. |
-| **Interactive Quiz Engine** | Dynamic test generator supporting Multiple Choice, Listening, Spelling, and Emoji Match questions. | `src/features/quiz/` | `useQuizEngine.ts` dynamically pulls terms, creates randomized distractors, and scores performance. |
-| **Spaced Repetition (SRS)** | SM-2 algorithm derivative calculating review intervals for weak vocabulary terms. | `src/services/SpacedRepetitionService.ts` | Adjusts term ease factors based on user answer speed and correctness. |
-| **Gamification Engine** | Experience points (XP), streak tracking, level progression, and badge achievements. | `src/services/GamificationService.ts` | Calculates level boundaries based on total XP and updates streak counters upon daily logins. |
-| **Arcade Games Suite** | Interactive spelling and memory games (Word Connect, Memory Match, Zombie Typing). | `src/components/games/` | Real-time interactive canvas and card views built with Framer Motion and audio feedback. |
-| **Multilingual Search** | Real-time dictionary search across English, Arabic, Kurdish, and phonetic pronunciations. | `src/pages/Search.tsx` | Filters normalized vocabulary lemmas instantly without backend latency. |
-| **Offline-First Sync Engine** | Seamless offline state persistence with automatic cloud resolution upon connection. | `src/services/SyncEngine.ts` | Merges offline mutations with Firestore documents securely. |
-| **Google Apps Script Proxy** | Safe backend proxy for Google Sheets content synchronization. | `server.ts` | Anti-SSRF allowlisted proxy endpoint `/api/admin/google-sheets/proxy`. |
-
----
-
-## 6. Installation & Setup
-
-### Prerequisites
-- **Node.js**: Version 18.0.0 or higher
-- **npm**: Version 9.0.0 or higher (or `bun` / `pnpm`)
-
-### Installation Steps
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/kbanana10/kurmanjiapp.git
-   cd kurmanjiapp
-   ```
-
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Set Up Environment Variables**:
-   Copy the `.env.example` file to create `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-
-   Configure the variables in `.env`:
-   ```env
-   # Public origin
-   APP_URL="http://localhost:3000"
-
-   # Admin API Security (server.ts)
-   ADMIN_API_ENABLED=false
-   ADMIN_API_TOKEN="your-secure-bearer-token"
-
-   # Text-to-Speech Engine Provider
-   TTS_PROVIDER="google"
-   ```
-
-4. **Start Development Server**:
-   ```bash
-   npm run dev
-   ```
-   Open your browser at `http://localhost:3000`.
-
-5. **Build for Production**:
-   ```bash
-   npm run build
-   ```
-
-6. **Run Test Suite**:
-   ```bash
-   npm run test
-   ```
-
----
-
-## 7. Development Guide
-
-### Adding New Vocabulary
-To add new vocabulary words to the curriculum:
-1. Open `src/data/kurmanji.ts`.
-2. Add a new item adhering to the `VocabularyItem` interface:
-   ```typescript
-   {
-     id: "word_unique_id",
-     kurdish: "Rojbaş",
-     english: "Good morning",
-     arabic: "صباح الخير",
-     phonetic: "Rohj-bahsh",
-     category: "greetings",
-     difficulty: "beginner"
-   }
-   ```
-3. Run `npm run lint` to verify type safety.
-
-### Adding New Routes & Pages
-1. Create a new page component in `src/pages/MyNewPage.tsx`.
-2. Open `src/App.tsx` and import the route using React `lazy`:
-   ```typescript
-   const MyNewPage = lazy(() => import('./pages/MyNewPage').then(m => ({ default: m.MyNewPage })));
-   ```
-3. Add the `<Route>` definition inside `<Routes>` in `src/App.tsx`.
-
-### Code Style Conventions
-- **TypeScript**: Strict type definitions required; avoid `any`.
-- **Styling**: Use Tailwind CSS utility classes exclusively.
-- **RTL/LTR Support**: Use logical directional CSS properties (`start`, `end`, `ms-`, `me-`) instead of left/right fixed positions.
-
----
-
-## 8. Database Documentation
-
-### Firestore Document Schema: `users/{userId}`
-
-| Property | Type | Description |
+| Feature | Location | Notes |
 | :--- | :--- | :--- |
-| `xp` | `number` | Total experience points accumulated by user. |
-| `level` | `number` | Current player level (calculated from total XP). |
-| `streak` | `number` | Consecutive daily login streak count. |
-| `wordsLearned` | `number` | Total count of vocabulary terms mastered. |
-| `quizzesCompleted` | `number` | Number of completed curriculum quizzes. |
-| `completedLessons` | `string[]` | Array of completed lesson IDs. |
-| `badges` | `string[]` | Array of earned achievement badge IDs. |
-| `favorites` | `string[]` | Array of favorited vocabulary word IDs. |
-| `lastActive` | `number` | JavaScript timestamp epoch of last activity. |
-| `createdAt` | `number` | User creation timestamp. |
-
-### Firestore Security Rules (`firestore.rules`)
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    function isOwner(userId) {
-      return request.auth != null && request.auth.uid == userId;
-    }
-
-    match /users/{userId} {
-      allow get, list, create, update, delete: if isOwner(userId);
-    }
-  }
-}
-```
+| **Hawar Alphabet** | `src/pages/Alphabet.tsx` | 31 letters, phonetic guide, per-letter audio |
+| **Vocabulary** | `src/pages/VocabularyCategories.tsx`, `VocabularyList.tsx` | Categorized by theme (numbers, colors, animals, food, family, home, time, …) |
+| **Quiz engine** | `src/features/quiz/` | Modes: multiple-choice, emoji-match, listening, write-Kurdish, adaptive, mixed challenge, SRS review, mistakes review |
+| **Question types** | `types.ts` | `multiple_choice`, `true_false`, `emoji`, `listen`, `scrambled_letters`, `sentence_reorder`, `fill_blank`, `translate` |
+| **Spaced repetition** | `SpacedRepetitionService.ts` | SM-2 derivative review deck |
+| **Arcade games** | `src/pages/Games.tsx` + `components/games/` | Scramble, Memory Match, Zombie Typing, Word Connect |
+| **Daily goal + missions** | `Dashboard.tsx`, `MissionsService.ts` | UTC-day XP goal modal, daily missions, streaks |
+| **Guided tour** | `src/features/tour/` | Driver.js onboarding tour (replayable from Profile) |
+| **Search** | `src/pages/Search.tsx` | Multilingual (en/ku/ar) dictionary search |
+| **Store + ads** | `src/pages/Store.tsx`, `features/monetization/` | Gem currency, simulated interstitial/rewarded ads |
+| **Reminders** | `ReminderService.ts` | In-app practice reminders (Web Notifications API) |
+| **Leaderboard** | `pages/LeaderboardPage.tsx`, `CloudLeaderboard.ts`, `LeaderboardService.ts` | Optional Firebase-backed ranking |
+| **Offline sync** | `SyncEngine.ts`, `OfflineStorageService.ts` | Merge + queue when offline |
 
 ---
 
-## 9. UI/UX Documentation
+## 7. Environment Variables
 
-### Key Screens
-- **Dashboard (`/`)**: Main hub displaying user level, XP progress bar, current login streak, motivational quote, daily goal progress, and quick-launch study modules.
-- **Learning Path / Roadmap (`/roadmap`)**: Gamified node-based milestone map tracking lesson unlocks from CEFR A1 to B2.
-- **Quiz Engine (`/quiz/:moduleId`)**: Full-screen interactive quiz view with progress indicator, haptic feedback, streak boosters, and celebration modals.
-- **Games Portal (`/games`)**: Selection of arcade games (Word Connect, Memory Match, Zombie Typing) designed for cognitive vocabulary reinforcement.
-- **Multilingual Search (`/search`)**: Fast, real-time dictionary search with language toggle filters.
-- **User Profile (`/profile`)**: Showcase for earned badges, detailed learning statistics, dialect settings, and cloud account sync options.
+Copy `.env.example` to `.env` (git-ignored). **Every feature works offline without any env vars** — the variables below enable optional integrations.
+
+| Variable | Purpose |
+| :--- | :--- |
+| `APP_URL` | Public origin (default `http://localhost:3000`) |
+| `GEMINI_API_KEY` | Gemini AI key (injected into the client bundle via `vite.config.ts` — see the warning in `.env.example`) |
+| `TTS_PROVIDER` | `google` (default) or `kurdishtts` |
+| `KURDISHTTS_API_KEY` / `KURDISHTTS_MODEL_VERSION` / `KURDISHTTS_SPEAKER_ID` | KurdishTTS provider config |
+| `VITE_FIREBASE_API_KEY` / `VITE_FIREBASE_AUTH_DOMAIN` / `VITE_FIREBASE_PROJECT_ID` / `VITE_FIREBASE_APP_ID` | Real Firebase project (all four required to enable cloud features) |
+| `VITE_FIREBASE_STORAGE_BUCKET` / `VITE_FIREBASE_MESSAGING_SENDER_ID` / `VITE_FIREBASE_MEASUREMENT_ID` / `VITE_FIREBASE_FIRESTORE_DATABASE_ID` | Optional Firebase fields |
+| `PORT` | Server port (default 3000) |
+| `DISABLE_HMR` | Set `true` to disable Vite HMR (used in some hosted sandboxes) |
+
+### How Firebase activation works
+
+`src/lib/firebase.ts` reads `VITE_FIREBASE_*` at build time. When **all four core values** are set, `isFirebaseConfigured === true` and the app shows Google sign-in and sync affordances. Otherwise the committed dev placeholder (`firebase-applet-config.json`) keeps the SDK bootable but the app treats cloud as **not configured** and hides those features — so users are never offered an auth flow that can't succeed.
+
+Firebase web config values are **not secrets** (they ship in every client bundle by design); data protection is enforced by `firestore.rules`. Keep real project values out of Git by injecting them via deployment env.
 
 ---
 
-## 10. Future Improvements
+## 8. Data & Firebase
 
-1. **Native Push Notifications**: Integrate `@capacitor/push-notifications` to send practice reminder alerts directly to mobile devices.
-2. **Offline Audio Bundles**: Package high-frequency audio files into a downloadable zip file for 100% offline pronunciation playback.
-3. **AI Speech Recognition**: Integrate browser SpeechRecognition API to assess student pronunciation accuracy in real time.
-4. **Multiplayer Leaderboard Challenges**: Enable peer-to-peer vocabulary head-to-head quiz battles.
+### Firestore collections
+
+| Path | Schema | Rules |
+| :--- | :--- | :--- |
+| `users/{userId}` | `UserProfile` (see `firebase-blueprint.json` / `src/models/user.ts`) | owner-only read/write; XP must only increase (`update` rule) |
+| `leaderboard/{userId}` | one entry per user (name, avatar, xp) | readable by any signed-in user; writable only by owner; published `xp` must equal the owner's profile `xp` |
+
+### Security rules (`firestore.rules`)
+
+Default-deny, owner-scoped writes, ID validation, profile-shape validation, and an **anti-tamper rule**: a client may never lower its own `xp` and it is bounded to `<= 10,000,000`. Full anti-cheat would require server-authored writes (Cloud Functions) — a documented limitation.
+
+### Content data (`src/data/`)
+
+- `kurmanji.ts` — core vocabulary (with emoji + audio paths) and alphabet letters.
+- `academic.ts` — academic vocabulary / dialogues.
+- `learningPath.ts` — CEFR roadmap modules/units/lessons (A1 → B2 → Advanced).
+- `normalized/` — canonical lemma + dialogue datasets.
+- `json/contentManifest.json` — content manifest (locale/version metadata).
+
+---
+
+## 9. Quality Tooling
+
+### Test suite (`npm test`)
+
+The audit harness (`audit/`) runs with **Vitest + jsdom**. Vitest config is `audit/vitest.config.ts`. Test files cover:
+
+- `audio.test.ts`, `srs.test.ts`, `quiz-engine.test.ts`, `quiz-modes.test.tsx`, `quiz-progression.test.tsx` — engine correctness
+- `deep.test.tsx`, `interact.test.tsx`, `games-progression.test.tsx` — component/user-interaction rendering
+- `regression.test.ts`, `logic.test.ts`, `missions.test.ts`, `perf.test.tsx`, `smoke.test.tsx`, `tour.test.ts`
+
+Tests mock browser-only seams (Firebase SDK, audio) at the module boundary — see `audit/setup.ts` and the per-file `vi.mock` blocks.
+
+### Browser QA tooling (`audit/tools/*.mjs`)
+
+Playwright-based scripts that run against the local dev server and check for horizontal scroll, tiny tap targets, clipped text, console errors and failed requests across a **route × viewport × theme × language matrix**. Checked-in `results-*.json` files record the last run.
+
+- `matrix-sweep.mjs` — screenshot sweep
+- `flows.mjs` — onboarding / dashboard end-to-end flows
+- `design-shots.mjs` — design regression
+- `qa-lib.mjs` — shared help
+
+### Linting
+
+- `npm run lint` — strict `tsc --noEmit`
+- `npm run lint:slop` — ESLint with the **vendored anti-slop plugin** (`tools/oxlint/anti-slop/`), a set of anti-"type slop" rules enforced as errors with a few documented, deliberate project divergences
+- `npm run lint:knip` — dead-code/unused-export audit (`knip.json`)
+
+CI (`.github/workflows/ci.yml`) runs: install → `npm audit --omit=dev` → type-check/lint → anti-slop → knip → tests → production build → Storybook build, on Node 20.
+
+---
+
+## 10. Known Gaps
+
+Documented as TODOs in code (e.g. `TODO-002`, `TODO-003`) — this section is kept in sync with the code, and any new gap found during reviews should be added here.
+
+- **Cloud is optional by design** (`TODO-002`, `src/lib/firebase.ts`): until a real Firebase project is injected via `VITE_FIREBASE_*`, Google sign-in and cloud sync are hidden. The committed `firebase-applet-config.json` is a scratch-project placeholder.
+- **Anti-cheat is client-side** (`TODO-003`, `firestore.rules`): the XP-monotonic rule helps, but authoritative scoring would need Cloud Functions.
+- **Pronunciation audio** is generated on demand (`npm run generate-audio`) and most of it is **not committed** — only the three feedback sounds ship. Audio URLs follow `/audio/…` and return JSON 404s when missing.
+- **`services/` vs `lib/` naming**: `src/lib/` currently holds thin re-export shims (e.g. `src/lib/AuthContext.ts → src/store/AuthContext`) for backward compatibility; the canonical modules live in `src/store/`, `src/services/` and `src/localization/`.
+- **`README` version skew**: this file is the source of truth and is updated as the tree changes; older assumptions (e.g. a `docs/` folder, `grammar` / `Admin` pages) do **not** exist in the current tree.
 
 ---
 

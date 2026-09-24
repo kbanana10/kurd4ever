@@ -7,6 +7,16 @@
 
 import { Language } from '../models/user';
 
+/**
+ * Marker stored as `window.history.state.usr` on every native history entry
+ * the Numbers/Colors subject pages push when a number family (or the advanced
+ * "large numbers" family) is opened. Read by the header/Capacitor back handlers
+ * to decide whether a back press should close the overlay before navigating
+ * away. A plain string primitive so it survives `pushState`'s structured clone
+ * and compares with `===` after deserialisation.
+ */
+export const NUMBER_FAMILY_HISTORY_STATE = 'number-family';
+
 export interface RouteMeta {
   isMainTab: boolean;
   hideHeader: boolean;
@@ -90,6 +100,102 @@ export function getRouteMeta(pathname: string, language: Language): RouteMeta {
       brandLabel: isKu ? 'HEVOK' : isAr ? 'الجمل' : 'PHRASES',
       title: isKu ? 'Hevokên Belav' : isAr ? 'العبارات الشائعة' : 'Common Phrases',
       safeBackTo: isKu ? 'Mal' : isAr ? 'الرئيسية' : 'Home',
+    };
+  }
+
+  // 5a. Writing word tracing page (per word)
+  if (pathname.startsWith('/writing/words/')) {
+    return {
+      isMainTab: false,
+      hideHeader: false,
+      hideBottomNav: false,
+      brandLabel: isKu ? 'PEYV' : isAr ? 'كلمات' : 'WORDS',
+      title: isKu ? 'Peyv' : isAr ? 'كلمة' : 'Word',
+      safeBackTo: isKu ? 'Peyv' : isAr ? 'كلمات' : 'Words',
+    };
+  }
+
+  // 5b. Writing word grid
+  if (pathname === '/writing/words') {
+    return {
+      isMainTab: false,
+      hideHeader: false,
+      hideBottomNav: false,
+      brandLabel: isKu ? 'NIVÎSÎN' : isAr ? 'الكتابة' : 'WRITING',
+      title: isKu ? 'Peyv' : isAr ? 'كلمات' : 'Words',
+      safeBackTo: isKu ? 'Nivîsîn' : isAr ? 'الكتابة' : 'Writing',
+    };
+  }
+
+  // 5a2. Writing sentence tracing page (per sentence)
+  if (pathname.startsWith('/writing/sentences/')) {
+    return {
+      isMainTab: false,
+      hideHeader: false,
+      hideBottomNav: false,
+      brandLabel: isKu ? 'HEVOK' : isAr ? 'جُمَل' : 'SENTENCES',
+      title: isKu ? 'Hevok' : isAr ? 'جملة' : 'Sentence',
+      safeBackTo: isKu ? 'Hevok' : isAr ? 'جُمَل' : 'Sentences',
+    };
+  }
+
+  // 5b2. Writing sentence grid
+  if (pathname === '/writing/sentences') {
+    return {
+      isMainTab: false,
+      hideHeader: false,
+      hideBottomNav: false,
+      brandLabel: isKu ? 'NIVÎSÎN' : isAr ? 'الكتابة' : 'WRITING',
+      title: isKu ? 'Hevok' : isAr ? 'جُمَل' : 'Sentences',
+      safeBackTo: isKu ? 'Nivîsîn' : isAr ? 'الكتابة' : 'Writing',
+    };
+  }
+
+  // 5c. Writing tracing page (per letter)
+  if (pathname.startsWith('/writing/')) {
+    return {
+      isMainTab: false,
+      hideHeader: false,
+      hideBottomNav: false,
+      brandLabel: isKu ? 'NIVÎSÎN' : isAr ? 'الكتابة' : 'WRITING',
+      title: isKu ? 'Şopandin' : isAr ? 'الكتابة' : 'Trace',
+      safeBackTo: isKu ? 'Nivîsîn' : isAr ? 'الكتابة' : 'Writing',
+    };
+  }
+
+  // 5b. Writing grid page (Nivîsîn)
+  if (pathname === '/writing') {
+    return {
+      isMainTab: false,
+      hideHeader: false,
+      hideBottomNav: false,
+      brandLabel: isKu ? 'NIVÎSÎN' : isAr ? 'الكتابة' : 'WRITING',
+      title: isKu ? 'Nivîsîn' : isAr ? 'الكتابة' : 'Writing',
+      safeBackTo: isKu ? 'Fêrbûn' : isAr ? 'التعلّم' : 'Learning',
+    };
+  }
+
+  // 6a. Grammar lesson placeholder (sub-category detail)
+  if (pathname.startsWith('/grammar/')) {
+    return {
+      isMainTab: false,
+      hideHeader: false,
+      hideBottomNav: false,
+      brandLabel: isKu ? 'RÊZIMAN' : isAr ? 'قواعد' : 'GRAMMAR',
+      title: isKu ? 'Ders' : isAr ? 'الدرس' : 'Lesson',
+      safeBackTo: isKu ? 'Rêziman' : isAr ? 'النحو' : 'Grammar',
+    };
+  }
+
+  // 6b. Grammar sub-category hub
+  if (pathname === '/grammar') {
+    return {
+      isMainTab: false,
+      hideHeader: false,
+      hideBottomNav: false,
+      brandLabel: isKu ? 'RÊZIMAN' : isAr ? 'قواعد' : 'GRAMMAR',
+      title: isKu ? 'Rêziman' : isAr ? 'النحو' : 'Grammar',
+      safeBackTo: isKu ? 'Fêrbûn' : isAr ? 'التعلّم' : 'Learning',
     };
   }
 
@@ -244,13 +350,29 @@ export function navigateSafelyBack(navigate: (path: string | number) => void, pa
   }
 
   if (pathname.startsWith('/vocabulary/')) {
-    navigate('/vocabulary');
+    navigate('/learn');
   } else if (pathname === '/vocabulary') {
     navigate('/roadmap');
   } else if (pathname.startsWith('/quiz/')) {
     navigate('/roadmap');
   } else if (pathname === '/leaderboard' || pathname === '/privacy' || pathname === '/terms') {
     navigate('/profile');
+  } else if (pathname === '/grammar') {
+    navigate('/learn');
+  } else if (pathname.startsWith('/grammar/')) {
+    navigate('/grammar');
+  } else if (pathname === '/writing') {
+    navigate('/learn');
+  } else if (pathname.startsWith('/writing/words/')) {
+    navigate('/writing/words');
+  } else if (pathname === '/writing/words') {
+    navigate('/writing');
+  } else if (pathname.startsWith('/writing/sentences/')) {
+    navigate('/writing/sentences');
+  } else if (pathname === '/writing/sentences') {
+    navigate('/writing');
+  } else if (pathname.startsWith('/writing/')) {
+    navigate('/writing');
   } else {
     navigate('/');
   }

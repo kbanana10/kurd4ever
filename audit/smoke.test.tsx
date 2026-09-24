@@ -72,6 +72,7 @@ async function renderRoute(path: string, Comp: React.ComponentType<any>, routePa
 const PAGES: Array<[string, string, string?]> = [
   ['Dashboard', '/'],
   ['Login', '/login'],
+  ['LearningHub', '/learn'],
   ['Alphabet', '/alphabet'],
   ['VocabularyCategories', '/vocabulary'],
   ['VocabularyList', '/vocabulary/family', '/vocabulary/:categoryId'],
