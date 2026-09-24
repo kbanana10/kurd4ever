@@ -86,8 +86,26 @@ execSync('mkdir -p /tmp/nsslibs && tar -xf /tmp/al2023.tar -C /tmp/nsslibs');
 LD_LIBRARY_PATH=/tmp/nsslibs/lib node your-script.mjs
 ```
 
+Proven minimal launch probe (Cycle 3, passed attempt 1 of 3):
+
+```bash
+# from repo root, after npm ci + npm install --no-save puppeteer-core @sparticuz/chromium
+# and the NSS extraction one-liner above:
+node -e "import('@sparticuz/chromium').then(async c=>{const e=await c.default.executablePath();const p=(await import('puppeteer-core')).default;const b=await p.launch({args:c.default.args,defaultViewport:{width:390,height:844},executablePath:e,headless:'shell',env:{...process.env,LD_LIBRARY_PATH:'/tmp/nsslibs/lib'}});const pg=await b.newPage();await pg.setContent('<h1>hello</h1>');console.log('H1:',await pg.\$eval('h1',el=>el.textContent));await b.close();});"
+# expected: H1: hello
+```
+
 Re-run the one-liner after every reset (tarball + extracted libs live in `/tmp`,
 which is also wiped).
+
+### Generalized UI measurement tool (Cycle 3)
+
+```bash
+node audit/tools/measure-ui.mjs                     # measures /grammar/pronouns (3 port sizes incl. RTL)
+ROUTE=/grammar/sentence-structure node audit/tools/measure-ui.mjs
+# Env overrides: ROUTE, ROW_SELECTOR, KU_SELECTOR, AUDIO_SELECTOR, RIGHT_SELECTOR, TOLERANCE_PX, BASE
+# Screenshots land in measure-ui-proof/ (gitignored via its nested .gitignore).
+```
 
 ## 5. Before/after every app change (Rule 4)
 
