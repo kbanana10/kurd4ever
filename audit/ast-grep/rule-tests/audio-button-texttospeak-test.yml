@@ -1,0 +1,11 @@
+id: audio-button-texttospeak
+valid:
+  - |
+    export const A = () => <AudioButton textToSpeak="Ez nan dixwim" />;
+  - |
+    export const B = () => <AudioButton audioUrl="/x.mp3" textToSpeak="av" />;
+invalid:
+  - |
+    export const C = () => <AudioButton audioUrl="/audio/x.mp3" />;
+  - |
+    export const D = () => <AudioButton />;

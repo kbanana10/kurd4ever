@@ -1,0 +1,9 @@
+id: opt-helper-arity
+valid:
+  - |
+    import { opt } from './helpers';
+    const a = opt('Ez', 'أنا', 'I');
+invalid:
+  - |
+    import { opt } from './helpers';
+    const a = opt('Ez', 'أنا');

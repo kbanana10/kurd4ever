@@ -1,0 +1,10 @@
+id: opt-helper-arity
+message: Exercise options must be authored with the trilingual opt(ku, ar, en) helper so every option carries an Arabic and English gloss.
+severity: warning
+language: Tsx
+rule:
+  pattern:
+    context: "opt($A, $B)"
+  not:
+    pattern:
+      context: "opt($A, $B, $C)"
