@@ -5,6 +5,22 @@
 > `origin/ai/autonomous` is the only durable state. Re-run the commands below
 > before doing any work.
 
+## Session Start — Context Recovery
+
+At the very start of a session, BEFORE doing anything else, recover context
+in this exact order:
+
+1. **Read `repomix-output.md`** first — it packs the whole repo (280 files,
+   ~537k tokens) into one file for one-shot project context. Regenerate it with:
+
+   ```bash
+   npx --yes repomix --style markdown --output repomix-output.md
+   ```
+
+   See §3 ("repomix") for the pinned command and ignore rules.
+2. **Then read `docs/agent-setup.md`** (this file) for environment re-establish
+   and the current cycle rules.
+
 ## 0. Baseline state (re-verify every session)
 
 | Thing | Expected |
@@ -62,8 +78,14 @@ npm exec --yes --package=@ast-grep/cli -- sg scan   -c audit/ast-grep/sgconfig.y
 # Browser verification pair (Cycle 3) — NOT YET COMMITTED AS RULES
 npm install --no-save puppeteer-core @sparticuz/chromium
 
-# repomix — one-file context pack (later cycle)
-npx repomix    # writes repomix-output.txt (keep out of git)
+# repomix — one-file context pack (Cycle 4: verified resolving, attempt 1)
+# Default output is repomix-output.xml in v1.18.1; we pin markdown + explicit name:
+npx --yes repomix --style markdown --output repomix-output.md
+#   → writes repomix-output.md (280 files, ~537k tokens) — exit 0
+# Ignore rules: .gitignore has `repomix-output.*`; .repomixignore excludes the
+# proof dirs (measure-ui-proof/, conceptcard-proof/) and the pack itself.
+# The pack is a GENERATED artifact: never commit it. Intended use: read at
+# start of session to re-establish project context (see "Session Start" above).
 ```
 
 ## 4. Browser (headless Chromium) workaround — used Cycle 3
