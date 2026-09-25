@@ -12,4 +12,4 @@ coverage/
 storybook-static/
 
 # Repomix generated context pack (AI context snapshot, not source)
-repomix-output.*
+repomix-*.md

@@ -10,14 +10,10 @@
 At the very start of a session, BEFORE doing anything else, recover context
 in this exact order:
 
-1. **Read `repomix-output.md`** first — it packs the whole repo (280 files,
-   ~537k tokens) into one file for one-shot project context. Regenerate it with:
-
-   ```bash
-   npx --yes repomix --style markdown --output repomix-output.md
-   ```
-
-   See §3 ("repomix") for the pinned command and ignore rules.
+1. **Read `repomix-src.md` first** (primary context: `src/**` in one file).
+   If a different area matters, read `repomix-docs.md`, `repomix-harness.md`,
+   or `repomix-root.md` as needed. Regenerate all four with the commands in
+   §3 ("repomix") — each stays under 100k tokens so it fits a context window.
 2. **Then read `docs/agent-setup.md`** (this file) for environment re-establish
    and the current cycle rules.
 
@@ -78,14 +74,19 @@ npm exec --yes --package=@ast-grep/cli -- sg scan   -c audit/ast-grep/sgconfig.y
 # Browser verification pair (Cycle 3) — NOT YET COMMITTED AS RULES
 npm install --no-save puppeteer-core @sparticuz/chromium
 
-# repomix — one-file context pack (Cycle 4: verified resolving, attempt 1)
-# Default output is repomix-output.xml in v1.18.1; we pin markdown + explicit name:
-npx --yes repomix --style markdown --output repomix-output.md
-#   → writes repomix-output.md (280 files, ~537k tokens) — exit 0
-# Ignore rules: .gitignore has `repomix-output.*`; .repomixignore excludes the
-# proof dirs (measure-ui-proof/, conceptcard-proof/) and the pack itself.
-# The pack is a GENERATED artifact: never commit it. Intended use: read at
-# start of session to re-establish project context (see "Session Start" above).
+# repomix — one-file context pack (Cycle 4 / 4.5: verified resolving, attempt 1)
+# Default output is repomix-output.xml in v1.18.1; we use --compress (tree-sitter
+# structure extraction) and split by area so every pack stays under ~100k tokens:
+#   whole repo --compress = 154,371 tokens (too big) → SPLIT:
+npx --yes repomix --include "src/**"             --compress --style markdown --output repomix-src.md     # 76,031 tk
+npx --yes repomix --include "docs/**"            --compress --style markdown --output repomix-docs.md    # 12,530 tk
+npx --yes repomix --include "audit/**,tools/**"  --compress --style markdown --output repomix-harness.md # 17,912 tk
+npx --yes repomix --ignore "src/**,docs/**,audit/**,tools/**,node_modules/**,build/**,dist/**" \
+         --compress --style markdown --output repomix-root.md                                          # 22,724 tk
+# Ignore rules: .gitignore `repomix-*.md`; .repomixignore excludes proof dirs,
+# result JSONs, and the packs themselves. All packs are GENERATED artifacts:
+# never commit them. Intended use: read at start of session to re-establish
+# project context (see "Session Start" above); read src first, then docs/harness/root.
 ```
 
 ## 4. Browser (headless Chromium) workaround — used Cycle 3
