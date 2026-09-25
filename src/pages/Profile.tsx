@@ -376,7 +376,7 @@ export function Profile() {
                           <h4 className="text-[13px] font-black text-slate-800 dark:text-slate-100 truncate">
                             {t(language, def.titleKey)}
                           </h4>
-                          <span className="text-[10px] font-black text-cyan-600 dark:text-cyan-400 shrink-0">💎 {def.reward}</span>
+                          <span className="text-[10px] font-black text-cyan-700 dark:text-cyan-300 shrink-0">💎 {def.reward}</span>
                         </div>
                         <p className="text-[11px] font-bold text-slate-400 dark:text-slate-500 truncate">
                           {t(language, def.descKey)}
