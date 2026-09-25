@@ -87,7 +87,7 @@ export function CheckButton({ disabled, onClick, label }: CheckButtonProps) {
       className={`w-full py-4 rounded-3xl font-black text-sm shadow-md transition-all duration-300 flex items-center justify-center gap-2 border-none ${
         disabled
           ? 'bg-slate-200 text-slate-400 cursor-not-allowed shadow-none'
-          : 'bg-teal-600 hover:bg-teal-700 active:scale-95 text-white cursor-pointer'
+          : 'bg-teal-700 hover:bg-teal-800 active:scale-95 text-white cursor-pointer'
       }`}
     >
       <Check className="w-4 h-4" />
@@ -106,7 +106,7 @@ export function ContinueButton({ onClick, label }: ContinueButtonProps) {
     <button
       type="button"
       onClick={onClick}
-      className="w-full py-4 rounded-3xl font-black text-sm bg-teal-600 hover:bg-teal-700 active:scale-95 text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border-none"
+      className="w-full py-4 rounded-3xl font-black text-sm bg-teal-700 hover:bg-teal-800 active:scale-95 text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border-none"
     >
       <span>{label}</span>
       <ArrowRight className="w-4 h-4 rtl:-scale-x-100" />

@@ -72,7 +72,7 @@ export function ArrangeSentenceExercise({ exercise, checked, onCheck, onNext }: 
               dir="ltr"
               disabled={submitted}
               onClick={() => (submitted ? undefined : setAnswer((prev) => prev.filter((_, j) => j !== i)))}
-              className="px-3 py-2 rounded-xl bg-teal-600 text-white font-bold text-sm shadow-xs transition-all active:scale-95"
+              className="px-3 py-2 rounded-xl bg-teal-700 text-white font-bold text-sm shadow-xs transition-all active:scale-95"
             >
               {word}
             </button>

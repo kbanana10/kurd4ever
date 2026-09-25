@@ -357,6 +357,7 @@ export function LeaderboardPage() {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          aria-label={dict.searchPlaceholder}
           placeholder={dict.searchPlaceholder}
           className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl py-3 px-10 font-medium text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-400 dark:focus:border-indigo-600 shadow-xs"
         />

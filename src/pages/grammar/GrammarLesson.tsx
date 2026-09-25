@@ -195,7 +195,7 @@ export function GrammarLessonPage() {
                 <button
                   type="button"
                   onClick={() => setConceptIndex((i) => Math.min(conceptTotal - 1, i + 1))}
-                  className="flex-1 py-3.5 rounded-3xl font-black text-sm bg-teal-600 hover:bg-teal-700 active:scale-95 text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border-none"
+                  className="flex-1 py-3.5 rounded-3xl font-black text-sm bg-teal-700 hover:bg-teal-800 active:scale-95 text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border-none"
                 >
                   {isAr ? 'التالي' : isKu ? 'Pêş' : 'Next'}
                   <ArrowRight className="w-4 h-4 rtl:-scale-x-100" />
@@ -204,7 +204,7 @@ export function GrammarLessonPage() {
                 <button
                   type="button"
                   onClick={() => setStage('exercises')}
-                  className="flex-1 py-3.5 rounded-3xl font-black text-sm bg-teal-600 hover:bg-teal-700 active:scale-95 text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border-none"
+                  className="flex-1 py-3.5 rounded-3xl font-black text-sm bg-teal-700 hover:bg-teal-800 active:scale-95 text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border-none"
                 >
                   <Sparkles className="w-4 h-4" />
                   {isAr ? 'ابدأ التمارين' : isKu ? 'Dest bi temrînan bike' : 'Start exercises'}
@@ -285,7 +285,7 @@ export function GrammarLessonPage() {
                   setConceptIndex(0);
                   setStage('concepts');
                 }}
-                className="w-full py-3.5 rounded-3xl font-black text-sm bg-teal-600 hover:bg-teal-700 active:scale-95 text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border-none"
+                className="w-full py-3.5 rounded-3xl font-black text-sm bg-teal-700 hover:bg-teal-800 active:scale-95 text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border-none"
               >
                 <BookOpen className="w-4 h-4" />
                 {isAr ? 'مراجعة البطاقات' : isKu ? 'Vegere kartan' : 'Review cards'}

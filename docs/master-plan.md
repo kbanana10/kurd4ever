@@ -50,12 +50,7 @@ Severity scale: **High** (blocks learning / accessibility / first-run),
 | Route | Issue | Severity | Suggested fix | Evidence |
 |---|---|---|---|---|
 | ALL | Navigation uses `<button>` + router `navigate()`; there are **zero real `<a>` links** in the app. No long-press/middle-click/open-in-new-tab, no link semantics for screen readers | Med | Introduce an `<AppLink>` (renders `<a href>` + `<Link>`-style nav, matching NavIcon styling); swap in bottom nav + hub cards | grep `src` for `<a `: only lucide `Link` import found; `MainLayout.tsx:440-461` NavIcon = `<button onClick={()=>navigate(path)}>` |
-| `/roadmap` | 12 WCAG-AA contrast failures + **11 unlabeled buttons** (level nodes `.w-16.h-16` with no accessible name) — the map is invisible to screen readers; accent numbers unreadable | **High** | Add `aria-label` (level name + status) to every node button; recolor `#FF5722`/`#B8860B` small text to AA-compliant tokens (`brand-deep = #8A6100` already 5.5:1 on white) | `audit/proof/ux-audit/roadmap-en.png`; contrast verified: `FF5722/white=3.16`, `B8860B/white=3.25`, `8A6100/white=5.54` |
-| `/roadmap` | 14 headings + stat cluster — high visual density for a first-time user | Low | Collapse stats behind one "My XP" tile; introduce the map with the existing Driver.js tour step | `roadmap-en.png`, headings extract |
-| `/profile` | Amber text `#B8860B` on cream `#FFF6E0` pills = **3.02:1** (fails AA; borderline even for large text); same token reused across tabs/achievements | **High** | Replace `text-[#B8860B]` on light surfaces with `#8A6100` (5.5:1); keep `#B8860B` only on dark bg | `Profile.tsx:235,326,430,513`; measured 3.02:1 |
-| `/leaderboard` | Rank badges + "Your Rank position:" white-on-light = ~1:1 (invisible) in one leaderboard variant; 1 unlabeled search input | **High** | Ensure rank/world text sits on the dark rank-card surface (fix conditional class); `aria-label="Search players"` on input | `leaderboard-en.png`, 4 AA failures + 1 unlabeled measured |
-| `/grammar/:id` (all lessons) | **Every** primary/Next button is `bg-teal-600` + white text = **3.74:1** (below 4.5 for 14px bold) | Med | Darken button to `teal-700` (#0F766E → 4.73:1) or raise font or add weight-aware token; one change in `ExerciseChrome.tsx` + `GrammarLesson.tsx` button classes | measured 3.74:1 (`#0D9488/white`); `GrammarLesson.tsx:198` |
-| `/store` | Gem-price icon `#00B0FF` on white = **2.43:1** (decorative, but repeated) | Low | Darken to `#0284C7` (sky-600) or add contrast ring | `store-en.png`, measured 2.43:1 |
+| `/roadmap` | **✅ FIXED C7.5** — 11 unlabeled level-node buttons → 0 (added `aria-label` with level name + status). Remaining: accent-number + WORLD-brand contrast (white-on-gold gradient) failures | **High** | *(unlabeled done)*; recolor `#FF5722`/`#B8860B` small text and WORLD-brand `text-white`→`--kq-gold-on` to AA tokens | `audit/proof/ux-audit/roadmap-en.png`; contrast: `FF5722/white=3.16`, `#432C00`(gold-on)/gold≈6.4–8.3 |\n| `/roadmap` | 14 headings + stat cluster — high visual density for a first-time user | Low | Collapse stats behind one "My XP" tile; introduce the map with the existing Driver.js tour step | `roadmap-en.png`, headings extract |\n| `/profile` | **✅ FIXED C7.5** — amber pill `#B8860B`→`#8A6100` (3.02:1 → 5.15:1, app's `--kq-gold-text` token; 4 sites). Remaining 4 AA = unrelated gem `💎` icon 3.32:1 | **High**→**Low** | *(amber done)*; darken gem icon `#00B0FF`/sky→`sky-700` or add contrast ring | `Profile.tsx:235,326,430,513`; measured 3.02:1 → 5.15:1 |\n| `/leaderboard` | Rank badges + "Your Rank position:" white-on-light ~1:1 in one variant; 1 unlabeled search input (**✅ input fixed C7.5**) | **High**→**Med** | Ensure rank/world text sits on the dark rank-card surface (fix conditional class) | `leaderboard-en.png`; unlabeled 1→0; AA 4→3 |\n| `/grammar/:id` (all lessons) | **✅ FIXED C7.5** — primary/Next buttons `teal-600`→`teal-700/800` + white (3.74:1 → 5.47:1) across `ExerciseChrome`, `GrammarLesson`, `ArrangeSentenceExercise` | Med → done | *(done)*; `/grammar/cînavk` now 0 AA failures in the audit | measured 3.74:1 → 5.47:1; `GrammarLesson.tsx:198` etc. |\n| `/store` | Gem-price icon `#00B0FF` on white = **2.43:1** (decorative, but repeated) | Low | Darken to `#0284C7` (sky-600) or add contrast ring | `store-en.png`, measured 2.43:1 |
 | `/search`, `/leaderboard` | Unlabeled text inputs (magnifier only, no `aria-label`) | Med | `aria-label` per language ("Search the dictionary" / "ابحث" / "Lêgerîn") | 1 unlabeled each, audit summary |
 | `/games` | Several "Coming Soon" dead-ends (maintainer-gated) — clear lock ribbon exists, good; check no live-but-inert buttons remain | Low | Already fixed once (C3-era); keep as gated; verify ribbon non-interactive | `Games.tsx:584-651`; `games-en.png` |
 | `/writing`, `/writing/words`, `/writing/sentences`, `/store` | Deliberate "Coming Soon" placeholder screens (flags) — not a bug, but a dead-end | Low | Flips in A.2/Cycles 10-11; ensure each placeholder offers a clear back path | `WRITING_WORDS_ENABLED=false` etc.; screenshots |
@@ -97,11 +92,18 @@ Incomplete / Disabled (flag). Libraries verified via `npm view` (see §A.4).
 
 ---
 
-## A.3 — Master Plan (Cycles 8–16)
+## A.3 — Master Plan (Cycles 7.5–15)
 
 Prioritisation factor = **value × urgency ÷ effort**. Chosen so the two required
 fixes (B, C) land first, then the highest value/effort gaps, ending with the
-bold differentiator.
+bold differentiator. *(Updated per approval: C10+C12 merged; a11y hotfix pulled
+earlier as C7.5; renumbered accordingly.)*
+
+### Cycle 7.5 — Critical a11y hotfix (DONE — commit `bc14208→next`) · value 4 · urgency 5 · effort 1
+- **Goal:** clear the three worst, lowest-effort accessibility findings before anything else.
+- **Deliverables:** (1) roadmap level-node buttons get `aria-label` (11→0 unlabeled); (2) Profile light-mode amber `#B8860B` → accessible `#8A6100` (3.02:1 → 5.15:1, the app's own `--kq-gold-text` token); (3) Grammar primary/check buttons `teal-600` → `teal-700/800` (3.74:1 → 5.47:1); Leaderboard search input `aria-label`.
+- **Verification:** `ux-audit.mjs` (harness itself fixed to parse Tailwind v4 `oklch()` + gradients) — `/grammar/cînavk` 1→0 AA, roadmap unlabeled 11→0, profile 8→4 (remaining 4 = unrelated gem `💎` icon), leaderboard unlabeled 1→0; full gates green (tsc 0 / lint:slop 0 / 218 tests).
+- **Risk:** Low. **Token cost:** ~40–80k.
 
 ### Cycle 8 — Fix the tracing "pass" bug (Deliverable B) · value 5 · urgency 5 · effort 2 → **first**
 - **Goal:** a correct *human-like* trace passes at tolerance 4, while a genuinely incomplete letter (e.g. E without the middle bar) still fails.
@@ -115,23 +117,23 @@ bold differentiator.
 - **Verification:** `/writing/e` shows the control; animation plays A–Z incl. ç ê î ş û; replay works; existing trace + gates green; browser proof screenshots.
 - **Risk:** Medium (new dependency; bundle size — `tegaki` tarball is 44.6 MB unpacked, use only the needed font bundle). **Token cost:** ~120–200k.
 
-### Cycle 10 — Re-enable word tracing (G3) · value 4 · effort 1
-- **Goal:** turn on word tracing now that the validator is trusted.
-- **Deliverables:** flip `WRITING_WORDS_ENABLED`; verify word canvas + zone logic on a target word; regression.
-- **Verification:** `/writing/words` grid → word trace passes; gates green; screenshots.
-- **Risk:** Low. **Token cost:** ~30–60k.
+### Cycle 10 — Enable word + sentence tracing (merged G3+G4) · value 4 · effort 1
+- **Goal:** turn on both already-code-complete tracing modes now that the validator is trusted and the single-letter guide lands first as a model.
+- **Deliverables:** flip `WRITING_WORDS_ENABLED` and `WRITING_SENTENCES_ENABLED`; verify word + sentence canvases and zone logic; regression.
+- **Verification:** `/writing/words` grid → word trace passes; `/writing/sentences` → sentence trace passes; full gates green; `measure-ui.mjs` + screenshots.
+- **Risk:** Low. **Token cost:** ~40–80k.
 
-### Cycle 11 — Accessibility sweep from A.1 (G6+G7) · value 4 · effort 2
-- **Goal:** eliminate the High/Med findings from the audit table.
-- **Deliverables:** roadmap node `aria-label`s; contrast token fixes (Profile amber → `#8A6100`; teal-600 buttons → AA); input `aria-label`s; `<AppLink>` for the main nav.
-- **Verification:** rerun `ux-audit.mjs` — 0 High/Med contrast failures, 0 unlabeled; full suite green.
-- **Risk:** Low. **Token cost:** ~60–120k.
+### Cycle 11 — Accessibility sweep (remaining A.1 findings) (G6+G7) · value 4 · effort 2
+- **Goal:** eliminate the remaining High/Med findings the C7.5 hotfix did not cover.
+- **Deliverables:** `<AppLink>` semantic nav (app has zero `<a>` links — a full-screen-reader gap); remaining contrast tokens now that the audit harness is precise (roadmap WORLD-brand/gold-on; `/games` "NEW"/"Coming Soon" badges 2.1–2.8:1; store gem `#00B0FF` 2.43:1; teal/gold text-on-wash accents); any leftover input labels.
+- **Verification:** rerun `ux-audit.mjs` — High/Med contrast failures cleared; full suite green.
+- **Risk:** Low-Med. **Token cost:** ~60–140k.
 
-### Cycle 12 — Sentence tracing + TTS quality (G4+G5) · value 4 · effort 2
-- **Goal:** complete the writing pillar and improve pronunciation quality.
-- **Deliverables:** flip `WRITING_SENTENCES_ENABLED`; re-enable or improve the audio path (hosted TTS or better offline fallback chain).
-- **Verification:** sentence tracing regression; audio buttons render + speech fires (browser probe); gates green.
-- **Risk:** Medium (audio fallback across browsers). **Token cost:** ~60–120k.
+### Cycle 12 — TTS quality (G5) · value 3 · effort 2
+- **Goal:** improve pronunciation audio quality/consistency across the app.
+- **Deliverables:** re-enable hosted TTS path (`USE_CUSTOM_AUDIO_API`) or harden the `speechSynthesis` ku→tr fallback chain + voice prewarm; verify KRD-ish phonemes across browsers.
+- **Verification:** audio buttons render + speech fires per browser; gates green.
+- **Risk:** Medium (cross-browser speech). **Token cost:** ~40–80k.
 
 ### Cycle 13 — "Due now" smart review surface (G8) · value 4 · effort 3
 - **Goal:** make SM-2 the heartbeat of the dashboard, not a background mechanic.
@@ -150,17 +152,23 @@ bold differentiator.
 - **Deliverables:** a "Çîrok / Folklore" unlock track — short illustrated Kurmanji folk-tale/idiom cards with audio, unlocked by XP/streak/writing milestones; reuse existing `AudioButton` + content pipeline.
 - **Verification:** unlock flow end-to-end in browser; content renders RTL-correct for ar; gates green; screenshots.
 - **Risk:** Low-Med. **Token cost:** ~100–160k.
+- **⚠ Pending (Adjustment 3, acknowledged):** a ~200-word "Kurdish cultural unlocks"
+  brief must be posted **before C15 begins** — concretely expanding what a
+  "Çîrok unlock track" means (content types, sources, licensing, unlock rules,
+  and where it lives in the nav). This is a hard prerequisite, noted here in the
+  plan and deferred until the cycle that precedes C15.
 
-### Cycle 16 — AI tutor (G15) — *flagged, not committed*
+### Cycle 16 — AI tutor (G15) — *flagged, NOT in the active 10-cycle sequence*
 - **Goal:** (proposal only) an optional, opt-in retrieval/LLM "Ziman helper" for explanations + Socratic practice, with strict offline-by-default and no data leaving the device unless enabled.
 - **Deliverables:** (future) privacy-first prompt flow, fallback to rule-based hints when offline.
 - **Verification:** TBD at approval time.
 - **Risk:** High (cost/privacy). **Token cost:** 150k+.
 
-> **Cycle 7 (this one) is the Master Plan itself.** C1–C6 (Track A tool setup)
-> are already committed. The sequence above is intentionally **B → C → unlocks
-> of your own code** before any new external dependency, so value lands early and
-> risk stays near zero while the sandbox environment remains reset-prone.
+> **Cycle 7 (this one) is the Master Plan itself; Cycle 7.5 is the a11y hotfix**
+> (both committed). C1–C6 (Track A tool setup) are already committed. The
+> sequence above is intentionally **hotfix → B → C → unlocks of your own code**
+> before any new external dependency, so value lands early and risk stays near
+> zero while the sandbox environment remains reset-prone.
 
 ---
 

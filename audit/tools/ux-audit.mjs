@@ -81,24 +81,29 @@ function comp(a, b) { // composite fg (a) over bg (b)
 
 const auditScript = (lang) => {
   // (browser-side, self-contained)
+  // Parse ANY CSS color to sRGB — the canvas lets the browser itself do the
+  // oklch()/oklab()/hsl()/named conversion, so Tailwind v4 theme colors and
+  // arbitrary values are all resolved correctly.
+  const _cv = document.createElement('canvas'); _cv.width = 1; _cv.height = 1;
+  const _ctx = _cv.getContext('2d', { willReadFrequently: true });
+  const _cache = new Map();
   const parseCSSColor = (str) => {
     if (!str) return null;
-    const s = str.trim();
-    if (s.startsWith('rgb(') || s.startsWith('rgba(')) {
-      const m = s.match(/rgba?\(([^)]+)\)/); if (!m) return null;
-      const parts = m[1].split(',').map((p) => parseFloat(p));
-      return { r: parts[0], g: parts[1], b: parts[2], a: parts.length > 3 ? parts[3] : 1 };
-    }
-    if (s === 'transparent') return { r: 0, g: 0, b: 0, a: 0 };
-    const m = s.match(/^#([0-9a-f]{3,8})$/i);
-    if (m) {
-      let h = m[1];
-      if (h.length === 3 || h.length === 4) h = h.split('').map((c) => c + c).join('');
-      const r = parseInt(h.slice(0,2),16), g = parseInt(h.slice(2,4),16), b = parseInt(h.slice(4,6),16);
-      const a = h.length === 8 ? parseInt(h.slice(6,8),16)/255 : 1;
-      return { r, g, b, a };
-    }
-    return null;
+    const s = str.trim().toLowerCase();
+    if (!s || s === 'transparent') return null;
+    if (_cache.has(s)) return _cache.get(s);
+    let out = null;
+    try {
+      _ctx.clearRect(0, 0, 1, 1);
+      _ctx.fillStyle = '#000000';
+      _ctx.fillStyle = s;          // does nothing if s is invalid → stays black
+      _ctx.fillStyle = s;
+      _ctx.fillRect(0, 0, 1, 1);
+      const d = _ctx.getImageData(0, 0, 1, 1).data;
+      if (d[3] > 0) out = { r: d[0], g: d[1], b: d[2], a: d[3] / 255 };
+    } catch { out = null; }
+    _cache.set(s, out);
+    return out;
   };
   const lum = ({ r, g, b }) => { const f = (v) => { v/=255; return v<=0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4); }; return 0.2126*f(r)+0.7152*f(g)+0.0722*f(b); };
   const ratio = (c1, c2) => { const a = lum(c1), b = lum(c2); const hi = Math.max(a,b), lo = Math.min(a,b); return (hi+0.05)/(lo+0.05); };
@@ -117,8 +122,10 @@ const auditScript = (lang) => {
       const color = parseCSSColor(cs.color);
       if (color) {
         const fg = color;
-        let bg = chain[0] || { r: 255, g: 255, b: 255, a: 1 };
-        for (const c of chain) bg = comp2(c, bg);
+        // chain = [nearest bg, ..., farthest bg (document=white)]. Composite
+        // farthest→nearest for the true effective background.
+        let bg = chain.length ? chain[chain.length - 1] : { r: 255, g: 255, b: 255, a: 1 };
+        for (let i = chain.length - 2; i >= 0; i--) bg = comp2(chain[i], bg);
         const eff = comp2(fg, bg);
         const r2 = ratio({ r: eff.r, g: eff.g, b: eff.b }, { r: bg.r, g: bg.g, b: bg.b });
         const fs = parseFloat(cs.fontSize);

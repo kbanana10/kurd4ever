@@ -232,7 +232,7 @@ export function Profile() {
         ) : (
           <div className="relative z-10 space-y-2">
             <h2 className="text-2xl font-black text-slate-800 dark:text-white"><bdi>{user?.displayName || 'Learner'}</bdi></h2>
-            <div className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#FFF6E0] dark:bg-[#3A2F14] text-[#B8860B] dark:text-[#FFCE6B] rounded-full text-xs font-extrabold border border-[#FFB300]/40 shadow-xs">
+            <div className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#FFF6E0] dark:bg-[#3A2F14] text-[#8A6100] dark:text-[#FFCE6B] rounded-full text-xs font-extrabold border border-[#FFB300]/40 shadow-xs">
               <Star className="w-3.5 h-3.5 fill-[#FFB300] text-[#FFB300]" />
               {language !== 'ar' ? 'Quest Learner' : 'متعلم كويست'}
             </div>
@@ -323,7 +323,7 @@ export function Profile() {
                       const isDone = !isToday && daysAgo > 0 && daysAgo <= (activeToday ? streak - 1 : streak);
                       return (
                         <div key={i} className="flex flex-col items-center gap-2">
-                          <span className={`text-[10px] font-extrabold uppercase ${isDone || isToday ? 'text-[#B8860B] dark:text-[#FFCE6B]' : 'text-slate-400'}`}>
+                          <span className={`text-[10px] font-extrabold uppercase ${isDone || isToday ? 'text-[#8A6100] dark:text-[#FFCE6B]' : 'text-slate-400'}`}>
                             {letter}
                           </span>
                           {isDone ? (
@@ -427,7 +427,7 @@ export function Profile() {
                   <button
                     type="button"
                     onClick={() => setShowAllBadges(v => !v)}
-                    className="text-sm font-extrabold text-[#B8860B] dark:text-[#FFCE6B] bg-transparent border-none cursor-pointer min-h-[44px] px-2"
+                    className="text-sm font-extrabold text-[#8A6100] dark:text-[#FFCE6B] bg-transparent border-none cursor-pointer min-h-[44px] px-2"
                   >
                     {showAllBadges
                       ? (language !== 'ar' ? 'Show Less' : 'عرض أقل')
@@ -510,7 +510,7 @@ export function Profile() {
                 {/* Theme Toggle */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#FFF3D6] dark:bg-[#3A2F14] flex items-center justify-center text-[#B8860B] dark:text-[#FFCE6B]">
+                    <div className="w-12 h-12 rounded-2xl bg-[#FFF3D6] dark:bg-[#3A2F14] flex items-center justify-center text-[#8A6100] dark:text-[#FFCE6B]">
                       {theme === 'dark' ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
                     </div>
                     <div>
