@@ -22,7 +22,10 @@
  * letter's centerline should count.
  *
  * Pass ⇔ coverage ≥ OVERALL_COVERAGE_MIN AND outOfBounds ≤ OUT_OF_BOUNDS_MAX
- *        AND every non-empty zone ≥ ZONE_COVERAGE_MIN.
+ *        AND every non-empty zone ≥ ZONE_COVERAGE_MIN — EXCEPT for the
+ *        near-miss branch: a trace that covers every zone above
+ *        ZONE_COVERAGE_FLOOR and whose mean zone coverage reaches
+ *        ZONE_COVERAGE_MEAN_MIN also passes its zones (see evaluateZones, C8).
  *
  * Glyphs are placed inside normalized "boxes" (0..1 over the surface) so the
  * same routines serve both single letters (one full-height box) and word
@@ -62,6 +65,31 @@ export const SELF_TEST_PERFECT_TRACE_ERODE = 9;
 
 /** Minimum per-zone coverage (fraction of the zone's glyph pixels covered). */
 export const ZONE_COVERAGE_MIN = 0.4;
+/**
+ * C8 (realism) near-miss branch — a SECOND check layer, not a loosening of
+ * ZONE_COVERAGE_MIN above. A correct human trace always hugs the guide, yet
+ * the 4×4 zone grid still carves out brittle cells whose glyph pixels are
+ * almost all "edge" pixels (diacritic crowns, terminal corner caps) that a
+ * wobbling brush under- or over-shoots by a pixel or two. Requiring every such
+ * cell to clear 40% rejects correct traces that are clean everywhere else.
+ *
+ * This branch has two parts:
+ *   • ZONE_COVERAGE_FLOOR (a hard floor, still per zone): a zone below this is
+ *     a WHOLESALE miss — a genuinely skipped feature (e.g. an E's middle bar
+ *     whose cells drop to ~0%) must still fail even if stronger zones pull the
+ *     mean up. 0.2 sits far below any fragile crown/cap cell (lowest observed
+ *     37.8%) and far above a blank feature (0%).
+ *   • ZONE_COVERAGE_MEAN_MIN (a shape-wide mean): only a trace whose zone
+ *     coverage is solid across the whole letter — not just the south cells —
+ *     may pass with one or two fragile cells below 40% but above the floor.
+ *
+ * Effect verified in audit/tools/realism-trace.mjs + calibrate-trace.mjs: at
+ * tolerance 4, GOOD 31/31, AVERAGE 31/31 (Û fixed: 37.8% crown cell but 86.4%
+ * mean), RUSHED unchanged (28/31 pass, ≥75% threshold holds); E/H minus their
+ * bar still FAIL (bar cells ~0% < floor); perfect-trace self-test still passes.
+ */
+export const ZONE_COVERAGE_FLOOR = 0.2;
+export const ZONE_COVERAGE_MEAN_MIN = 0.6;
 /** Minimum overall glyph coverage required to pass. */
 export const OVERALL_COVERAGE_MIN = 0.6;
 /** Maximum fraction of ink allowed outside the glyph (within the region). */
@@ -542,15 +570,54 @@ function evaluateZones(
 
       const coverage = targetPixels > 0 ? coveredPixels / targetPixels : 0;
       // Empty zones and noise-level zones are irrelevant to the letter shape.
+      // `passed` keeps the STRICT per-zone verdict (diagnostics); the C8
+      // near-miss branch below may still clear the whole letter.
       const passed = targetPixels === 0 || targetPixels < ZONE_MIN_PIXELS || coverage >= ZONE_COVERAGE_MIN;
       zones.push({ row, col, targetPixels, coveredPixels, coverage, passed });
-
-      if (!passed) {
+      if (targetPixels >= ZONE_MIN_PIXELS && coverage < ZONE_COVERAGE_MIN) {
         allPassed = false;
-        for (let r = r0; r < r1; r += 1) {
-          for (let c = c0; c < c1; c += 1) {
-            const i = r * size + c;
-            if (glyphMask[i] === 1 && cover[i] !== 1) miss[i] = MISS_TARGET;
+      }
+    }
+  }
+
+  // C8 near-miss branch: correct human traces can dip one brittle cell below
+  // ZONE_COVERAGE_MIN (crowns/corner caps) while the rest of the letter is
+  // solid. Allow that ONLY when (a) every cell clears the hard floor (so a
+  // genuinely skipped feature — whose cells fall to ~0% — still fails) and
+  // (b) the mean zone coverage still proves the whole shape was traced.
+  // Red highlights are only painted for hard misses (cells below the floor),
+  // so an all-pass letter never shows stray red on a fragile crown.
+  if (!allPassed) {
+    const meaningful = zones.filter(
+      (z) => z.targetPixels >= ZONE_MIN_PIXELS && z.coverage < ZONE_COVERAGE_MIN,
+    );
+    const noWholesaleMiss = meaningful.every((z) => z.coverage >= ZONE_COVERAGE_FLOOR);
+    if (noWholesaleMiss) {
+      const tracked = zones.filter((z) => z.targetPixels >= ZONE_MIN_PIXELS);
+      if (tracked.length > 0) {
+        const mean = tracked.reduce((sum, z) => sum + z.coverage, 0) / tracked.length;
+        if (mean >= ZONE_COVERAGE_MEAN_MIN) allPassed = true;
+      }
+    }
+    // Refill the miss mask only when the letter still fails, marking every
+    // strict-fail zone's missed pixels red (same guidance as before the C8
+    // branch). On a PASS the miss stays empty even if a near-miss zone (0.2–
+    // 0.4) was granted — painting red on a pass would be confusing.
+    if (!allPassed) {
+      for (let row = 0; row < rows; row += 1) {
+        const r0 = bounds.minRow + Math.floor((row * height) / rows);
+        const r1 = bounds.minRow + Math.floor(((row + 1) * height) / rows);
+        for (let col = 0; col < cols; col += 1) {
+          const z = zones[row * cols + col];
+          if (z.targetPixels >= ZONE_MIN_PIXELS && z.coverage < ZONE_COVERAGE_MIN) {
+            const c0 = bounds.minCol + Math.floor((col * width) / cols);
+            const c1 = bounds.minCol + Math.floor(((col + 1) * width) / cols);
+            for (let r = r0; r < r1; r += 1) {
+              for (let c = c0; c < c1; c += 1) {
+                const i = r * size + c;
+                if (glyphMask[i] === 1 && cover[i] !== 1) miss[i] = MISS_TARGET;
+              }
+            }
           }
         }
       }
