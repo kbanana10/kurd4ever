@@ -51,10 +51,16 @@ interface TracingCanvasProps {
   /** When provided, fully replaces the default glyph draw — lets word tracing
       render every letter of the word plus per-letter boundary boxes. */
   renderGuide?: (ctx: CanvasRenderingContext2D) => void;
+  /**
+   * Optional extra layer drawn between the guide and the learner's strokes
+   * (C10: the animated stroke-order demo). Non-interactive by construction:
+   * the parent is responsible for making its content `pointer-events-none`.
+   */
+  guideOverlay?: React.ReactNode;
 }
 
 const TracingCanvas = React.forwardRef<TracingCanvasHandle, TracingCanvasProps>(
-  function TracingCanvas({ char, guideBox = SINGLE_BOX, renderGuide }, ref) {
+  function TracingCanvas({ char, guideBox = SINGLE_BOX, renderGuide, guideOverlay }, ref) {
     const guideRef = useRef<HTMLCanvasElement>(null);
     const strokesRef = useRef<HTMLCanvasElement>(null);
     const missRef = useRef<HTMLCanvasElement>(null);
@@ -190,6 +196,7 @@ const TracingCanvas = React.forwardRef<TracingCanvasHandle, TracingCanvasProps>(
           className="absolute inset-0 w-full h-full"
           aria-hidden="true"
         />
+        {guideOverlay}
         <canvas
           ref={strokesRef}
           width={SIZE}

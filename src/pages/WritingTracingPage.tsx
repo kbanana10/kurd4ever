@@ -4,6 +4,8 @@ import { useAuth } from '../lib/AuthContext';
 import { alphabet } from '../data/kurmanji';
 import { Modal, Button } from '../components/ui';
 import TracingCanvas, { type TracingCanvasHandle } from '../components/TracingCanvas';
+import StrokeGuide from '../components/StrokeGuide';
+import { AUTHORED_GLYPHS } from '../data/strokeOrder';
 import {
   buildLetterMask,
   buildStrokesMask,
@@ -17,7 +19,7 @@ import {
   type TraceResult,
 } from '../lib/traceLetters';
 import { recordReview, type ReviewDeck } from '../services/SpacedRepetitionService';
-import { Eraser, RotateCcw, CheckCircle2, XCircle, ChevronRight } from 'lucide-react';
+import { Eraser, RotateCcw, CheckCircle2, XCircle, ChevronRight, Eye } from 'lucide-react';
 
 /** Single-glyph tracing target burned into the offscreen mask. */
 const TOP_LETTER = (letterApi: { id: string; char: string }) =>
@@ -43,6 +45,11 @@ export function WritingTracingPage() {
   const traceRef = useRef<TracingCanvasHandle>(null);
   const [result, setResult] = useState<TraceResult>(emptyTraceResult);
   const [open, setOpen] = useState(false);
+  // Stroke-order demo: `replayToken === 0` on mount plays the demo once (the
+  // component auto-plays on first render), and each "Watch how" tap increments
+  // it to replay. No per-letter authored plan → the token is harmless (the
+  // overlay renders nothing for that glyph).
+  const [replayToken, setReplayToken] = useState(0);
 
   // DEV-ONLY regression canary: after the guide has rendered, validate the
   // tolerance pipeline with a programmatic perfect trace. If correctness ever
@@ -122,6 +129,9 @@ export function WritingTracingPage() {
     goToLetter(next.id);
   }, [goToLetter, letter.id]);
 
+  // Only letters with an authored stroke plan get the demo overlay + button.
+  const hasGuide = AUTHORED_GLYPHS.includes(glyph);
+
   const isAr = language === 'ar';
   const isKu = language === 'ku';
 
@@ -129,6 +139,7 @@ export function WritingTracingPage() {
   const undoLabel = isKu ? 'Vegere' : isAr ? 'تراجع' : 'Undo';
   const checkLabel = isKu ? 'Kontrol' : isAr ? 'تحقق' : 'Check';
   const nextLabel = isKu ? 'Ya din' : isAr ? 'التالي' : 'Next';
+  const watchLabel = isKu ? 'Binêre' : isAr ? 'شاهد' : 'Watch how';
 
   const failTitle = isKu ? 'Dîsa biceribîne ❌' : isAr ? 'حاول مرة أخرى ❌' : 'Try again ❌';
   const passTitle = isKu ? 'Baş e! ✅' : isAr ? 'أحسنت! ✅' : 'Well done! ✅';
@@ -161,8 +172,28 @@ export function WritingTracingPage() {
 
       {/* Canvas */}
       <div className="mb-4">
-        <TracingCanvas key={letter.id} ref={traceRef} char={glyph} />
+        <TracingCanvas
+          key={letter.id}
+          ref={traceRef}
+          char={glyph}
+          guideOverlay={hasGuide ? <StrokeGuide char={glyph} replayToken={replayToken} /> : undefined}
+        />
       </div>
+
+      {/* Watch-how replay (letters with an authored stroke plan only) */}
+      {hasGuide && (
+        <div className="max-w-md w-full mx-auto mb-3">
+          <Button
+            variant="outline"
+            size="md"
+            onClick={() => setReplayToken(t => t + 1)}
+            leadingIcon={<Eye className="w-4 h-4" />}
+            className="text-xs h-12 w-full"
+          >
+            {watchLabel}
+          </Button>
+        </div>
+      )}
 
       {/* Toolbar — 2×2 grid on every screen size (narrow-phone safe) */}
       <div className="grid grid-cols-2 gap-3 max-w-md w-full mx-auto">
