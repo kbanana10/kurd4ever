@@ -186,6 +186,34 @@ Rule 14: if a sandbox reset occurs mid-cycle, PAUSE and post a one-line alert
 (SANDBOX RESET — investigating), complete the recovery, then resume. Do not
 silently recover and continue.
 
+## 6c. Agent skills (Mission 2) — user-level skills under ~/.agents/skills/
+
+Eight third-party agent skills adopted via `npx`/manual copy only (nothing in
+`package.json`). Installed user-level into the Agent Standard dir
+`~/.agents/skills/`; see `docs/skills.md` for per-skill status, licenses and
+verification output. **These live in $HOME, not the repo** — a sandbox reset
+may wipe them; re-run the commands below to restore.
+
+```bash
+mkdir -p ~/.agents/skills
+
+# Skills CLI (vercel-labs/agent-skills) installs, all global:
+npx --yes skills add blader/humanizer --global --yes
+npx --yes skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend" --global --yes
+npx --yes skills add https://github.com/cathrynlavery/diagram-design --global --yes
+npx --yes skills add https://github.com/hardikpandya/stop-slop --global --yes
+npx --yes skills add https://github.com/zarazhangrui/frontend-slides --global --yes
+npx --yes skills add https://github.com/Egonex-AI/Understand-Anything --skill "understand" --global --yes
+
+# UI/UX Pro Max — own CLI; universal = Agent Standard .agents/skills/
+npx --yes ui-ux-pro-max-cli init --ai universal --global --offline --force
+
+# Impeccable — bundled downloader unreachable from sandbox (TLS fail on
+# impeccable.style); use the repo's shipped payload instead:
+git clone --depth 1 https://github.com/pbakaus/impeccable.git /tmp/impeccable
+cp -r /tmp/impeccable/.agents/skills/impeccable ~/.agents/skills/
+```
+
 ## 7. Session-doc conventions
 
 - `docs/agent-setup.md` — this file (re-establish commands).
