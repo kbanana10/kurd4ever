@@ -5,6 +5,7 @@ import {
   drawGlyphInBox,
   type TraceBox,
 } from '../lib/traceLetters';
+import type { TracePoint } from '../lib/pathValidation';
 
 /**
  * TracingCanvas.tsx — the actual drawing surface for the Writing feature.
@@ -37,8 +38,15 @@ export interface TracingCanvasHandle {
   undo: () => void;
   /** The strokes-only layer, for the parent to read back. */
   canvas: () => HTMLCanvasElement | null;
+  /**
+   * The learner's finished strokes as polylines in analysis-pixel space, in
+   * draw order — for the path-based validator (single-letter tracing).
+   */
+  strokePaths: () => TracePoint[][];
   /** Paint a miss-mask: 0 = skip · 1 = covered · 2 = missed (red). */
   showMissHighlight: (miss: Uint8ClampedArray) => void;
+  /** Paint red on the given polyline(s) — deviation/missing-stroke feedback. */
+  showRedPaths: (paths: TracePoint[][]) => void;
   /** Clear the miss highlight without touching strokes. */
   clearMissHighlight: () => void;
 }
@@ -65,6 +73,10 @@ const TracingCanvas = React.forwardRef<TracingCanvasHandle, TracingCanvasProps>(
     const strokesRef = useRef<HTMLCanvasElement>(null);
     const missRef = useRef<HTMLCanvasElement>(null);
     const drawingRef = useRef(false);
+    // Stroke polylines (analysis-px) for the path-based validator, plus the
+    // in-progress stroke. One undo-snapshot per finished stroke below.
+    const pathsRef = useRef<TracePoint[][]>([]);
+    const currentPathRef = useRef<TracePoint[] | null>(null);
     // One undo-snapshot per finished stroke (offscreen copies of the strokes
     // canvas), pushed before each stroke begins so "undo" restores the prior
     // exact frame.
@@ -75,6 +87,8 @@ const TracingCanvas = React.forwardRef<TracingCanvasHandle, TracingCanvasProps>(
         const ctx = strokesRef.current?.getContext('2d');
         if (ctx) ctx.clearRect(0, 0, SIZE, SIZE);
         snapshotsRef.current = [];
+        pathsRef.current = [];
+        currentPathRef.current = null;
         if (missRef.current) {
           missRef.current.getContext('2d')?.clearRect(0, 0, SIZE, SIZE);
         }
@@ -84,10 +98,12 @@ const TracingCanvas = React.forwardRef<TracingCanvasHandle, TracingCanvasProps>(
         const ctx = canvas?.getContext('2d');
         if (!canvas || !ctx) return;
         const snapshot = snapshotsRef.current.pop();
+        pathsRef.current.pop();
         ctx.clearRect(0, 0, SIZE, SIZE);
         if (snapshot) ctx.drawImage(snapshot, 0, 0);
       },
       canvas: () => strokesRef.current,
+      strokePaths: () => pathsRef.current,
       showMissHighlight: (miss: Uint8ClampedArray) => {
         const layer = missRef.current;
         const ctx = layer?.getContext('2d');
@@ -104,6 +120,30 @@ const TracingCanvas = React.forwardRef<TracingCanvasHandle, TracingCanvasProps>(
           px[a + 3] = 170;
         }
         ctx.putImageData(img, 0, 0);
+      },
+      showRedPaths: (paths: TracePoint[][]) => {
+        const layer = missRef.current;
+        const ctx = layer?.getContext('2d');
+        if (!layer || !ctx) return;
+        ctx.clearRect(0, 0, SIZE, SIZE);
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = 'rgba(239, 68, 68, 0.70)';
+        ctx.lineWidth = SIZE * 0.045;
+        for (const path of paths) {
+          if (path.length === 0) continue;
+          ctx.beginPath();
+          ctx.moveTo(path[0].x, path[0].y);
+          for (let k = 1; k < path.length; k += 1) ctx.lineTo(path[k].x, path[k].y);
+          ctx.stroke();
+          // Single-point paths (deviating taps) are drawn as a red dot.
+          if (path.length === 1) {
+            ctx.fillStyle = 'rgba(239, 68, 68, 0.70)';
+            ctx.beginPath();
+            ctx.arc(path[0].x, path[0].y, SIZE * 0.022, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
       },
       clearMissHighlight: () => {
         const ctx = missRef.current?.getContext('2d');
@@ -164,6 +204,8 @@ const TracingCanvas = React.forwardRef<TracingCanvasHandle, TracingCanvasProps>(
       ctx.strokeStyle = 'rgba(51, 65, 85, 0.55)';
       ctx.lineWidth = SIZE * 0.045;
       const p = toPoint(e);
+      // Record the new stroke for the path validator (tap = single point).
+      currentPathRef.current = [{ x: p.x, y: p.y }];
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
       // A dot: extending a hair-length guarantees a visible mark on tap.
@@ -176,12 +218,17 @@ const TracingCanvas = React.forwardRef<TracingCanvasHandle, TracingCanvasProps>(
       const ctx = strokesRef.current?.getContext('2d');
       if (!ctx) return;
       const p = toPoint(e);
+      currentPathRef.current?.push({ x: p.x, y: p.y });
       ctx.lineTo(p.x, p.y);
       ctx.stroke();
     };
 
     const endStroke = () => {
       drawingRef.current = false;
+      // Commit the finished stroke to the path record (undo pops the last).
+      const path = currentPathRef.current;
+      if (path && path.length > 0) pathsRef.current.push(path);
+      currentPathRef.current = null;
     };
 
     return (
