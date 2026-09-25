@@ -130,6 +130,15 @@ ROUTE=/grammar/sentence-structure node audit/tools/measure-ui.mjs
 # Screenshots land in measure-ui-proof/ (gitignored via its nested .gitignore).
 ```
 
+### Writing-tracing self-test runner (Cycle 5)
+
+```bash
+node audit/tools/selftest-tolerance.mjs   # headless runTraceSelfTest; prints coverage/minZone/missPixels
+# Measures the tolerance CURRENTLY compiled into src/lib/traceLetters.ts.
+# Evidence reference (track B): COVERAGE_TOLERANCE_PX = 4 → I 72.7 / E 72.7 /
+# O 83.7 / M 77.3 / W 77.6, all pass; 3 → M fails (min-zone 36.1% < 40% floor).
+```
+
 ## 5. Before/after every app change (Rule 4)
 
 ```bash

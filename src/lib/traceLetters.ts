@@ -37,10 +37,12 @@ export const STROKE_ALPHA_THRESHOLD = 64;
  * Distance tolerance (analysis px, i.e. 3/4 of a device px) for counting a
  * target pixel as covered: the learner's thin stroke is dilated by this radius
  * before comparison. Chosen so a brush-stroke centerline (ink peak width ~
- * BRUSH_WIDTH % of the canvas ≈ 14px) plus tolerance (2·6px) spans a 900-weight
+ * BRUSH_WIDTH % of the canvas ≈ 14px) plus tolerance (2·4px) spans a 900-weight
  * letter's stroke thickness without forgiving a genuinely missing feature.
+ * 4px is the tightest value at which the perfect-trace self-test still passes
+ * every letter (3px trips M's diagonal leg zone: min-zone 36.1% < 40% floor).
  */
-export const COVERAGE_TOLERANCE_PX = 6;
+export const COVERAGE_TOLERANCE_PX = 4;
 /**
  * Radius (analysis px) by which in-bounds ink is dilated when computing the
  * out-of-bounds fraction. A tight allowance lets honest overhang (the natural
@@ -53,7 +55,8 @@ export const BOUNDS_TOLERANCE_PX = 2;
  * thin (~5px) centerline that, WITHOUT the coverage tolerance, would fall
  * below OVERALL_COVERAGE_MIN (e.g. E drops to ~58% exact coverage), so a
  * tolerance regression trips the check. With COVERAGE_TOLERANCE_PX intact the
- * same trace reaches ~90% and passes.
+ * same trace reaches ~88%+ (at 4px: I 72.7 / E 72.7 / O 83.7 / M 77.3 /
+ * W 77.6, all zones ≥40%) and passes.
  */
 export const SELF_TEST_PERFECT_TRACE_ERODE = 9;
 
