@@ -154,6 +154,24 @@ npm run build
 - After each successful cycle: one descriptive commit (what + why), `git push origin ai/autonomous`.
 - Never `git checkout`/`reset`/`rebase` other branches.
 
+## 6b. Pre-commit checklist (Rule 13 — MANDATORY before every commit)
+
+Sandbox resets can delete the local branch, causing `git commit` to fall back
+to whatever HEAD is (this nearly leaked a commit to arena once). The push then
+refuses, but the local commit must not land on the wrong branch.
+
+Before ANY `git commit`:
+
+1. Run `git branch --show-current`.
+2. If it is NOT `ai/autonomous`, STOP — do NOT commit. Re-establish the branch
+   per §1 (fetch + `git branch -f ai/autonomous origin/ai/autonomous` +
+   `git symbolic-ref HEAD refs/heads/ai/autonomous`) first.
+3. Only after confirming the branch, run the commit.
+
+Rule 14: if a sandbox reset occurs mid-cycle, PAUSE and post a one-line alert
+(SANDBOX RESET — investigating), complete the recovery, then resume. Do not
+silently recover and continue.
+
 ## 7. Session-doc conventions
 
 - `docs/agent-setup.md` — this file (re-establish commands).
