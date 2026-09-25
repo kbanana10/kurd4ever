@@ -74,6 +74,20 @@ npm exec --yes --package=@ast-grep/cli -- sg scan   -c audit/ast-grep/sgconfig.y
 # Browser verification pair (Cycle 3) — NOT YET COMMITTED AS RULES
 npm install --no-save puppeteer-core @sparticuz/chromium
 
+# Handwriting guide libraries (Cycle 9 / C9) — evaluate BEFORE wiring in; --no-save only.
+npm install --no-save tegaki@0.22.2       # MIT; per-stroke handwriting animation for any font
+npm install --no-save letterpaths@1.0.2   # MIT fallback; UK-curriculum stroke geometry
+# C9 DECISION (verified): BOTH libraries fail the Kurdish requirement. tegaki
+# renders pre-baked stroke data (glyphData.json) only for its 10 bundled fonts;
+# NONE of them covers ç ê î ş û (CLI probe of every bundled font → 0 paths for
+# "çêîşû"). Custom bundles are generated ONLY via the hosted browser studio
+# (gkurt.com/tegaki/studio) — no local generator, no npm generator package —
+# and its "stroke order" is a skeleton heuristic (connected components sorted
+# top-to-bottom/left-to-right), so diacritic crowns would draw BEFORE the base
+# letter (wrong for teaching). letterpaths covers A–Z a–z + digits only (UK
+# print/cursive, lowercase); has NO Kurdish diacritics and does not match the
+# app's 900-weight uppercase Noto guide. Full evidence: audit/proof/cyc9-lib-evidence.txt
+
 # repomix — one-file context pack (Cycle 4 / 4.5: verified resolving, attempt 1)
 # Default output is repomix-output.xml in v1.18.1; we use --compress (tree-sitter
 # structure extraction) and split by area so every pack stays under ~100k tokens:
