@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import { useAuth } from '../lib/AuthContext';
 import { t } from '../lib/translations';
 import { AudioButton } from '../components/AudioButton';
+import { RecallButton } from '../components/RecallButton';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function Alphabet() {
@@ -55,6 +56,11 @@ export function Alphabet() {
               <p className="text-2xl font-black text-ink mb-1"><bdi>{letterData.exampleWord}</bdi></p>
               <p className="text-xs font-bold text-muted tracking-wider uppercase"><bdi>{language === 'ar' ? letterData.meaningAr : letterData.meaningEn}</bdi></p>
             </div>
+
+            {/* PHASE 2: lightweight inline self-check for the focused letter.
+                Feeds the existing SM-2 reviewDeck — the same deck the alphabet
+                quiz records into — so Hub progress stays honest. */}
+            <RecallButton wordId={letterData.id} size="block" className="mt-4" />
           </motion.div>
         </AnimatePresence>
       </div>

@@ -103,6 +103,7 @@ await simple('04', 'vocabulary_categories', '/vocabulary', 'Vocabulary hub — G
 await simple('05', 'vocabulary_list', '/vocabulary/numbers', 'Vocabulary word list — Numbers category with word cards');
 await simple('06', 'search', '/search', 'Dictionary search — search field, CEFR + POS filter chips, recent queries');
 await simple('07', 'favorites', '/favorites', 'Favorites — saved words (seeded: Dayik, Bav, Bra)');
+await simple('08', 'learning_hub', '/learn', 'Learning Hub — six section cards (letters, numbers, colors, vocabulary, phrases, pronunciation)');
 await simple('09', 'sentences', '/sentences', 'Sentences & dialogues — daily phrases with playback, topic tabs');
 await simple('10', 'alphabet', '/alphabet', 'Alphabet — 31 Hawar letters, vowel/consonant tags, letter hero card');
 

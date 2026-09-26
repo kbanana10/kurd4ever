@@ -1,0 +1,24 @@
+id: audio-button-texttospeak
+snapshots:
+  ? |
+    export const C = () => <AudioButton audioUrl="/audio/x.mp3" />;
+  : labels:
+    - source: <AudioButton audioUrl="/audio/x.mp3" />
+      style: primary
+      start: 23
+      end: 62
+    - source: AudioButton
+      style: secondary
+      start: 24
+      end: 35
+  ? |
+    export const D = () => <AudioButton />;
+  : labels:
+    - source: <AudioButton />
+      style: primary
+      start: 23
+      end: 38
+    - source: AudioButton
+      style: secondary
+      start: 24
+      end: 35

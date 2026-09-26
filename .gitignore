@@ -10,3 +10,6 @@ coverage/
 # Audit harness artefacts
 /audit/patch_mainlayout.py
 storybook-static/
+
+# Repomix generated context pack (AI context snapshot, not source)
+repomix-*.md

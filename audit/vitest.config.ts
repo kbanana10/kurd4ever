@@ -10,7 +10,11 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: [path.resolve(__dirname, 'setup.ts')],
-    include: [path.resolve(__dirname, '**/*.test.ts?(x)')],
+    include: [
+      path.resolve(__dirname, '**/*.test.ts?(x)'),
+      // Grammar lib tests live with the domain code under src/lib/grammar.
+      path.resolve(__dirname, '../src/lib/grammar/**/*.test.ts?(x)'),
+    ],
     testTimeout: 60000,
     hookTimeout: 60000,
     pool: 'forks',

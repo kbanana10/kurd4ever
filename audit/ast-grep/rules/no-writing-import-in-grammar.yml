@@ -1,0 +1,12 @@
+id: no-writing-import-in-grammar
+message: Grammar module files must not import from the Writing module (module boundary). Keep grammar and writing decoupled.
+severity: error
+language: Tsx
+files:
+- 'src/pages/grammar/**'
+- 'src/data/grammar/**'
+- 'src/lib/grammar/**'
+rule:
+  kind: import_statement
+  has:
+    regex: "writing"

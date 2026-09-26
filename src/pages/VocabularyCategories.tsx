@@ -62,8 +62,10 @@ export function VocabularyCategories() {
         </div>
       </div>
 
-      {/* 2. Elevated Brand Hero Card */}
-      <div className="max-w-md mx-auto bg-white dark:bg-slate-900 rounded-[32px] p-6 shadow-flat border border-line-soft relative overflow-hidden group">
+      {/* 2. Elevated Brand Hero Card — PHASE 4 (unify): + radial gold glow to
+          match the Alphabet page reference hero. */}
+      <div className="max-w-md mx-auto bg-white dark:bg-slate-900 rounded-[2rem] p-6 shadow-flat border border-line-soft relative overflow-hidden group">
+        <div className="absolute inset-x-0 -top-16 h-48 bg-[radial-gradient(circle_at_50%_0%,#FFB300_0%,transparent_65%)] opacity-[0.10] pointer-events-none" aria-hidden="true" />
         <BookOpen className="absolute right-0 bottom-0 opacity-[0.06] w-40 h-40 transform translate-y-8 select-none pointer-events-none group-hover:scale-110 transition-transform duration-700 text-slate-500" />
         
         <div className="space-y-2 relative z-10">

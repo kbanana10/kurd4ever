@@ -1,0 +1,11 @@
+id: audio-button-texttospeak
+message: Every <AudioButton> must carry a textToSpeak prop, otherwise the TTS fallback speaks a file path and the Kurdish word is never pronounced.
+severity: warning
+language: Tsx
+rule:
+  kind: jsx_self_closing_element
+  has:
+    regex: "AudioButton"
+  not:
+    has:
+      regex: "textToSpeak"

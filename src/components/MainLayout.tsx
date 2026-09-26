@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router';
+import { Outlet, useNavigate, useLocation, useNavigationType } from 'react-router';
 import { useAuth } from '../lib/AuthContext';
 import { 
-  BookA, Hash, ArrowLeft, Search, User, Bell, X as CloseIcon, 
+  Hash, ArrowLeft, Search, User, Bell, X as CloseIcon, 
   Gamepad2, Map, Flame, Smile, GraduationCap, Sparkles, Star, Compass, Award 
 , Settings as SettingsIcon } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { t, getLayoutDirection } from '../localization/translations';
-import { getRouteMeta, navigateSafelyBack } from '../lib/navigation';
+import { getRouteMeta, navigateSafelyBack, NUMBER_FAMILY_HISTORY_STATE } from '../lib/navigation';
 import { Capacitor } from '@capacitor/core';
 import { App as CapacitorApp } from '@capacitor/app';
 import { motion, AnimatePresence } from 'motion/react';
@@ -34,6 +34,7 @@ export function MainLayout() {
   const { user, userData, loading, language } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const navigationType = useNavigationType();
   const routeMeta = getRouteMeta(location.pathname, language);
   const isProfile = location.pathname === '/profile';
   const isHome = location.pathname === '/';
@@ -42,18 +43,42 @@ export function MainLayout() {
 
   // GLOBAL SCROLL RESET (navigation audit, CRITICAL): the app scrolls inside
   // <main> (flex-1 overflow-y-auto), NOT the window — so switching routes
-  // kept the previous page's scroll offset (Profile opened mid-scroll after
-  // a long Dashboard). Every pathname change now snaps the container (and
-  // window, for safety) back to (0,0) instantly; direct property writes
-  // bypass the container's CSS scroll-smooth so there is no visible glide.
+  // kept the previous page's offset. The HEADER'S directionality decides the
+  // policy below: forward navigation (a next-page link / bottom-nav tap)
+  // starts the destination at the top; BACK navigation restores the previous
+  // page's saved offset so the user returns exactly where they left it.
   const mainScrollRef = useRef<HTMLElement | null>(null);
+  const scrollPositionsRef = useRef<Record<string, number>>({});
   useEffect(() => {
-    if (mainScrollRef.current) {
-      mainScrollRef.current.scrollTop = 0;
-      mainScrollRef.current.scrollLeft = 0;
+    const el = mainScrollRef.current;
+    if (navigationType === 'POP') {
+      const saved = scrollPositionsRef.current[location.key] ?? 0;
+      if (el) {
+        el.scrollTop = saved;
+        el.scrollLeft = 0;
+      }
+      if (globalThis.window !== undefined) window.scrollTo(0, saved);
+    } else {
+      if (el) {
+        el.scrollTop = 0;
+        el.scrollLeft = 0;
+      }
+      if (globalThis.window !== undefined) window.scrollTo(0, 0);
     }
-    if (globalThis.window !== undefined) window.scrollTo(0, 0);
-  }, [location.pathname]);
+  }, [location.key, location.pathname, navigationType]);
+
+  // Save this page's scroll offset keyed by its unique history entry, so a
+  // later back-navigation can restore it. Direct reads/writes bypass the
+  // container's scroll-smooth so offsets are exact with no visible glide.
+  useEffect(() => {
+    const el = mainScrollRef.current;
+    if (!el) return;
+    const capture = () => {
+      scrollPositionsRef.current[location.key] = el.scrollTop;
+    };
+    el.addEventListener('scroll', capture, { passive: true });
+    return () => el.removeEventListener('scroll', capture);
+  }, [location.key]);
   const [activeNotification, setActiveNotification] = useState<{ title: string; message: string } | null>(null);
 
   // UX: the toast overlays the header — never let it BLOCK navigation.
@@ -136,6 +161,35 @@ export function MainLayout() {
     }
   }, [user, loading, location, navigate]);
 
+  // Smart back on the Numbers screen: when a number family / advanced-numbers
+  // overlay is open, a back press first closes that overlay instead of leaving
+  // the page. The previous-entry check makes the behaviour deterministic
+  // regardless of whether the call came from the on-screen arrow or the
+  // Android hardware back button.
+  const lastKqFamilyEntryWasNumberFamily = (): boolean => {
+    // SAFETY: DOM's `history.state` is an `any` payload; only its `usr` field
+    // is read, matching the shape this app writes via pushFamilyHistoryEntry.
+    const state: any = (globalThis as any).window?.history?.state;
+    return state != null && state.usr === NUMBER_FAMILY_HISTORY_STATE;
+  };
+  // SAFETY: the browser History API is the only way to instruct an in-app
+  // overlay to "go back" one history entry; the guard confirms a History
+  // object and a `back` method exist before invoking it.
+  const historyBack = () => {
+    const w: any = globalThis.window;
+    if (w && w.history && w.history.back) {
+      w.history.back();
+    }
+  };
+
+  const handleSmartBack = () => {
+    if (location.pathname === '/vocabulary/numbers' && lastKqFamilyEntryWasNumberFamily()) {
+      historyBack();
+      return;
+    }
+    navigateSafelyBack(navigate, location.pathname);
+  };
+
   useEffect(() => {
     if (!Capacitor.isNativePlatform()) {
       return;
@@ -146,6 +200,10 @@ export function MainLayout() {
         setShowExitModal(false);
       } else if (location.pathname === '/' || location.pathname === '/login') {
         setShowExitModal(true);
+      } else if (location.pathname === '/vocabulary/numbers' && lastKqFamilyEntryWasNumberFamily()) {
+        // Close the number family first (the component's popstate handler
+        // re-arms the entry for the next back press).
+        historyBack();
       } else {
         navigateSafelyBack(navigate, location.pathname);
       }
@@ -264,7 +322,7 @@ export function MainLayout() {
           <header className="px-4 py-3 flex items-center shadow-xs z-10 bg-white dark:bg-slate-900 border-b border-line dark:border-slate-800 min-h-[56px]">
             {(!isMainTab || isProfile) && (
               <button 
-                onClick={() => navigateSafelyBack(navigate, location.pathname)} 
+                onClick={handleSmartBack}
                 type="button"
                 aria-label={language !== 'ar' ? `Back to ${routeMeta.safeBackTo}` : 'رجوع آمن'}
                 className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors -ms-2 me-2 focus-visible:ring-2 focus-visible:ring-[#FFB300] dark:focus-visible:ring-[#FFBA38]"
@@ -368,7 +426,7 @@ export function MainLayout() {
             className="absolute bottom-0 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/60 dark:border-slate-800 flex justify-around items-center px-1 pb-safe pt-1 h-16 z-20 shadow-[0_-10px_35px_rgba(0,0,0,0.035)]"
           >
             <NavIcon path="/" icon={<Hash className="w-5 h-5" />} label={t(language, 'home')} current={location.pathname} />
-            <NavIcon path="/alphabet" icon={<BookA className="w-5 h-5" />} label={t(language, 'alphabet')} current={location.pathname} />
+            <NavIcon path="/learn" activePaths={['/learn', '/alphabet', '/vocabulary/numbers', '/vocabulary/colors', '/grammar', '/grammar/pronouns', '/grammar/verbs', '/grammar/nouns', '/grammar/sentence-structure', '/grammar/prepositions', '/writing', '/writing/words', '/writing/sentences']} icon={<GraduationCap className="w-5 h-5" />} label={t(language, 'learning')} current={location.pathname} />
             <NavIcon path="/roadmap" icon={<Map className="w-5 h-5" />} label={t(language, 'roadmap_tab')} current={location.pathname} tourId="nav-roadmap" />
             <NavIcon path="/games" icon={<Gamepad2 className="w-5 h-5" />} label={t(language, 'games_tab')} current={location.pathname} />
             <NavIcon path="/profile" icon={<User className="w-5 h-5" />} label={t(language, 'profile_tab')} current={location.pathname} />
@@ -379,9 +437,16 @@ export function MainLayout() {
   );
 }
 
-function NavIcon({ path, icon, label, current, tourId }: { path: string, icon: React.ReactNode, label: string, current: string, tourId?: string }) {
+function NavIcon({ path, icon, label, current, tourId, activePaths }: { path: string, icon: React.ReactNode, label: string, current: string, tourId?: string, activePaths?: string[] }) {
   const navigate = useNavigate();
-  const isActive = current === path || (path !== '/' && current.startsWith(path));
+  // `current.startsWith(path)` keeps /vocabulary and /vocabulary/:id (and their
+  // future siblings) highlighted under the Learn tab; `activePaths` additionally
+  // pins the tab for siblings that live under a DIFFERENT base URL (the
+  // preserved /alphabet page and its /vocabulary/number + color deep-links).
+  const isActive =
+    (activePaths && (activePaths.includes(current) || current.startsWith(path)))
+    || current === path
+    || (path !== '/' && current.startsWith(path));
   
   return (
     <button 

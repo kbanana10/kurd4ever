@@ -74,4 +74,19 @@ export interface UserData {
   lastDailyRewardClaimed?: string; // YYYY-MM-DD string
   /** Guided-tour ids the user finished or skipped (see src/features/tour). */
   completedTours?: string[];
+  /**
+   * Interactive Letter Writing Lesson progress, keyed by UPPERCASE glyph.
+   * Persisted only as per-letter aggregates — never pointer/ink data.
+   */
+  writingProgress?: Record<string, WritingLetterProgress>;
+}
+
+/** Per-letter stats for the Interactive Letter Writing Lesson. */
+export interface WritingLetterProgress {
+  /** Highest deterministic 0..100 score ever achieved for this letter. */
+  bestScore: number;
+  /** Completed attempts (a full Learn→Watch→Trace→Write→Score run). */
+  attempts: number;
+  /** At least one attempt cleared the "keep practicing" (≥60) floor. */
+  completed: boolean;
 }
