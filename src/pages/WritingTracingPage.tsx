@@ -16,8 +16,14 @@ import {
   OUT_OF_BOUNDS_MAX,
   ZONE_COVERAGE_MIN,
   COVERAGE_TOLERANCE_PX,
+  TRACE_CANVAS,
   type TraceResult,
 } from '../lib/traceLetters';
+import {
+  validateStrokeTrace,
+  glyphBBoxFromMask,
+  type PathTraceResult,
+} from '../lib/pathValidation';
 import { recordReview, type ReviewDeck } from '../services/SpacedRepetitionService';
 import { Eraser, RotateCcw, CheckCircle2, XCircle, ChevronRight, Eye } from 'lucide-react';
 
@@ -44,6 +50,8 @@ export function WritingTracingPage() {
   const maskCacheRef = useRef<{ glyph: string; mask: Uint8ClampedArray } | null>(null);
   const traceRef = useRef<TracingCanvasHandle>(null);
   const [result, setResult] = useState<TraceResult>(emptyTraceResult);
+  // Path-based result for the 10 authored glyphs (null → pixel-engine mode).
+  const [pathResult, setPathResult] = useState<PathTraceResult | null>(null);
   const [open, setOpen] = useState(false);
   // Stroke-order demo: `replayToken === 0` on mount plays the demo once (the
   // component auto-plays on first render), and each "Watch how" tap increments
@@ -86,17 +94,43 @@ export function WritingTracingPage() {
     return mask;
   }, [glyph]);
 
+  // Only letters with an authored stroke plan get the demo overlay + button
+  // AND path-based validation; every other glyph keeps the pixel engine.
+  const hasGuide = AUTHORED_GLYPHS.includes(glyph);
+
   const handleCheck = useCallback(() => {
+    // PATH MODE: letters with an authored stroke plan validate against the
+    // Watch animation's own strokes (direction/order/connection/coverage).
+    if (hasGuide) {
+      const mask = maskFor();
+      const bbox = glyphBBoxFromMask(mask, TRACE_CANVAS);
+      const ink = traceRef.current?.strokePaths() ?? [];
+      const path = validateStrokeTrace(glyph, ink, bbox ?? { minC: 0, minR: 0, w: 0, h: 0 });
+      setPathResult(path);
+      setResult(emptyTraceResult());
+      setOpen(true);
+      // Red = deviation from the expected path (+ red guide on missing strokes).
+      if (!path.passed && bbox) {
+        const redPaths = [...path.deviations.map(p => [p])];
+        traceRef.current?.showRedPaths([...redPaths, ...path.missingPaths]);
+      } else if (path.passed) {
+        traceRef.current?.clearMissHighlight();
+      }
+      return;
+    }
+
+    // PIXEL MODE (unchanged): every other glyph keeps the coverage engine.
     const strokes = traceRef.current?.canvas() ?? null;
     const mask = maskFor();
     const strokesMask = buildStrokesMask(strokes);
     const traced = evaluateTrace(mask, strokesMask, undefined, glyph);
+    setPathResult(null);
     setResult(traced);
     setOpen(true);
     // `traced.miss` is all-zero on a pass and marks the missed glyph pixels of
     // failed zones on a fail, so painting it unconditionally is always right.
     traceRef.current?.showMissHighlight(traced.miss);
-  }, [maskFor, glyph]);
+  }, [hasGuide, maskFor, glyph]);
 
   const goToLetter = useCallback(
     (id: string) => {
@@ -121,6 +155,8 @@ export function WritingTracingPage() {
 
   const handleRetry = useCallback(() => {
     traceRef.current?.clear();
+    setPathResult(null);
+    setResult(emptyTraceResult());
     setOpen(false);
   }, []);
 
@@ -128,9 +164,6 @@ export function WritingTracingPage() {
     const next = alphabet[(alphabet.findIndex(l => l.id === letter.id) + 1) % alphabet.length];
     goToLetter(next.id);
   }, [goToLetter, letter.id]);
-
-  // Only letters with an authored stroke plan get the demo overlay + button.
-  const hasGuide = AUTHORED_GLYPHS.includes(glyph);
 
   const isAr = language === 'ar';
   const isKu = language === 'ku';
@@ -145,6 +178,58 @@ export function WritingTracingPage() {
   const passTitle = isKu ? 'Baş e! ✅' : isAr ? 'أحسنت! ✅' : 'Well done! ✅';
 
   const percentText = (fraction: number) => `${Math.round(fraction * 100)}%`;
+
+  // Path-mode verdict (authored glyphs only) + a plain-language hint per rule.
+  const pathPassed = pathResult?.passed ?? false;
+  const pathHint = (() => {
+    if (!pathResult || pathResult.passed) return null;
+    switch (pathResult.reason) {
+      case 'empty':
+        return isKu
+          ? 'Tiştek nexşandî. Ji kerema xwe her tîp bi rêz bikişîne.'
+          : isAr
+            ? 'لم ترسم شيئاً بعد. ارسم الحرف بضربات مرتبة.'
+            : 'Nothing drawn yet. Trace the letter stroke by stroke.';
+      case 'stroke-count':
+        return isKu
+          ? `Vê tîpê ${pathResult.expectedCount} xet hene — te ${pathResult.strokeCount} xet kişand.`
+          : isAr
+            ? `هذا الحرف يتكون من ${pathResult.expectedCount} حركات وأنت رسمت ${pathResult.strokeCount}.`
+            : `This letter has ${pathResult.expectedCount} strokes — you drew ${pathResult.strokeCount}.`;
+      case 'order':
+        return isKu
+          ? 'Rêza xetan xelet e. Li "Binêre" temaşe bike û dîsa biceribîne.'
+          : isAr
+            ? 'ترتيب الحركات خاطئ. شاهد "شاهد" ثم حاول مجدداً.'
+            : 'Strokes drawn in the wrong order. Watch the demo and try again.';
+      case 'direction':
+        return isKu
+          ? 'Berê xetê berevajî ye. Ji cihê destpêkê dest pê bike.'
+          : isAr
+            ? 'اتجاه الحركة معكوس. ابدأ من نقطة البداية.'
+            : 'A stroke was drawn the wrong way. Start from the starting point.';
+      case 'shape':
+        return isKu
+          ? 'Şikl ji rê derket. Deverên sor li ser rêya zêrîn bikişîne.'
+          : isAr
+            ? 'انحرفت عن المسار. ارسم فوق المناطق الحمراء على طول المسار الذهبي.'
+            : 'A stroke drifted off the path. Trace the red parts along the gold guide.';
+      case 'connection':
+        return isKu
+          ? 'Xet li hev nayên girêdan — ji kerema xwe serê xetan bigihîne hev.'
+          : isAr
+            ? 'الحركات غير متصلة — صل أطراف الحركات ببعضها.'
+            : 'Strokes are not connected — join the stroke ends together.';
+      case 'coverage':
+        return isKu
+          ? 'Beşek ji tîpê kêm e. Deverên sor temam bike.'
+          : isAr
+            ? 'جزء من الحرف ناقص. أكمل المناطق الحمراء.'
+            : 'Part of the letter is missing. Complete the red areas.';
+      default:
+        return null;
+    }
+  })();
 
   return (
     <div className="p-4 flex flex-col min-h-screen pb-24">
@@ -239,50 +324,77 @@ export function WritingTracingPage() {
       <Modal
         open={open}
         onClose={() => setOpen(false)}
-        title={result.passed ? passTitle : failTitle}
+        title={hasGuide ? (pathPassed ? passTitle : failTitle) : result.passed ? passTitle : failTitle}
         variant="center"
         hideCloseButton
       >
-        <div className="flex flex-col gap-3">
-          <div className="text-xs font-bold text-muted space-y-1">
-            <div className="flex justify-between">
-              <span>{isKu ? 'Dagirtin' : isAr ? 'التغطية' : 'Coverage'}</span>
-              <span className="tabular-nums" dir="ltr">{percentText(result.coverage)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>{isKu ? 'Derveyî rê' : isAr ? 'خارج المسار' : 'Outside'}</span>
-              <span className="tabular-nums" dir="ltr">{percentText(result.outOfBounds)}</span>
-            </div>
-          </div>
+        {hasGuide ? (
+          pathResult ? (
+            <div className="flex flex-col gap-3">
+              <div className="flex justify-between text-xs font-bold text-muted">
+                <span>{isKu ? 'Xet' : isAr ? 'الحركات' : 'Strokes'}</span>
+                <span className="tabular-nums" dir="ltr">
+                  {pathResult.strokeCount}/{pathResult.expectedCount}
+                </span>
+              </div>
 
-          {!result.passed && (
-            <p className="text-[11px] font-semibold text-muted leading-relaxed">
+              {pathHint && (
+                <p className="text-[11px] font-semibold text-muted leading-relaxed">{pathHint}</p>
+              )}
+
+              {pathPassed ? (
+                <Button variant="success" fullWidth onClick={handlePassNext} leadingIcon={<CheckCircle2 className="w-4 h-4" />}>
+                  {nextLabel}
+                </Button>
+              ) : (
+                <Button variant="danger" fullWidth onClick={handleRetry} leadingIcon={<XCircle className="w-4 h-4" />}>
+                  {isKu ? 'Dîsa biceribîne' : isAr ? 'إعادة المحاولة' : 'Retry'}
+                </Button>
+              )}
+            </div>
+          ) : null
+        ) : (
+          <div className="flex flex-col gap-3">
+            <div className="text-xs font-bold text-muted space-y-1">
+              <div className="flex justify-between">
+                <span>{isKu ? 'Dagirtin' : isAr ? 'التغطية' : 'Coverage'}</span>
+                <span className="tabular-nums" dir="ltr">{percentText(result.coverage)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>{isKu ? 'Derveyî rê' : isAr ? 'خارج المسار' : 'Outside'}</span>
+                <span className="tabular-nums" dir="ltr">{percentText(result.outOfBounds)}</span>
+              </div>
+            </div>
+
+            {!result.passed && (
+              <p className="text-[11px] font-semibold text-muted leading-relaxed">
+                {isKu
+                  ? `Rêjeya te %${Math.round(result.coverage * 100)} e. Ji kerema xwe temam bike.`
+                  : isAr
+                    ? `نسبتك ${Math.round(result.coverage * 100)}٪. يرجى إكمالها.`
+                    : `Your coverage is ${Math.round(result.coverage * 100)}%. Please complete it.`}
+              </p>
+            )}
+
+            <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500">
               {isKu
-                ? `Rêjeya te %${Math.round(result.coverage * 100)} e. Ji kerema xwe temam bike.`
+                ? `divê dagirtin ≥ ${Math.round(OVERALL_COVERAGE_MIN * 100)}%, her herêm ≥ ${Math.round(ZONE_COVERAGE_MIN * 100)}%, derveyî ≤ ${Math.round(OUT_OF_BOUNDS_MAX * 100)}%`
                 : isAr
-                  ? `نسبتك ${Math.round(result.coverage * 100)}٪. يرجى إكمالها.`
-                  : `Your coverage is ${Math.round(result.coverage * 100)}%. Please complete it.`}
+                  ? `التغطية ≥ ${Math.round(OVERALL_COVERAGE_MIN * 100)}٪، كل منطقة ≥ ${Math.round(ZONE_COVERAGE_MIN * 100)}٪، خارج المسار ≤ ${Math.round(OUT_OF_BOUNDS_MAX * 100)}٪ (±${COVERAGE_TOLERANCE_PX} بكسل)`
+                  : `coverage ≥ ${Math.round(OVERALL_COVERAGE_MIN * 100)}%, each zone ≥ ${Math.round(ZONE_COVERAGE_MIN * 100)}%, outside ≤ ${Math.round(OUT_OF_BOUNDS_MAX * 100)}% (±${COVERAGE_TOLERANCE_PX}px tolerance)`}
             </p>
-          )}
 
-          <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500">
-            {isKu
-              ? `divê dagirtin ≥ ${Math.round(OVERALL_COVERAGE_MIN * 100)}%, her herêm ≥ ${Math.round(ZONE_COVERAGE_MIN * 100)}%, derveyî ≤ ${Math.round(OUT_OF_BOUNDS_MAX * 100)}%`
-              : isAr
-                ? `التغطية ≥ ${Math.round(OVERALL_COVERAGE_MIN * 100)}٪، كل منطقة ≥ ${Math.round(ZONE_COVERAGE_MIN * 100)}٪، خارج المسار ≤ ${Math.round(OUT_OF_BOUNDS_MAX * 100)}٪ (±${COVERAGE_TOLERANCE_PX} بكسل)`
-                : `coverage ≥ ${Math.round(OVERALL_COVERAGE_MIN * 100)}%, each zone ≥ ${Math.round(ZONE_COVERAGE_MIN * 100)}%, outside ≤ ${Math.round(OUT_OF_BOUNDS_MAX * 100)}% (±${COVERAGE_TOLERANCE_PX}px tolerance)`}
-          </p>
-
-          {result.passed ? (
-            <Button variant="success" fullWidth onClick={handlePassNext} leadingIcon={<CheckCircle2 className="w-4 h-4" />}>
-              {nextLabel}
-            </Button>
-          ) : (
-            <Button variant="danger" fullWidth onClick={handleRetry} leadingIcon={<XCircle className="w-4 h-4" />}>
-              {isKu ? 'Dîsa biceribîne' : isAr ? 'إعادة المحاولة' : 'Retry'}
-            </Button>
-          )}
-        </div>
+            {result.passed ? (
+              <Button variant="success" fullWidth onClick={handlePassNext} leadingIcon={<CheckCircle2 className="w-4 h-4" />}>
+                {nextLabel}
+              </Button>
+            ) : (
+              <Button variant="danger" fullWidth onClick={handleRetry} leadingIcon={<XCircle className="w-4 h-4" />}>
+                {isKu ? 'Dîsa biceribîne' : isAr ? 'إعادة المحاولة' : 'Retry'}
+              </Button>
+            )}
+          </div>
+        )}
       </Modal>
     </div>
   );

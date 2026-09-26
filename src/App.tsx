@@ -32,6 +32,7 @@ const Grammar = lazy(() => import('./pages/Grammar').then(m => ({ default: m.Gra
 const GrammarLessonPage = lazy(() => import('./pages/grammar/GrammarLesson').then(m => ({ default: m.GrammarLessonPage })));
 const Writing = lazy(() => import('./pages/Writing').then(m => ({ default: m.Writing })));
 const WritingTracingPage = lazy(() => import('./pages/WritingTracingPage').then(m => ({ default: m.WritingTracingPage })));
+const WritingLessonPage = lazy(() => import('./pages/WritingLessonPage').then(m => ({ default: m.WritingLessonPage })));
 const WritingWords = lazy(() => import('./pages/WritingWords').then(m => ({ default: m.WritingWords })));
 const WritingWordTracingPage = lazy(() => import('./pages/WritingWordTracingPage').then(m => ({ default: m.WritingWordTracingPage })));
 const WritingSentences = lazy(() => import('./pages/WritingSentences').then(m => ({ default: m.WritingSentences })));
@@ -124,6 +125,10 @@ export default function App() {
                 <Route path="grammar" element={<Grammar />} />
                 <Route path="grammar/:lessonId" element={<GrammarLessonPage />} />
                 <Route path="writing" element={<Writing />} />
+                {/* Interactive Letter Writing Lesson (data-driven, all 31).
+                    Declared BEFORE writing/:letterId so /writing/lesson/A
+                    matches the lesson, not the legacy single-letter trace. */}
+                <Route path="writing/lesson/:letterId" element={<WritingLessonPage />} />
                 {/* Word + sentence routes stay registered; the gate swaps in the
                     "Coming Soon" placeholder until the flags are re-enabled. */}
                 <Route path="writing/words" element={<WordsGate />} />

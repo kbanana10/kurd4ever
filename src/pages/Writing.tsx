@@ -141,7 +141,7 @@ export function Writing() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.015, duration: 0.3 }}
-                onClick={() => navigate(`/writing/${letter.id}`)}
+                onClick={() => navigate(`/writing/lesson/${letter.id}`)}
                 aria-label={`${letter.char.split(' ')[0]}${isLearned ? (isAr ? ' — مكتوب' : ' — written') : ''}`}
                 className={`aspect-square rounded-2xl flex flex-col items-center justify-center font-black text-xl transition-all relative cursor-pointer select-none
                   ${isLearned
