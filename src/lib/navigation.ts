@@ -377,3 +377,42 @@ export function navigateSafelyBack(navigate: (path: string | number) => void, pa
     navigate('/');
   }
 }
+
+/**
+ * Back-press interceptor registry (LIFO).
+ *
+ * Some screens own a sub-level the router cannot see — the writing lesson's
+ * watch/trace/write stages and its result overlay are component state, not
+ * routes. A back press on such a screen must climb ONE level INSIDE the screen
+ * instead of popping the route. Screens register a handler here; the header
+ * arrow and the Capacitor hardware back button run the registry FIRST (before
+ * navigateSafelyBack), and the most recently mounted screen gets the first
+ * chance to consume the press.
+ *
+ * The registry is a module-level array with no window access, so it is safe
+ * under SSR and jsdom (handlers are simply never invoked there).
+ */
+export type BackInterceptor = () => boolean;
+
+const backInterceptors: BackInterceptor[] = [];
+
+/** Register an interceptor; returns the unregister function (use as an effect cleanup). */
+export function registerBackInterceptor(fn: BackInterceptor): () => void {
+  backInterceptors.push(fn);
+  return () => {
+    const idx = backInterceptors.indexOf(fn);
+    if (idx >= 0) backInterceptors.splice(idx, 1);
+  };
+}
+
+/**
+ * Run registered interceptors LIFO (most recently mounted screen first).
+ * Returns true when one consumed the back press — the caller must then NOT
+ * navigate; false means the press falls through to normal back navigation.
+ */
+export function runBackInterceptors(): boolean {
+  for (let i = backInterceptors.length - 1; i >= 0; i--) {
+    if (backInterceptors[i]()) return true;
+  }
+  return false;
+}

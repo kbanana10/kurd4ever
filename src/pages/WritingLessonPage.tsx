@@ -23,6 +23,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useAuth } from '../lib/AuthContext';
+import { registerBackInterceptor } from '../lib/navigation';
 import { alphabet } from '../data/kurmanji';
 import { AudioButton } from '../components/AudioButton';
 import { Button, Modal, Progress } from '../components/ui';
@@ -65,6 +66,17 @@ import {
 import type { WritingLetterProgress } from '../models/user';
 
 type Stage = 'learn' | 'watch' | 'trace' | 'write' | 'result';
+
+/**
+ * The slice of `history.state` this page reads: react-router 7 writes
+ * `{ usr, key, idx }` on every entry it owns, and the deep-link marker pushed
+ * below adds its own `kqLessonBackMarker` flag. `idx` 0 means the lesson is
+ * the FIRST entry of the session (a deep link), with nothing below it.
+ */
+interface LessonHistoryState {
+  idx?: number;
+  kqLessonBackMarker?: boolean;
+}
 
 /** XP by score band (awarded exactly once per attempt). */
 const XP_BY_BAND = {
@@ -143,6 +155,118 @@ export function WritingLessonPage() {
     resetAttempt();
     setStage('write');
   }, [resetAttempt]);
+
+  // State ownership (same contract as WritingWordTracingPage): when only
+  // :letterId changes, React Router keeps this component mounted and would
+  // otherwise carry the scored result, the open result overlay and the spent
+  // XP guard into the next letter — that stale `showResult`/`score` is exactly
+  // what kept the "Keep practicing" modal on screen after "Next letter". The
+  // route re-keys this element (App.tsx → KeyedWritingLesson) so a new letter
+  // remounts cleanly; this reset is kept belt-and-suspenders and additionally
+  // re-arms a same-letter re-entry.
+  useEffect(() => {
+    canvasRef.current?.clear();
+    canvasRef.current?.clearFeedback();
+    setStage('learn');
+    setActiveStroke(0);
+    setTraceFeedback(null);
+    setScore(null);
+    setEarnedXp(0);
+    setShowResult(false);
+    setFinalScoreSent(false);
+    xpAwardedRef.current = false;
+    // Keyed solely by the letter identity: runs exactly once per letter.
+  }, [letter.id, glyph]);
+
+  // ── Unified back policy (L1 /writing → L2 letter 'learn' → L3 practice) ──
+  // The router only sees the route; the watch/trace/write stages and the
+  // result overlay are component state. These refs mirror that state so the
+  // registry interceptor and the window-level listener always read the
+  // CURRENT values without re-subscribing on every stage change.
+  const stageRef = useRef<Stage>('learn');
+  const showResultRef = useRef(false);
+  useEffect(() => {
+    stageRef.current = stage;
+  }, [stage]);
+  useEffect(() => {
+    showResultRef.current = showResult;
+  }, [showResult]);
+
+  // Header arrow / Android hardware back: MainLayout asks the registry FIRST
+  // (runBackInterceptors). One press climbs exactly one level of the lesson:
+  //   - the result overlay is open → close it (stage untouched);
+  //   - watch/trace/write          → back to THIS letter's 'learn' view with
+  //                                  the attempt/canvas state reset;
+  //   - already at 'learn'         → NOT consumed, so the press falls through
+  //                                  and exits to /writing.
+  useEffect(() => {
+    return registerBackInterceptor(() => {
+      if (showResultRef.current) {
+        setShowResult(false);
+        return true;
+      }
+      if (stageRef.current !== 'learn') {
+        resetAttempt();
+        setStage('learn');
+        return true;
+      }
+      return false;
+    });
+  }, [resetAttempt]);
+
+  // Deep-link guard: when the lesson is the session's FIRST entry (idx 0 — an
+  // installed-app shortcut straight to /writing/lesson/:id) there is no in-app
+  // entry below it, so a browser back from a practice stage would leave the
+  // app before popstate could collapse the stage. Leaving 'learn' therefore
+  // pushes ONE lightweight same-URL marker entry for that press to pop. It can
+  // never stack: the marker flag is checked first, and every router-driven
+  // push writes a fresh (unmarked) entry.
+  const pushLessonBackMarkerIfDeepLink = useCallback(() => {
+    const w = globalThis.window;
+    if (!w) return;
+    // `history.state` is the DOM lib's `any` payload; the declared shape
+    // mirrors what react-router writes (`idx`, `key`) plus this page's marker
+    // flag — and the spread below preserves any other field verbatim.
+    const state: LessonHistoryState | null = w.history.state ?? null;
+    const idx = Number.isInteger(state?.idx) ? (state?.idx ?? 0) : 0;
+    if (idx !== 0) return; // an in-app entry exists below: back already works
+    if (state?.kqLessonBackMarker) return; // marker already pushed
+    try {
+      w.history.pushState(
+        { ...state, key: Math.random().toString(36).substring(2, 10), idx: idx + 1, kqLessonBackMarker: true },
+        '',
+        w.location.href,
+      );
+    } catch {
+      // Best-effort: a blocked pushState only means the back press falls back
+      // to the browser's default history behaviour.
+    }
+  }, []);
+
+  useEffect(() => {
+    if (stage === 'learn') return;
+    pushLessonBackMarkerIfDeepLink();
+  }, [stage, pushLessonBackMarkerIfDeepLink]);
+
+  // Browser/PWA back: popstate is the only signal react-router cannot deliver
+  // to this page (MainLayout's smart-back covers the header arrow and the
+  // Android hardware button only). A pop that lands while a practice stage is
+  // active means "go up one level", not "leave the lesson": collapse to the
+  // letter's 'learn' view and push the SAME URL back so the URL and the entry
+  // depth are restored — the next press then exits to /writing normally. At
+  // 'learn' this handler does nothing and the router's own pop routing wins.
+  useEffect(() => {
+    const w = globalThis.window;
+    if (!w) return;
+    const onPopState = () => {
+      if (stageRef.current === 'learn') return;
+      resetAttempt();
+      setStage('learn');
+      navigate(`/writing/lesson/${letterId}`);
+    };
+    w.addEventListener('popstate', onPopState);
+    return () => w.removeEventListener('popstate', onPopState);
+  }, [navigate, letterId, resetAttempt]);
 
   // TRACE MODE: one committed stroke at a time, evaluated against its authored
   // target. Small deviations are tolerated; off-path gives gentle feedback and
@@ -262,13 +386,16 @@ export function WritingLessonPage() {
   const nextLetter = useCallback(() => {
     const idx = alphabet.findIndex((l) => l.id === letter.id);
     const next = alphabet[(idx + 1) % alphabet.length];
-    navigate(`/writing/lesson/${next.id}`);
+    // Replace, never push: switching letters must not leave a trail of
+    // previously viewed letters for the back press to walk through.
+    navigate(`/writing/lesson/${next.id}`, { replace: true });
   }, [navigate, letter.id]);
 
   const prevLetter = useCallback(() => {
     const idx = alphabet.findIndex((l) => l.id === letter.id);
     const prev = alphabet[(idx - 1 + alphabet.length) % alphabet.length];
-    navigate(`/writing/lesson/${prev.id}`);
+    // Same rule as nextLetter (prevLetter has no UI trigger yet).
+    navigate(`/writing/lesson/${prev.id}`, { replace: true });
   }, [navigate, letter.id]);
 
   const bestScore = userData?.writingProgress?.[glyph]?.bestScore ?? null;
@@ -316,7 +443,7 @@ export function WritingLessonPage() {
       <div className="flex items-center justify-between mb-4 px-1">
         <button
           type="button"
-          onClick={() => navigate('/writing')}
+          onClick={() => navigate('/writing', { replace: true })}
           className="flex items-center gap-1 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider min-h-[44px] px-1 cursor-pointer bg-transparent border-none"
         >
           <ChevronLeft className="w-4 h-4 rtl:-scale-x-100" />

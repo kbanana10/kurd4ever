@@ -295,6 +295,58 @@ locally on `arena/01a0c86c-kurd4ever`; nothing has been pushed anywhere.
 
 ---
 
+## 10. Post-review fixes — Next-letter overlay & unified back policy
+
+Reported after the report above was written: (a) scoring a letter and pressing
+**"Next letter"** navigated, but the previous letter's *"Keep practicing"* modal
+stayed on screen forever; (b) back (header arrow / Android hardware button /
+browser back) skipped the letter's own page and left the lesson entirely, and
+switching letters left a trail of visited letters for back to walk through.
+
+**Root cause (a):** React Router re-uses the mounted page when only `:letterId`
+changes, so the scored `score`, the open `showResult` and the spent
+`xpAwardedRef` guard carried into the next letter — the stale `showResult` kept
+`<Modal open={showResult && score !== null}>` mounted, and the spent guard
+silently blocked that letter's XP.
+
+| Fix | Layer | Where |
+|---|---|---|
+| Route re-keys the lesson per letter (`KeyedWritingLesson` → `<WritingLessonPage key={letterId} />`) | remount per letter | `src/App.tsx` |
+| Page still clears attempt state on a letter change — belt-and-suspenders, and re-arms a same-letter re-entry | effect keyed by `[letter.id, glyph]` | `src/pages/WritingLessonPage.tsx` |
+
+**Back policy (b)** — one press climbs exactly ONE level: L1 the `/writing` grid
+→ L2 the letter's `learn` view → L3 its active practice stage (watch/trace/write)
+and the result overlay.
+
+| Rule | Implementation |
+|---|---|
+| Overlay open → back closes the overlay ONLY (stage untouched) | `showResultRef` in the lesson's interceptor |
+| Practice stage → back collapses to THAT letter's `learn` view, attempt + canvas cleared | `registerBackInterceptor` (LIFO registry in `src/lib/navigation.ts`) |
+| At `learn` → back is NOT consumed; the press falls through to `/writing` | interceptor returns `false` |
+| Header arrow and Android hardware back share the rule | `MainLayout` runs `runBackInterceptors()` first on both paths |
+| Switching letters keeps the history stack flat | `nextLetter` / `prevLetter` / "All letters" use `navigate(..., { replace: true })` |
+| Browser/PWA back mid-practice restores the letter page | `popstate` handler collapses the stage, then pushes the same URL back |
+| Installed-app deep link (`idx 0`) can still go up | one non-stacking `kqLessonBackMarker` entry is pushed when practice starts |
+
+**Evidence**
+
+| Artefact | Result |
+|---|---|
+| `audit/writing-lesson-next.test.tsx` (new; end-to-end score 66 → "Keep practicing" / +8 XP → Next letter) | **4/4 passed** — overlay closes, next letter armed, XP guard re-armed, un-keyed fallback recovers too |
+| `audit/writing-lesson-back.test.tsx` (new; registry + lesson back + flat history + real jsdom `popstate` traversal) | **12/12 passed** |
+| `audit/regression.test.ts` (source-contract locks for both fixes) | 5 new tests |
+| `npm test` | **23 files / 270 tests passed** (+2 files, +21 tests vs §6) |
+| `npx tsc --noEmit` · `npm run lint:slop` · `npm run build` | exit 0 |
+
+**Harness fix:** `audit/vitest.config.ts` built its `include` globs with
+`path.resolve()`, which emits backslashes on Windows — picomatch read `\"` as an
+escape sequence and the suite silently discovered **0 test files**. Globs are now
+normalised to forward slashes on every platform.
+
+No dependency was added, and no other route's behaviour changed.
+
+---
+
 ## Appendix — commands
 
 ```bash

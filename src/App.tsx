@@ -50,6 +50,12 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(m => ({ de
 const TermsOfService = lazy(() => import('./pages/TermsOfService').then(m => ({ default: m.TermsOfService })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 
+/** Remounts the letter-writing lesson whenever the :letterId param changes. */
+function KeyedWritingLesson() {
+  const { letterId } = useParams();
+  return <WritingLessonPage key={letterId} />;
+}
+
 /** Remounts the word-tracing screen whenever the :wordId param changes. */
 function KeyedWritingWordTracing() {
   const { wordId } = useParams();
@@ -127,8 +133,11 @@ export default function App() {
                 <Route path="writing" element={<Writing />} />
                 {/* Interactive Letter Writing Lesson (data-driven, all 31).
                     Declared BEFORE writing/:letterId so /writing/lesson/A
-                    matches the lesson, not the legacy single-letter trace. */}
-                <Route path="writing/lesson/:letterId" element={<WritingLessonPage />} />
+                    matches the lesson, not the legacy single-letter trace.
+                    MUST stay keyed: "Next letter" only changes the param, and
+                    an un-keyed element reuses the mounted instance — leaving
+                    the previous letter's result modal open forever. */}
+                <Route path="writing/lesson/:letterId" element={<KeyedWritingLesson />} />
                 {/* Word + sentence routes stay registered; the gate swaps in the
                     "Coming Soon" placeholder until the flags are re-enabled. */}
                 <Route path="writing/words" element={<WordsGate />} />

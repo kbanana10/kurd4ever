@@ -7,7 +7,7 @@ import {
 , Settings as SettingsIcon } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { t, getLayoutDirection } from '../localization/translations';
-import { getRouteMeta, navigateSafelyBack, NUMBER_FAMILY_HISTORY_STATE } from '../lib/navigation';
+import { getRouteMeta, navigateSafelyBack, NUMBER_FAMILY_HISTORY_STATE, runBackInterceptors } from '../lib/navigation';
 import { Capacitor } from '@capacitor/core';
 import { App as CapacitorApp } from '@capacitor/app';
 import { motion, AnimatePresence } from 'motion/react';
@@ -183,6 +183,12 @@ export function MainLayout() {
   };
 
   const handleSmartBack = () => {
+    // Screens that own a hidden sub-level (the writing lesson's practice
+    // stages / result overlay) get first refusal on the press. A consumed
+    // press must not navigate at all.
+    if (runBackInterceptors()) {
+      return;
+    }
     if (location.pathname === '/vocabulary/numbers' && lastKqFamilyEntryWasNumberFamily()) {
       historyBack();
       return;
@@ -196,6 +202,12 @@ export function MainLayout() {
     }
 
     const backButtonListener = CapacitorApp.addListener('backButton', () => {
+      // Same first-refusal rule as the header arrow: let the active screen
+      // consume the press (e.g. the writing lesson collapsing a practice
+      // stage back to its letter page) before any navigation happens.
+      if (runBackInterceptors()) {
+        return;
+      }
       if (showExitModal) {
         setShowExitModal(false);
       } else if (location.pathname === '/' || location.pathname === '/login') {
