@@ -10,10 +10,11 @@
  * the auth provider and the landing route.
  */
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { BrowserRouter, Route, Routes, useParams } from 'react-router';
 import { AuthProvider } from './store/AuthContext';
 import { MainLayout } from './components/MainLayout';
 import { Dashboard } from './pages/Dashboard';
+import { WRITING_WORDS_ENABLED, WRITING_SENTENCES_ENABLED } from './lib/writingFlags';
 import { InterstitialAdModal, RewardedAdModal } from './features/monetization/components/AdElements';
 import { NetworkStatusBadge } from './components/NetworkStatusBadge';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -22,10 +23,21 @@ import { RouteFallback } from './components/RouteFallback';
 // Route-level code splitting. Heavy, rarely-entered screens (games,
 // dictionary) are the biggest wins here.
 const Login = lazy(() => import('./pages/Login').then(m => ({ default: m.Login })));
+const LearningHub = lazy(() => import('./pages/LearningHub').then(m => ({ default: m.LearningHub })));
 const Alphabet = lazy(() => import('./pages/Alphabet').then(m => ({ default: m.Alphabet })));
 const VocabularyCategories = lazy(() => import('./pages/VocabularyCategories').then(m => ({ default: m.VocabularyCategories })));
 const VocabularyList = lazy(() => import('./pages/VocabularyList').then(m => ({ default: m.VocabularyList })));
 const Sentences = lazy(() => import('./pages/Sentences').then(m => ({ default: m.Sentences })));
+const Grammar = lazy(() => import('./pages/Grammar').then(m => ({ default: m.Grammar })));
+const GrammarLessonPage = lazy(() => import('./pages/grammar/GrammarLesson').then(m => ({ default: m.GrammarLessonPage })));
+const Writing = lazy(() => import('./pages/Writing').then(m => ({ default: m.Writing })));
+const WritingTracingPage = lazy(() => import('./pages/WritingTracingPage').then(m => ({ default: m.WritingTracingPage })));
+const WritingLessonPage = lazy(() => import('./pages/WritingLessonPage').then(m => ({ default: m.WritingLessonPage })));
+const WritingWords = lazy(() => import('./pages/WritingWords').then(m => ({ default: m.WritingWords })));
+const WritingWordTracingPage = lazy(() => import('./pages/WritingWordTracingPage').then(m => ({ default: m.WritingWordTracingPage })));
+const WritingSentences = lazy(() => import('./pages/WritingSentences').then(m => ({ default: m.WritingSentences })));
+const WritingSentenceTracingPage = lazy(() => import('./pages/WritingSentenceTracingPage').then(m => ({ default: m.WritingSentenceTracingPage })));
+const WritingComingSoon = lazy(() => import('./pages/WritingComingSoon').then(m => ({ default: m.WritingComingSoon })));
 const Favorites = lazy(() => import('./pages/Favorites').then(m => ({ default: m.Favorites })));
 const Quiz = lazy(() => import('./pages/Quiz').then(m => ({ default: m.Quiz })));
 const Search = lazy(() => import('./pages/Search').then(m => ({ default: m.Search })));
@@ -37,6 +49,56 @@ const Games = lazy(() => import('./pages/Games').then(m => ({ default: m.Games }
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
 const TermsOfService = lazy(() => import('./pages/TermsOfService').then(m => ({ default: m.TermsOfService })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
+
+/** Remounts the letter-writing lesson whenever the :letterId param changes. */
+function KeyedWritingLesson() {
+  const { letterId } = useParams();
+  return <WritingLessonPage key={letterId} />;
+}
+
+/** Remounts the word-tracing screen whenever the :wordId param changes. */
+function KeyedWritingWordTracing() {
+  const { wordId } = useParams();
+  return <WritingWordTracingPage key={wordId} />;
+}
+
+/** Remounts the sentence-tracing screen whenever the :sentenceId changes. */
+function KeyedWritingSentenceTracing() {
+  const { sentenceId } = useParams();
+  return <WritingSentenceTracingPage key={sentenceId} />;
+}
+
+/**
+ * Word-tracing gate. While WRITING_WORDS_ENABLED is false the real screens
+ * stay lazy-unloaded and the user sees the "Coming Soon" placeholder instead.
+ */
+function WordsGate() {
+  return WRITING_WORDS_ENABLED ? <WritingWords /> : <WritingComingSoon feature="words" />;
+}
+
+/**
+ * Single-word-tracing gate. While WRITING_WORDS_ENABLED is false the real
+ * per-word canvas stays lazy-unloaded behind the placeholder.
+ */
+function WordTracingGate() {
+  return WRITING_WORDS_ENABLED ? <KeyedWritingWordTracing /> : <WritingComingSoon feature="words" />;
+}
+
+/**
+ * Sentence-list gate. While WRITING_SENTENCES_ENABLED is false the user sees
+ * the placeholder instead of the sentences grid.
+ */
+function SentencesGate() {
+  return WRITING_SENTENCES_ENABLED ? <WritingSentences /> : <WritingComingSoon feature="sentences" />;
+}
+
+/**
+ * Sentence-tracing gate. While WRITING_SENTENCES_ENABLED is false the user
+ * sees the placeholder instead of the sentence canvas.
+ */
+function SentenceTracingGate() {
+  return WRITING_SENTENCES_ENABLED ? <KeyedWritingSentenceTracing /> : <WritingComingSoon feature="sentences" />;
+}
 
 export default function App() {
   return (
@@ -61,10 +123,28 @@ export default function App() {
                   }
                 />
                 <Route path="login" element={<Login />} />
+                <Route path="learn" element={<LearningHub />} />
                 <Route path="alphabet" element={<Alphabet />} />
                 <Route path="vocabulary" element={<VocabularyCategories />} />
                 <Route path="vocabulary/:categoryId" element={<VocabularyList />} />
                 <Route path="sentences" element={<Sentences />} />
+                <Route path="grammar" element={<Grammar />} />
+                <Route path="grammar/:lessonId" element={<GrammarLessonPage />} />
+                <Route path="writing" element={<Writing />} />
+                {/* Interactive Letter Writing Lesson (data-driven, all 31).
+                    Declared BEFORE writing/:letterId so /writing/lesson/A
+                    matches the lesson, not the legacy single-letter trace.
+                    MUST stay keyed: "Next letter" only changes the param, and
+                    an un-keyed element reuses the mounted instance — leaving
+                    the previous letter's result modal open forever. */}
+                <Route path="writing/lesson/:letterId" element={<KeyedWritingLesson />} />
+                {/* Word + sentence routes stay registered; the gate swaps in the
+                    "Coming Soon" placeholder until the flags are re-enabled. */}
+                <Route path="writing/words" element={<WordsGate />} />
+                <Route path="writing/words/:wordId" element={<WordTracingGate />} />
+                <Route path="writing/sentences" element={<SentencesGate />} />
+                <Route path="writing/sentences/:sentenceId" element={<SentenceTracingGate />} />
+                <Route path="writing/:letterId" element={<WritingTracingPage />} />
                 <Route path="favorites" element={<Favorites />} />
                 <Route
                   path="quiz/:moduleId"

@@ -1,0 +1,8 @@
+# Generated proof artifacts (browser screenshots) — not source, large/not useful as context
+measure-ui-proof/
+conceptcard-proof/
+# The context pack itself (avoid re-packing the pack)
+repomix-output.*
+repomix-*.md
+# Generated measure/matrix results (large JSON noise, not source)
+audit/tools/results-*.json

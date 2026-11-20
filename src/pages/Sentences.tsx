@@ -292,8 +292,10 @@ export function Sentences() {
             exit={{ opacity: 0, y: -15 }}
             className="space-y-6"
           >
-            {/* 2. Brand Card Header Description */}
-            <div className="max-w-xl mx-auto bg-white dark:bg-slate-900 rounded-[32px] p-6 shadow-flat border border-line-soft relative overflow-hidden group">
+            {/* 2. Brand Card Header Description — PHASE 4 (unify): + radial gold
+                glow to match the Alphabet page reference hero. */}
+            <div className="max-w-xl mx-auto bg-white dark:bg-slate-900 rounded-[2rem] p-6 shadow-flat border border-line-soft relative overflow-hidden group">
+              <div className="absolute inset-x-0 -top-16 h-48 bg-[radial-gradient(circle_at_50%_0%,#FFB300_0%,transparent_65%)] opacity-[0.10] pointer-events-none" aria-hidden="true" />
               <MessageSquare className="absolute right-0 bottom-0 opacity-[0.06] w-40 h-40 transform translate-y-8 select-none pointer-events-none group-hover:scale-110 transition-transform duration-700 text-slate-500" />
               <div className="space-y-2 relative z-10 text-start">
                 <span className="text-[9px] bg-[#FFF6E0] dark:bg-[#3A2F14] text-[#8A6100] dark:text-[#FFCE6B] font-black px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 w-max">

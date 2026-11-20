@@ -306,3 +306,52 @@ describe('SYNC & RECONCILIATION', () => {
   });
 });
 
+
+describe('WRITING LESSON — result overlay must not survive "Next letter"', () => {
+  // Bug: clicking "Next letter" navigated, but the previous letter's
+  // "Keep practicing" modal stayed on screen forever. React Router re-uses the
+  // mounted page when only the :letterId param changes, so `showResult`/`score`
+  // — and the spent `xpAwardedRef` guard — leaked into the next letter.
+  // The behaviour is proven end-to-end in audit/writing-lesson-next.test.tsx;
+  // these lock both layers of the fix so neither can be quietly reverted.
+  it('the lesson route re-keys per letter so a new letter remounts cleanly', () => {
+    const app = fs.readFileSync('src/App.tsx', 'utf8');
+    expect(app).toMatch(/function KeyedWritingLesson\(\)[\s\S]*?<WritingLessonPage key=\{letterId\} \/>/);
+    expect(app).toContain('<Route path="writing/lesson/:letterId" element={<KeyedWritingLesson />} />');
+  });
+
+  it('WritingLessonPage still clears attempt state when only :letterId changes', () => {
+    const page = fs.readFileSync('src/pages/WritingLessonPage.tsx', 'utf8');
+    expect(page).toMatch(/setShowResult\(false\)[\s\S]{0,200}?\}, \[letter\.id, glyph\]\);/);
+  });
+});
+
+
+describe('WRITING LESSON — unified back policy (one level per press)', () => {
+  // Bug: with a practice stage active (or the result overlay open) the header
+  // arrow / Android hardware back left the whole lesson — skipping the letter's
+  // own 'learn' view — and "Next letter" PUSHED an entry, building a trail of
+  // visited letters for back to walk through. Behaviour is proven end-to-end in
+  // audit/writing-lesson-back.test.tsx; these lock the three wiring points.
+  it('MainLayout gives registered screens first refusal before navigating back', () => {
+    const layout = fs.readFileSync('src/components/MainLayout.tsx', 'utf8');
+    // Header arrow + Capacitor hardware button: a consumed press must not navigate.
+    expect(layout.match(/if \(runBackInterceptors\(\)\) \{\s*return;\s*\}/g)).toHaveLength(2);
+  });
+
+  it('the interceptor registry is LIFO with an unregister-returning API', () => {
+    const nav = fs.readFileSync('src/lib/navigation.ts', 'utf8');
+    expect(nav).toContain('export function registerBackInterceptor');
+    expect(nav).toContain('export function runBackInterceptors');
+    expect(nav).toMatch(/for \(let i = backInterceptors\.length - 1; i >= 0; i--\)/);
+  });
+
+  it('the lesson consumes one press per level, and switching letters replaces the entry', () => {
+    const page = fs.readFileSync('src/pages/WritingLessonPage.tsx', 'utf8');
+    expect(page).toContain('registerBackInterceptor');
+    expect(page).toMatch(/navigate\(`\/writing\/lesson\/\$\{next\.id\}`, \{ replace: true \}\)/);
+    expect(page).toMatch(/navigate\(`\/writing\/lesson\/\$\{prev\.id\}`, \{ replace: true \}\)/);
+    expect(page).toMatch(/navigate\('\/writing', \{ replace: true \}\)/);
+  });
+});
+

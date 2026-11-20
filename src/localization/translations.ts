@@ -9,10 +9,11 @@ import { Language } from '../models/user';
 const translations = {
   en: {
     // Main UI
-    app_title: "Kurmanji Quester",
+    app_title: "Kurdish Quest",
     loading: "Loading...",
     home: "Home",
     alphabet: "Alphabet",
+    learning: "Learning",
     roadmap_tab: "Roadmap",
     profile_tab: "Profile",
     quiz_hub_title: "Quizzes",
@@ -269,6 +270,7 @@ const translations = {
     loading: "Tê barkirin...",
     home: "Destpêk",
     alphabet: "Alfabe",
+    learning: "Fêrbûn",
     roadmap_tab: "Nexşe",
     profile_tab: "Profîl",
     quiz_hub_title: "Test",
@@ -525,6 +527,7 @@ const translations = {
     loading: "جاري التحميل...",
     home: "الرئيسية",
     alphabet: "الأبجدية",
+    learning: "التعلّم",
     roadmap_tab: "الخارطة",
     profile_tab: "حسابي",
     quiz_hub_title: "الاختبارات",

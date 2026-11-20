@@ -190,7 +190,13 @@ export function ZombieTypingGame({ vocabulary, language, onWin, onClose }: Zombi
     setWordsCleared(0);
     setGameState('playing');
     pickNewWord();
-    window.setTimeout(() => rootRef.current?.scrollTo({ top: 0 }), 0);
+    if (rootRef.current?.scrollTo) {
+      window.setTimeout(() => rootRef.current?.scrollTo({ top: 0 }), 0);
+    } else {
+      // jsdom and some Android WebViews don't implement Element.scrollTo —
+      // fall back to the universally-supported scrollTop property.
+      window.setTimeout(() => { if (rootRef.current) rootRef.current.scrollTop = 0; }, 0);
+    }
     window.setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 0);
   };
 

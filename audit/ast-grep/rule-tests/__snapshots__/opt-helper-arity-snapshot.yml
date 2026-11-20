@@ -1,0 +1,10 @@
+id: opt-helper-arity
+snapshots:
+  ? |
+    import { opt } from './helpers';
+    const a = opt('Ez', 'أنا');
+  : labels:
+    - source: opt('Ez', 'أنا')
+      style: primary
+      start: 43
+      end: 62

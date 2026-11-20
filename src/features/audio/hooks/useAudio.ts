@@ -12,6 +12,7 @@
  */
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { isAudioPath, deriveAudioPath } from '../utils/audioSlug';
+import { USE_CUSTOM_AUDIO_API } from '../../../lib/audioFlags';
 
 const audioCache = new Map<string, HTMLAudioElement>();
 let currentlyPlaying: HTMLAudioElement | null = null;
@@ -260,6 +261,53 @@ export function playCompleteSound() {
 }
 
 // Speech synthesis fallback assistant
+//
+// iOS Safari loads `getVoices()` asynchronously and the engine can sit in a
+// "paused" state until the first user gesture primes it. We register one
+// shared `voiceschanged` listener and cache the result so the first tap after
+// load always has a voice list, and we resume a paused engine before speaking.
+let cachedVoices: SpeechSynthesisVoice[] = [];
+let voicesWarmed = false;
+
+function warmVoices() {
+  if (voicesWarmed) return;
+  if (globalThis.window === undefined || !('speechSynthesis' in window)) return;
+  voicesWarmed = true;
+  const refresh = () => {
+    try {
+      cachedVoices = window.speechSynthesis.getVoices();
+    } catch {
+      cachedVoices = [];
+    }
+  };
+  refresh();
+  try {
+    window.speechSynthesis.addEventListener('voiceschanged', refresh);
+  } catch {
+    /* older engines do not expose addEventListener on speechSynthesis */
+  }
+}
+
+function pickPreferredVoice() {
+  warmVoices();
+  const voices = cachedVoices.length ? cachedVoices : (() => {
+    try {
+      return window.speechSynthesis.getVoices();
+    } catch {
+      return [];
+    }
+  })();
+  // Kurmanji first (ku / kmr), then Turkish (closest phonetic match), then any
+  // English voice, then the browser default.
+  const kuVoice = voices.find((v) => {
+    const lang = (v.lang || '').toLowerCase();
+    return lang === 'ku' || lang.startsWith('ku-') || lang.startsWith('ku_') || lang.startsWith('kmr');
+  });
+  const trVoice = voices.find((v) => (v.lang || '').toLowerCase().startsWith('tr'));
+  const enVoice = voices.find((v) => (v.lang || '').toLowerCase().startsWith('en'));
+  return kuVoice ?? trVoice ?? enVoice ?? voices[0] ?? null;
+}
+
 function speakFallback(text: string, rate: number = 1.0) {
   if (getMuteState()) return;
   if (globalThis.window === undefined || !('speechSynthesis' in window)) return;
@@ -274,6 +322,13 @@ function speakFallback(text: string, rate: number = 1.0) {
   if (!cleanText) return;
 
   try {
+    // Prime/refresh the voice list inside the user gesture (iOS Safari).
+    warmVoices();
+    // An engine stuck in 'paused' (common on iOS after rapid cancel/spoke
+    // cycles) must be resumed before a new utterance will ever fire.
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
     window.speechSynthesis.cancel();
   } catch (e) {
     console.warn(e);
@@ -282,20 +337,18 @@ function speakFallback(text: string, rate: number = 1.0) {
   const utterance = new SpeechSynthesisUtterance(cleanText);
   
   // Try to use a Kurdish or Turkish-friendly speech synthesis voice
-  const voices = window.speechSynthesis.getVoices();
-  const kuVoice = voices.find(v => v.lang.startsWith('ku') || v.lang.startsWith('kmr'));
-  const trVoice = voices.find(v => v.lang.startsWith('tr')); // Turkish has closest phonetic sounds to Kurmanji letters
-  const enVoice = voices.find(v => v.lang.startsWith('en'));
+  const preferred = pickPreferredVoice();
 
-  if (kuVoice) {
-    utterance.voice = kuVoice;
-    utterance.lang = kuVoice.lang;
-  } else if (trVoice) {
-    utterance.voice = trVoice;
-    utterance.lang = 'tr';
-  } else if (enVoice) {
-    utterance.voice = enVoice;
-    utterance.lang = 'en';
+  if (preferred) {
+    const lang = (preferred.lang || '').toLowerCase();
+    utterance.voice = preferred;
+    if (lang === 'ku' || lang.startsWith('ku') || lang.startsWith('kmr')) {
+      utterance.lang = preferred.lang;
+    } else if (lang.startsWith('tr')) {
+      utterance.lang = 'tr';
+    } else if (lang.startsWith('en')) {
+      utterance.lang = 'en';
+    }
   }
 
   utterance.rate = rate;
@@ -330,6 +383,18 @@ export function stopAllActiveAudio() {
 export const playAudioUrl = async (url: string, textToSpeak?: string, playbackRate: number = 1.0): Promise<void> => {
   if (getMuteState()) return;
 
+  const fallbackText = textToSpeak || url;
+
+  // Temporary browser-native TTS: while USE_CUSTOM_AUDIO_API is false, the
+  // SpeechSynthesis fallback is the PRIMARY source for all spoken Kurdish.
+  // The HEAD-check/native-HTMLAudio path below stays gated behind the flag so
+  // it can be restored without touching call sites.
+  if (!USE_CUSTOM_AUDIO_API) {
+    speakFallback(fallbackText, playbackRate);
+    await new Promise(resolve => window.setTimeout(resolve, estimateSpeechDurationMs(fallbackText, playbackRate)));
+    return;
+  }
+
   if (currentlyPlaying) {
     currentlyPlaying.pause();
     currentlyPlaying.currentTime = 0;
@@ -337,8 +402,8 @@ export const playAudioUrl = async (url: string, textToSpeak?: string, playbackRa
   }
 
   if (!(await canUseNativeAudio(url))) {
-    speakFallback(textToSpeak || url, playbackRate);
-    await new Promise(resolve => window.setTimeout(resolve, estimateSpeechDurationMs(textToSpeak || url, playbackRate)));
+    speakFallback(fallbackText, playbackRate);
+    await new Promise(resolve => window.setTimeout(resolve, estimateSpeechDurationMs(fallbackText, playbackRate)));
     return;
   }
 
@@ -359,7 +424,7 @@ export const playAudioUrl = async (url: string, textToSpeak?: string, playbackRa
     
     audio.onerror = (e) => {
       console.warn("Fast path audio error, speaking via synthesis instead:", e);
-      speakFallback(textToSpeak || url, playbackRate);
+      speakFallback(fallbackText, playbackRate);
       currentlyPlaying = null;
       // Resolve instead of reject to keep the application flow serene and fluid
       resolve();
@@ -369,7 +434,7 @@ export const playAudioUrl = async (url: string, textToSpeak?: string, playbackRa
       currentlyPlaying = audio!;
     }).catch(err => {
       console.warn("Fast path audio play catch, speaking via synthesis instead:", err);
-      speakFallback(textToSpeak || url, playbackRate);
+      speakFallback(fallbackText, playbackRate);
       resolve();
     });
   });
@@ -452,6 +517,17 @@ export function useAudio(audioUrl?: string, textToSpeak?: string) {
       return;
     }
     if (!audioUrl && !textToSpeak) return;
+
+    // Temporary browser-native TTS primary path (see playAudioUrl above).
+    if (!USE_CUSTOM_AUDIO_API) {
+      const fallbackText = textToSpeak || audioUrl || '';
+      speakFallback(fallbackText, playbackRate);
+      setIsPlaying(true);
+      window.setTimeout(() => {
+        setIsPlaying(false);
+      }, estimateSpeechDurationMs(fallbackText, playbackRate));
+      return;
+    }
 
     const shouldUseNativeAudio = audioUrl ? await canUseNativeAudio(audioUrl) : false;
     if (!shouldUseNativeAudio) {

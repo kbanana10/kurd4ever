@@ -29,6 +29,11 @@
   /* Semantic tokens used across pages/components */
   --color-surface: #ffffff;
   --color-surface-2: #F6F5F1;
+  /* surface-3 = "one step stronger than surface-2": off-state switch tracks,
+     hover fills on surface-2 wells. Must be dark enough to read against a
+     white card (the Switch knob is surface=white), otherwise an unchecked
+     switch is invisible in light mode. */
+  --color-surface-3: #E2E8F0;
   --color-ink: #1E293B;
   --color-muted: #475569;
   --color-subtle: #64748B;
@@ -156,6 +161,7 @@ body {
 .dark {
   --color-surface: #1F1F1E;
   --color-surface-2: #2A2415;
+  --color-surface-3: #3A3938;
   --color-ink: #F1F1F0;
   --color-muted: #A8B0BC;
   --color-subtle: #7C8592;

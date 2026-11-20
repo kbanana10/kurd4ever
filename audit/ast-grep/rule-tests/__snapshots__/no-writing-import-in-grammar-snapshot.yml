@@ -1,0 +1,13 @@
+id: no-writing-import-in-grammar
+snapshots:
+  ? |
+    import { WritingTracingPage } from '../writing/WritingTracingPage';
+  : labels:
+    - source: import { WritingTracingPage } from '../writing/WritingTracingPage';
+      style: primary
+      start: 0
+      end: 67
+    - source: '''../writing/WritingTracingPage'''
+      style: secondary
+      start: 35
+      end: 66

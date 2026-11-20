@@ -84,7 +84,7 @@ export const categories: Category[] = [
 ];
 
 const defaultVocabulary: Word[] = [
-  // Numbers -> Ones (الأرقام -> الأحاد)
+  // Numbers -> Ones 0–9 (الأرقام -> الآحاد ٠–٩)
   { id: 'n0', ku: 'Sifir', en: 'Zero', ar: 'صفر', categoryId: 'numbers', subCategoryId: 'ones', emoji: '0️⃣', audio: '/audio/numbers/zero.mp3' },
   { id: 'n1', ku: 'Yek', en: 'One', ar: 'واحد', categoryId: 'numbers', subCategoryId: 'ones', emoji: '1️⃣', audio: '/audio/numbers/one.mp3' },
   { id: 'n2', ku: 'Du', en: 'Two', ar: 'اثنان', categoryId: 'numbers', subCategoryId: 'ones', emoji: '2️⃣', audio: '/audio/numbers/two.mp3' },
@@ -95,28 +95,128 @@ const defaultVocabulary: Word[] = [
   { id: 'n7', ku: 'Heft', en: 'Seven', ar: 'سبعة', categoryId: 'numbers', subCategoryId: 'ones', emoji: '7️⃣', audio: '/audio/numbers/seven.mp3' },
   { id: 'n8', ku: 'Heşt', en: 'Eight', ar: 'ثمانية', categoryId: 'numbers', subCategoryId: 'ones', emoji: '8️⃣', audio: '/audio/numbers/eight.mp3' },
   { id: 'n9', ku: 'Neh', en: 'Nine', ar: 'تسعة', categoryId: 'numbers', subCategoryId: 'ones', emoji: '9️⃣', audio: '/audio/numbers/nine.mp3' },
-  
-  // Numbers -> Tens (الأرقام -> العشرات)
-  { id: 'n10', ku: 'Deh', en: 'Ten', ar: 'عشرة', categoryId: 'numbers', subCategoryId: 'tens', emoji: '🔟', audio: '/audio/numbers/ten.mp3' },
-  { id: 'n20', ku: 'Bîst', en: 'Twenty', ar: 'عشرون', categoryId: 'numbers', subCategoryId: 'tens', emoji: '🎚️', audio: '/audio/numbers/twenty.mp3' },
-  { id: 'n30', ku: 'Sî', en: 'Thirty', ar: 'ثلاثون', categoryId: 'numbers', subCategoryId: 'tens', emoji: '🗓️', audio: '/audio/numbers/thirty.mp3' },
-  { id: 'n40', ku: 'Çil', en: 'Forty', ar: 'أربعون', categoryId: 'numbers', subCategoryId: 'tens', emoji: '⏱️', audio: '/audio/numbers/forty.mp3' },
-  { id: 'n50', ku: 'Pêncî', en: 'Fifty', ar: 'خمسون', categoryId: 'numbers', subCategoryId: 'tens', emoji: '📊', audio: '/audio/numbers/fifty.mp3' },
-  { id: 'n60', ku: 'Şêst', en: 'Sixty', ar: 'ستون', categoryId: 'numbers', subCategoryId: 'tens', emoji: '📈', audio: '/audio/numbers/sixty.mp3' },
-  { id: 'n70', ku: 'Heftê', en: 'Seventy', ar: 'سبعون', categoryId: 'numbers', subCategoryId: 'tens', emoji: '🧮', audio: '/audio/numbers/seventy.mp3' },
-  { id: 'n80', ku: 'Heştê', en: 'Eighty', ar: 'ثمانون', categoryId: 'numbers', subCategoryId: 'tens', emoji: '📌', audio: '/audio/numbers/eighty.mp3' },
-  { id: 'n90', ku: 'Nod', en: 'Ninety', ar: 'تسعون', categoryId: 'numbers', subCategoryId: 'tens', emoji: '🔔', audio: '/audio/numbers/ninety.mp3' },
 
-  // Numbers -> Hundreds (الأرقام -> المئات)
-  { id: 'n100', ku: 'Sed', en: 'One hundred', ar: 'مئة', categoryId: 'numbers', subCategoryId: 'hundreds', emoji: '💯', audio: '' },
+  // Numbers -> Teens 10–19 (الأرقام -> الأعداد من ١٠ إلى ١٩)
+  { id: 'n10', ku: 'Deh', en: 'Ten', ar: 'عشرة', categoryId: 'numbers', subCategoryId: 'teens', emoji: '1️⃣0️⃣', audio: '' },
+  { id: 'n11', ku: 'Yazdeh', en: 'Eleven', ar: 'أحد عشر', categoryId: 'numbers', subCategoryId: 'teens', emoji: '1️⃣1️⃣', audio: '' },
+  { id: 'n12', ku: 'Diwazdeh', en: 'Twelve', ar: 'اثنا عشر', categoryId: 'numbers', subCategoryId: 'teens', emoji: '1️⃣2️⃣', audio: '' },
+  { id: 'n13', ku: 'Sêzdeh', en: 'Thirteen', ar: 'ثلاثة عشر', categoryId: 'numbers', subCategoryId: 'teens', emoji: '1️⃣3️⃣', audio: '' },
+  { id: 'n14', ku: 'Çardeh', en: 'Fourteen', ar: 'أربعة عشر', categoryId: 'numbers', subCategoryId: 'teens', emoji: '1️⃣4️⃣', audio: '' },
+  { id: 'n15', ku: 'Panzdeh', en: 'Fifteen', ar: 'خمسة عشر', categoryId: 'numbers', subCategoryId: 'teens', emoji: '1️⃣5️⃣', audio: '' },
+  { id: 'n16', ku: 'Şanzdeh', en: 'Sixteen', ar: 'ستة عشر', categoryId: 'numbers', subCategoryId: 'teens', emoji: '1️⃣6️⃣', audio: '' },
+  { id: 'n17', ku: 'Hevdeh', en: 'Seventeen', ar: 'سبعة عشر', categoryId: 'numbers', subCategoryId: 'teens', emoji: '1️⃣7️⃣', audio: '' },
+  { id: 'n18', ku: 'Hejdeh', en: 'Eighteen', ar: 'ثمانية عشر', categoryId: 'numbers', subCategoryId: 'teens', emoji: '1️⃣8️⃣', audio: '' },
+  { id: 'n19', ku: 'Nozdeh', en: 'Nineteen', ar: 'تسعة عشر', categoryId: 'numbers', subCategoryId: 'teens', emoji: '1️⃣9️⃣', audio: '' },
+
+  // Numbers -> Twenties 20–29 (الأرقام -> العشرينات ٢٠–٢٩)
+  { id: 'n20', ku: 'Bîst', en: 'Twenty', ar: 'عشرون', categoryId: 'numbers', subCategoryId: 'twenties', emoji: '2️⃣0️⃣', audio: '' },
+  { id: 'n21', ku: 'Bîst û yek', en: 'Twenty-one', ar: 'واحد وعشرون', categoryId: 'numbers', subCategoryId: 'twenties', emoji: '2️⃣1️⃣', audio: '' },
+  { id: 'n22', ku: 'Bîst û du', en: 'Twenty-two', ar: 'اثنان وعشرون', categoryId: 'numbers', subCategoryId: 'twenties', emoji: '2️⃣2️⃣', audio: '' },
+  { id: 'n23', ku: 'Bîst û sê', en: 'Twenty-three', ar: 'ثلاثة وعشرون', categoryId: 'numbers', subCategoryId: 'twenties', emoji: '2️⃣3️⃣', audio: '' },
+  { id: 'n24', ku: 'Bîst û çar', en: 'Twenty-four', ar: 'أربعة وعشرون', categoryId: 'numbers', subCategoryId: 'twenties', emoji: '2️⃣4️⃣', audio: '' },
+  { id: 'n25', ku: 'Bîst û pênc', en: 'Twenty-five', ar: 'خمسة وعشرون', categoryId: 'numbers', subCategoryId: 'twenties', emoji: '2️⃣5️⃣', audio: '' },
+  { id: 'n26', ku: 'Bîst û şeş', en: 'Twenty-six', ar: 'ستة وعشرون', categoryId: 'numbers', subCategoryId: 'twenties', emoji: '2️⃣6️⃣', audio: '' },
+  { id: 'n27', ku: 'Bîst û heft', en: 'Twenty-seven', ar: 'سبعة وعشرون', categoryId: 'numbers', subCategoryId: 'twenties', emoji: '2️⃣7️⃣', audio: '' },
+  { id: 'n28', ku: 'Bîst û heşt', en: 'Twenty-eight', ar: 'ثمانية وعشرون', categoryId: 'numbers', subCategoryId: 'twenties', emoji: '2️⃣8️⃣', audio: '' },
+  { id: 'n29', ku: 'Bîst û neh', en: 'Twenty-nine', ar: 'تسعة وعشرون', categoryId: 'numbers', subCategoryId: 'twenties', emoji: '2️⃣9️⃣', audio: '' },
+
+  // Numbers -> Thirties 30–39 (الأرقام -> الثلاثينات ٣٠–٣٩)
+  { id: 'n30', ku: 'Sî', en: 'Thirty', ar: 'ثلاثون', categoryId: 'numbers', subCategoryId: 'thirties', emoji: '3️⃣0️⃣', audio: '' },
+  { id: 'n31', ku: 'Sî û yek', en: 'Thirty-one', ar: 'واحد وثلاثون', categoryId: 'numbers', subCategoryId: 'thirties', emoji: '3️⃣1️⃣', audio: '' },
+  { id: 'n32', ku: 'Sî û du', en: 'Thirty-two', ar: 'اثنان وثلاثون', categoryId: 'numbers', subCategoryId: 'thirties', emoji: '3️⃣2️⃣', audio: '' },
+  { id: 'n33', ku: 'Sî û sê', en: 'Thirty-three', ar: 'ثلاثة وثلاثون', categoryId: 'numbers', subCategoryId: 'thirties', emoji: '3️⃣3️⃣', audio: '' },
+  { id: 'n34', ku: 'Sî û çar', en: 'Thirty-four', ar: 'أربعة وثلاثون', categoryId: 'numbers', subCategoryId: 'thirties', emoji: '3️⃣4️⃣', audio: '' },
+  { id: 'n35', ku: 'Sî û pênc', en: 'Thirty-five', ar: 'خمسة وثلاثون', categoryId: 'numbers', subCategoryId: 'thirties', emoji: '3️⃣5️⃣', audio: '' },
+  { id: 'n36', ku: 'Sî û şeş', en: 'Thirty-six', ar: 'ستة وثلاثون', categoryId: 'numbers', subCategoryId: 'thirties', emoji: '3️⃣6️⃣', audio: '' },
+  { id: 'n37', ku: 'Sî û heft', en: 'Thirty-seven', ar: 'سبعة وثلاثون', categoryId: 'numbers', subCategoryId: 'thirties', emoji: '3️⃣7️⃣', audio: '' },
+  { id: 'n38', ku: 'Sî û heşt', en: 'Thirty-eight', ar: 'ثمانية وثلاثون', categoryId: 'numbers', subCategoryId: 'thirties', emoji: '3️⃣8️⃣', audio: '' },
+  { id: 'n39', ku: 'Sî û neh', en: 'Thirty-nine', ar: 'تسعة وثلاثون', categoryId: 'numbers', subCategoryId: 'thirties', emoji: '3️⃣9️⃣', audio: '' },
+
+  // Numbers -> Forties 40–49 (الأرقام -> الأربعينات ٤٠–٤٩)
+  { id: 'n40', ku: 'Çil', en: 'Forty', ar: 'أربعون', categoryId: 'numbers', subCategoryId: 'forties', emoji: '4️⃣0️⃣', audio: '' },
+  { id: 'n41', ku: 'Çil û yek', en: 'Forty-one', ar: 'واحد وأربعون', categoryId: 'numbers', subCategoryId: 'forties', emoji: '4️⃣1️⃣', audio: '' },
+  { id: 'n42', ku: 'Çil û du', en: 'Forty-two', ar: 'اثنان وأربعون', categoryId: 'numbers', subCategoryId: 'forties', emoji: '4️⃣2️⃣', audio: '' },
+  { id: 'n43', ku: 'Çil û sê', en: 'Forty-three', ar: 'ثلاثة وأربعون', categoryId: 'numbers', subCategoryId: 'forties', emoji: '4️⃣3️⃣', audio: '' },
+  { id: 'n44', ku: 'Çil û çar', en: 'Forty-four', ar: 'أربعة وأربعون', categoryId: 'numbers', subCategoryId: 'forties', emoji: '4️⃣4️⃣', audio: '' },
+  { id: 'n45', ku: 'Çil û pênc', en: 'Forty-five', ar: 'خمسة وأربعون', categoryId: 'numbers', subCategoryId: 'forties', emoji: '4️⃣5️⃣', audio: '' },
+  { id: 'n46', ku: 'Çil û şeş', en: 'Forty-six', ar: 'ستة وأربعون', categoryId: 'numbers', subCategoryId: 'forties', emoji: '4️⃣6️⃣', audio: '' },
+  { id: 'n47', ku: 'Çil û heft', en: 'Forty-seven', ar: 'سبعة وأربعون', categoryId: 'numbers', subCategoryId: 'forties', emoji: '4️⃣7️⃣', audio: '' },
+  { id: 'n48', ku: 'Çil û heşt', en: 'Forty-eight', ar: 'ثمانية وأربعون', categoryId: 'numbers', subCategoryId: 'forties', emoji: '4️⃣8️⃣', audio: '' },
+  { id: 'n49', ku: 'Çil û neh', en: 'Forty-nine', ar: 'تسعة وأربعون', categoryId: 'numbers', subCategoryId: 'forties', emoji: '4️⃣9️⃣', audio: '' },
+
+  // Numbers -> Fifties 50–59 (الأرقام -> الخمسينات ٥٠–٥٩)
+  { id: 'n50', ku: 'Pêncî', en: 'Fifty', ar: 'خمسون', categoryId: 'numbers', subCategoryId: 'fifties', emoji: '5️⃣0️⃣', audio: '' },
+  { id: 'n51', ku: 'Pêncî û yek', en: 'Fifty-one', ar: 'واحد وخمسون', categoryId: 'numbers', subCategoryId: 'fifties', emoji: '5️⃣1️⃣', audio: '' },
+  { id: 'n52', ku: 'Pêncî û du', en: 'Fifty-two', ar: 'اثنان وخمسون', categoryId: 'numbers', subCategoryId: 'fifties', emoji: '5️⃣2️⃣', audio: '' },
+  { id: 'n53', ku: 'Pêncî û sê', en: 'Fifty-three', ar: 'ثلاثة وخمسون', categoryId: 'numbers', subCategoryId: 'fifties', emoji: '5️⃣3️⃣', audio: '' },
+  { id: 'n54', ku: 'Pêncî û çar', en: 'Fifty-four', ar: 'أربعة وخمسون', categoryId: 'numbers', subCategoryId: 'fifties', emoji: '5️⃣4️⃣', audio: '' },
+  { id: 'n55', ku: 'Pêncî û pênc', en: 'Fifty-five', ar: 'خمسة وخمسون', categoryId: 'numbers', subCategoryId: 'fifties', emoji: '5️⃣5️⃣', audio: '' },
+  { id: 'n56', ku: 'Pêncî û şeş', en: 'Fifty-six', ar: 'ستة وخمسون', categoryId: 'numbers', subCategoryId: 'fifties', emoji: '5️⃣6️⃣', audio: '' },
+  { id: 'n57', ku: 'Pêncî û heft', en: 'Fifty-seven', ar: 'سبعة وخمسون', categoryId: 'numbers', subCategoryId: 'fifties', emoji: '5️⃣7️⃣', audio: '' },
+  { id: 'n58', ku: 'Pêncî û heşt', en: 'Fifty-eight', ar: 'ثمانية وخمسون', categoryId: 'numbers', subCategoryId: 'fifties', emoji: '5️⃣8️⃣', audio: '' },
+  { id: 'n59', ku: 'Pêncî û neh', en: 'Fifty-nine', ar: 'تسعة وخمسون', categoryId: 'numbers', subCategoryId: 'fifties', emoji: '5️⃣9️⃣', audio: '' },
+
+  // Numbers -> Sixties 60–69 (الأرقام -> الستينات ٦٠–٦٩)
+  { id: 'n60', ku: 'Şêst', en: 'Sixty', ar: 'ستون', categoryId: 'numbers', subCategoryId: 'sixties', emoji: '6️⃣0️⃣', audio: '' },
+  { id: 'n61', ku: 'Şêst û yek', en: 'Sixty-one', ar: 'واحد وستون', categoryId: 'numbers', subCategoryId: 'sixties', emoji: '6️⃣1️⃣', audio: '' },
+  { id: 'n62', ku: 'Şêst û du', en: 'Sixty-two', ar: 'اثنان وستون', categoryId: 'numbers', subCategoryId: 'sixties', emoji: '6️⃣2️⃣', audio: '' },
+  { id: 'n63', ku: 'Şêst û sê', en: 'Sixty-three', ar: 'ثلاثة وستون', categoryId: 'numbers', subCategoryId: 'sixties', emoji: '6️⃣3️⃣', audio: '' },
+  { id: 'n64', ku: 'Şêst û çar', en: 'Sixty-four', ar: 'أربعة وستون', categoryId: 'numbers', subCategoryId: 'sixties', emoji: '6️⃣4️⃣', audio: '' },
+  { id: 'n65', ku: 'Şêst û pênc', en: 'Sixty-five', ar: 'خمسة وستون', categoryId: 'numbers', subCategoryId: 'sixties', emoji: '6️⃣5️⃣', audio: '' },
+  { id: 'n66', ku: 'Şêst û şeş', en: 'Sixty-six', ar: 'ستة وستون', categoryId: 'numbers', subCategoryId: 'sixties', emoji: '6️⃣6️⃣', audio: '' },
+  { id: 'n67', ku: 'Şêst û heft', en: 'Sixty-seven', ar: 'سبعة وستون', categoryId: 'numbers', subCategoryId: 'sixties', emoji: '6️⃣7️⃣', audio: '' },
+  { id: 'n68', ku: 'Şêst û heşt', en: 'Sixty-eight', ar: 'ثمانية وستون', categoryId: 'numbers', subCategoryId: 'sixties', emoji: '6️⃣8️⃣', audio: '' },
+  { id: 'n69', ku: 'Şêst û neh', en: 'Sixty-nine', ar: 'تسعة وستون', categoryId: 'numbers', subCategoryId: 'sixties', emoji: '6️⃣9️⃣', audio: '' },
+
+  // Numbers -> Seventies 70–79 (الأرقام -> السبعينات ٧٠–٧٩)
+  { id: 'n70', ku: 'Heftê', en: 'Seventy', ar: 'سبعون', categoryId: 'numbers', subCategoryId: 'seventies', emoji: '7️⃣0️⃣', audio: '' },
+  { id: 'n71', ku: 'Heftê û yek', en: 'Seventy-one', ar: 'واحد وسبعون', categoryId: 'numbers', subCategoryId: 'seventies', emoji: '7️⃣1️⃣', audio: '' },
+  { id: 'n72', ku: 'Heftê û du', en: 'Seventy-two', ar: 'اثنان وسبعون', categoryId: 'numbers', subCategoryId: 'seventies', emoji: '7️⃣2️⃣', audio: '' },
+  { id: 'n73', ku: 'Heftê û sê', en: 'Seventy-three', ar: 'ثلاثة وسبعون', categoryId: 'numbers', subCategoryId: 'seventies', emoji: '7️⃣3️⃣', audio: '' },
+  { id: 'n74', ku: 'Heftê û çar', en: 'Seventy-four', ar: 'أربعة وسبعون', categoryId: 'numbers', subCategoryId: 'seventies', emoji: '7️⃣4️⃣', audio: '' },
+  { id: 'n75', ku: 'Heftê û pênc', en: 'Seventy-five', ar: 'خمسة وسبعون', categoryId: 'numbers', subCategoryId: 'seventies', emoji: '7️⃣5️⃣', audio: '' },
+  { id: 'n76', ku: 'Heftê û şeş', en: 'Seventy-six', ar: 'ستة وسبعون', categoryId: 'numbers', subCategoryId: 'seventies', emoji: '7️⃣6️⃣', audio: '' },
+  { id: 'n77', ku: 'Heftê û heft', en: 'Seventy-seven', ar: 'سبعة وسبعون', categoryId: 'numbers', subCategoryId: 'seventies', emoji: '7️⃣7️⃣', audio: '' },
+  { id: 'n78', ku: 'Heftê û heşt', en: 'Seventy-eight', ar: 'ثمانية وسبعون', categoryId: 'numbers', subCategoryId: 'seventies', emoji: '7️⃣8️⃣', audio: '' },
+  { id: 'n79', ku: 'Heftê û neh', en: 'Seventy-nine', ar: 'تسعة وسبعون', categoryId: 'numbers', subCategoryId: 'seventies', emoji: '7️⃣9️⃣', audio: '' },
+
+  // Numbers -> Eighties 80–89 (الأرقام -> الثمانينات ٨٠–٨٩)
+  { id: 'n80', ku: 'Heştê', en: 'Eighty', ar: 'ثمانون', categoryId: 'numbers', subCategoryId: 'eighties', emoji: '8️⃣0️⃣', audio: '' },
+  { id: 'n81', ku: 'Heştê û yek', en: 'Eighty-one', ar: 'واحد وثمانون', categoryId: 'numbers', subCategoryId: 'eighties', emoji: '8️⃣1️⃣', audio: '' },
+  { id: 'n82', ku: 'Heştê û du', en: 'Eighty-two', ar: 'اثنان وثمانون', categoryId: 'numbers', subCategoryId: 'eighties', emoji: '8️⃣2️⃣', audio: '' },
+  { id: 'n83', ku: 'Heştê û sê', en: 'Eighty-three', ar: 'ثلاثة وثمانون', categoryId: 'numbers', subCategoryId: 'eighties', emoji: '8️⃣3️⃣', audio: '' },
+  { id: 'n84', ku: 'Heştê û çar', en: 'Eighty-four', ar: 'أربعة وثمانون', categoryId: 'numbers', subCategoryId: 'eighties', emoji: '8️⃣4️⃣', audio: '' },
+  { id: 'n85', ku: 'Heştê û pênc', en: 'Eighty-five', ar: 'خمسة وثمانون', categoryId: 'numbers', subCategoryId: 'eighties', emoji: '8️⃣5️⃣', audio: '' },
+  { id: 'n86', ku: 'Heştê û şeş', en: 'Eighty-six', ar: 'ستة وثمانون', categoryId: 'numbers', subCategoryId: 'eighties', emoji: '8️⃣6️⃣', audio: '' },
+  { id: 'n87', ku: 'Heştê û heft', en: 'Eighty-seven', ar: 'سبعة وثمانون', categoryId: 'numbers', subCategoryId: 'eighties', emoji: '8️⃣7️⃣', audio: '' },
+  { id: 'n88', ku: 'Heştê û heşt', en: 'Eighty-eight', ar: 'ثمانية وثمانون', categoryId: 'numbers', subCategoryId: 'eighties', emoji: '8️⃣8️⃣', audio: '' },
+  { id: 'n89', ku: 'Heştê û neh', en: 'Eighty-nine', ar: 'تسعة وثمانون', categoryId: 'numbers', subCategoryId: 'eighties', emoji: '8️⃣9️⃣', audio: '' },
+
+  // Numbers -> Nineties 90–99 (الأرقام -> التسعينات ٩٠–٩٩)
+  { id: 'n90', ku: 'Nod', en: 'Ninety', ar: 'تسعون', categoryId: 'numbers', subCategoryId: 'nineties', emoji: '9️⃣0️⃣', audio: '' },
+  { id: 'n91', ku: 'Nod û yek', en: 'Ninety-one', ar: 'واحد وتسعون', categoryId: 'numbers', subCategoryId: 'nineties', emoji: '9️⃣1️⃣', audio: '' },
+  { id: 'n92', ku: 'Nod û du', en: 'Ninety-two', ar: 'اثنان وتسعون', categoryId: 'numbers', subCategoryId: 'nineties', emoji: '9️⃣2️⃣', audio: '' },
+  { id: 'n93', ku: 'Nod û sê', en: 'Ninety-three', ar: 'ثلاثة وتسعون', categoryId: 'numbers', subCategoryId: 'nineties', emoji: '9️⃣3️⃣', audio: '' },
+  { id: 'n94', ku: 'Nod û çar', en: 'Ninety-four', ar: 'أربعة وتسعون', categoryId: 'numbers', subCategoryId: 'nineties', emoji: '9️⃣4️⃣', audio: '' },
+  { id: 'n95', ku: 'Nod û pênc', en: 'Ninety-five', ar: 'خمسة وتسعون', categoryId: 'numbers', subCategoryId: 'nineties', emoji: '9️⃣5️⃣', audio: '' },
+  { id: 'n96', ku: 'Nod û şeş', en: 'Ninety-six', ar: 'ستة وتسعون', categoryId: 'numbers', subCategoryId: 'nineties', emoji: '9️⃣6️⃣', audio: '' },
+  { id: 'n97', ku: 'Nod û heft', en: 'Ninety-seven', ar: 'سبعة وتسعون', categoryId: 'numbers', subCategoryId: 'nineties', emoji: '9️⃣7️⃣', audio: '' },
+  { id: 'n98', ku: 'Nod û heşt', en: 'Ninety-eight', ar: 'ثمانية وتسعون', categoryId: 'numbers', subCategoryId: 'nineties', emoji: '9️⃣8️⃣', audio: '' },
+  { id: 'n99', ku: 'Nod û neh', en: 'Ninety-nine', ar: 'تسعة وتسعون', categoryId: 'numbers', subCategoryId: 'nineties', emoji: '9️⃣9️⃣', audio: '' },
+
+  // Numbers -> One hundred (الأرقام -> المئة ١٠٠)
+  { id: 'n100', ku: 'Sed', en: 'One hundred', ar: 'مئة', categoryId: 'numbers', subCategoryId: 'hundred', emoji: '💯', audio: '' },
+
+  // Numbers -> Large Numbers (الأرقام -> الأعداد الكبيرة)
   { id: 'n200', ku: 'Du sed', en: 'Two hundred', ar: 'مئتان', categoryId: 'numbers', subCategoryId: 'hundreds', emoji: '🏛️', audio: '' },
   { id: 'n300', ku: 'Sê sed', en: 'Three hundred', ar: 'ثلاث مئة', categoryId: 'numbers', subCategoryId: 'hundreds', emoji: '🏢', audio: '' },
   { id: 'n500', ku: 'Pênc sed', en: 'Five hundred', ar: 'خمس مئة', categoryId: 'numbers', subCategoryId: 'hundreds', emoji: '🏥', audio: '' },
-
-  // Numbers -> Thousands & Millions (الأرقام -> آلاف وملايين)
-  { id: 'n1000', ku: 'Hezar', en: 'Thousand', ar: 'ألف', categoryId: 'numbers', subCategoryId: 'millions', emoji: '💵', audio: '' },
-  { id: 'n1000000', ku: 'Milyon', en: 'Million', ar: 'مليون', categoryId: 'numbers', subCategoryId: 'millions', emoji: '💰', audio: '' },
-  { id: 'n1000000000', ku: 'Milyar', en: 'Billion', ar: 'مليار', categoryId: 'numbers', subCategoryId: 'millions', emoji: '💎', audio: '' },
+  { id: 'n1000', ku: 'Hezar', en: 'One thousand', ar: 'ألف', categoryId: 'numbers', subCategoryId: 'hundreds', emoji: '💵', audio: '' },
+  { id: 'n10000', ku: 'Deh hezar', en: 'Ten thousand', ar: 'عشرة آلاف', categoryId: 'numbers', subCategoryId: 'hundreds', emoji: '🪙', audio: '' },
+  { id: 'n100000', ku: 'Sed hezar', en: 'One hundred thousand', ar: 'مئة ألف', categoryId: 'numbers', subCategoryId: 'hundreds', emoji: '🐑', audio: '' },
+  { id: 'n1000000', ku: 'Milyon', en: 'One million', ar: 'مليون', categoryId: 'numbers', subCategoryId: 'hundreds', emoji: '💰', audio: '' },
+  { id: 'n1000000000', ku: 'Milyar', en: 'One billion', ar: 'مليار', categoryId: 'numbers', subCategoryId: 'hundreds', emoji: '💎', audio: '' },
+  { id: 'n1000000000000', ku: 'Trîlyon', en: 'One trillion', ar: 'تريليون', categoryId: 'numbers', subCategoryId: 'hundreds', emoji: '👑', audio: '' },
   
   // Colors
   { id: 'c1', ku: 'Sor', en: 'Red', ar: 'أحمر', categoryId: 'colors', emoji: '🟥', audio: '/audio/colors/red.mp3' },

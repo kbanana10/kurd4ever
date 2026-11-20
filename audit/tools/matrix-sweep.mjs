@@ -7,6 +7,7 @@ import { launch, newAuditPage, gotoAndSettle, snap, runDomChecks } from './qa-li
 
 const FULL_ROUTES = [
   ['home', '/'],
+  ['learn', '/learn'],
   ['alphabet', '/alphabet'],
   ['vocabulary', '/vocabulary'],
   ['sentences', '/sentences'],

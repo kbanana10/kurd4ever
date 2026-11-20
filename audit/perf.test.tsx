@@ -35,7 +35,7 @@ describe('RENDER PERFORMANCE', () => {
     const pages: Array<[string,string,string?]> = [
       ['Dashboard','/'],['Search','/search'],['Games','/games'],['Roadmap','/roadmap'],
       ['Sentences','/sentences'],['VocabularyList','/vocabulary/family','/vocabulary/:categoryId'],
-      ['Profile','/profile'],['LeaderboardPage','/leaderboard'],['Alphabet','/alphabet'],
+      ['Profile','/profile'],['LeaderboardPage','/leaderboard'],['LearningHub','/learn'],['Alphabet','/alphabet'],
     ];
     const rows: string[] = [];
     for (const [name, path, pattern] of pages) {

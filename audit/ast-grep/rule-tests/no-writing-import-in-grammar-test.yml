@@ -1,0 +1,8 @@
+id: no-writing-import-in-grammar
+valid:
+  - |
+    import React from 'react';
+    import { TriRow } from './TriRow';
+invalid:
+  - |
+    import { WritingTracingPage } from '../writing/WritingTracingPage';

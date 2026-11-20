@@ -579,6 +579,13 @@ export function Roadmap() {
                     >
                       <motion.button
                         id={`roadmap-node-${node.id}`}
+                        aria-label={
+                          isLocked
+                            ? `${language !== 'ar' ? (node.titleEn || node.id) : (node.titleAr || node.id)} (${language !== 'ar' ? 'locked' : 'مقفل'})`
+                            : language !== 'ar'
+                              ? `${node.titleEn || node.id}${isCompleted ? ' — completed' : ' — start lesson'}`
+                              : `${node.titleAr || node.id}${isCompleted ? ' — مكتمل' : ' — ابدأ الدرس'}`
+                        }
                         whileHover={{ scale: !isLocked ? 1.08 : 1 }}
                         whileTap={{ scale: !isLocked ? 0.95 : 1 }}
                         onClick={() => handleNodeClick(node, lvl)}
